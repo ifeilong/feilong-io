@@ -32,7 +32,6 @@ import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
-import com.feilong.io.FileUtil;
 
 /**
  * The Class FileUtilTest.
@@ -54,7 +53,7 @@ public class FileUtilTest{
     @Test
     public void testGetContentLength(){
         try{
-            URL url = new URL("http://www.jinbaowang.cn/images//20110722/096718c3d1c9b4a1.jpg");
+            URL url = URLUtil.newURL("http://www.jinbaowang.cn/images//20110722/096718c3d1c9b4a1.jpg");
             URLConnection urlConnection = url.openConnection();
             int contentLength = urlConnection.getContentLength();
             LOGGER.info(FileUtil.formatSize(contentLength));
@@ -62,7 +61,7 @@ public class FileUtilTest{
             throw new UncheckedIOException(e);
         }
         try{
-            URL url = new URL("http://localhost:8080/TestHttpURLConnectionPro/index.jsp");
+            URL url = URLUtil.newURL("http://localhost:8080/TestHttpURLConnectionPro/index.jsp");
             url.openConnection();
         }catch (MalformedURLException e){
             LOGGER.error(e.getClass().getName(), e);
