@@ -19,6 +19,7 @@ import java.io.File;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -220,12 +221,8 @@ public final class FilenameUtil{
      * @return 新文件名称
      */
     public static String getNewFileName(String fileName,String newPostfixName){
-        if (Validator.isNullOrEmpty(fileName)){
-            throw new NullPointerException("fileName can't be null/empty!");
-        }
-        if (Validator.isNullOrEmpty(newPostfixName)){
-            throw new NullPointerException("newPostfixName can't be null/empty!");
-        }
+        Validate.notEmpty(fileName, "fileName can't be null/empty!");
+        Validate.notEmpty(newPostfixName, "newPostfixName can't be null/empty!");
 
         // 有后缀
         if (hasExtension(fileName)){
@@ -268,9 +265,7 @@ public final class FilenameUtil{
      * @since 1.0.7
      */
     public static String getFileTopParentName(String pathname){
-        if (Validator.isNullOrEmpty(pathname)){
-            throw new NullPointerException("pathname can't be null/empty!");
-        }
+        Validate.notEmpty(pathname, "pathname can't be null/empty!");
 
         File file = new File(pathname);
         String parent = file.getParent();
@@ -305,9 +300,7 @@ public final class FilenameUtil{
      * @since 1.0.7
      */
     public static String getFileTopParentName(File file){
-        if (Validator.isNullOrEmpty(file)){
-            throw new NullPointerException("file can't be null/empty!");
-        }
+        Validate.notNull(file, "file can't be null!");
 
         File parent = file.getParentFile();
         if (Validator.isNullOrEmpty(parent)){

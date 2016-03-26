@@ -28,6 +28,7 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -95,9 +96,9 @@ public final class IOReaderUtil{
      * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
      */
     public static String getFileContent(File file,String charsetName){
-        if (Validator.isNullOrEmpty(file)){
-            throw new NullPointerException("the file is null or empty!");
-        }
+
+        Validate.notNull(file, "file can't be null!");
+
         // 分配新的直接字节缓冲区
         final int capacity = 186140;
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(capacity);

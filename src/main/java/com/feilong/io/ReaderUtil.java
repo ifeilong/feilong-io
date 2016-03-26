@@ -21,6 +21,7 @@ import java.io.Reader;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.io.UncheckedIOException;
 
@@ -86,9 +87,7 @@ public final class ReaderUtil{
 
         BufferedReader bufferedReader = IOUtils.toBufferedReader(reader);
 
-        if (null == bufferedReader){
-            throw new NullPointerException("the bufferedReader is null or empty!");
-        }
+        Validate.notNull(bufferedReader, "bufferedReader can't be null!");
 
         try{
             // 读取一个文本行.通过下列字符之一即可认为某行已终止：换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.

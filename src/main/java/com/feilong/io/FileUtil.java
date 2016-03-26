@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -262,16 +263,12 @@ public final class FileUtil{
      * @see org.apache.commons.io.FileUtils#sizeOfDirectory(File)
      */
     public static boolean isEmptyDirectory(String directory){
-        if (Validator.isNullOrEmpty(directory)){
-            throw new NullPointerException("directory param " + directory + " can't be null/empty!");
-        }
+        Validate.notEmpty(directory, "directory can't be null/empty!");
+
         File file = new File(directory);
-        if (!file.exists()){
-            throw new IllegalArgumentException("directory file " + directory + " don't exists!");
-        }
-        if (!file.isDirectory()){
-            throw new IllegalArgumentException("directory file " + directory + " is not Directory!");
-        }
+
+        Validate.isTrue(file.exists(), "directory file " + directory + " don't exists!");
+        Validate.isTrue(file.isDirectory(), "directory file " + directory + " is not Directory!");
 
         // Returns an array of strings naming the files and directories in the directory denoted by this abstract pathname.
         // 如果此抽象路径名不表示一个目录,那么此方法将返回 null
@@ -319,9 +316,7 @@ public final class FileUtil{
      * @since 1.2.0
      */
     public static void createDirectoryByFilePath(String filePath){
-        if (Validator.isNullOrEmpty(filePath)){
-            throw new NullPointerException("filePath can't be null/empty!");
-        }
+        Validate.notEmpty(filePath, "filePath can't be null/empty!");
         String directory = getParent(filePath);
         createDirectory(directory);
     }
@@ -352,9 +347,7 @@ public final class FileUtil{
      * @see #createDirectoryByFilePath(String)
      */
     public static void createDirectory(String directory){
-        if (Validator.isNullOrEmpty(directory)){
-            throw new NullPointerException("filePath can't be null/empty!");
-        }
+        Validate.notEmpty(directory, "directory can't be null/empty!");
         File directoryFile = new File(directory);
 
         boolean isExists = directoryFile.exists();
@@ -445,9 +438,7 @@ public final class FileUtil{
      * @see java.io.File#getParent()
      */
     public static String getParent(String path){
-        if (Validator.isNullOrEmpty(path)){
-            throw new NullPointerException("pathname can't be null/empty!");
-        }
+        Validate.notEmpty(path, "path can't be null/empty!");
         File file = new File(path);
         return file.getParent();
     }
@@ -500,9 +491,7 @@ public final class FileUtil{
      * @since 1.0.7
      */
     public static String getFileFormatSize(File file){
-        if (Validator.isNullOrEmpty(file)){
-            throw new NullPointerException("file can't be null/empty!");
-        }
+        Validate.notNull(file, "file can't be null!");
         long fileSize = getFileSize(file);
         return formatSize(fileSize);
     }
@@ -592,9 +581,8 @@ public final class FileUtil{
      * @since 1.4.0
      */
     public static URL[] toURLs(String...filePaths){
-        if (Validator.isNullOrEmpty(filePaths)){
-            throw new NullPointerException("paths can't be null/empty!");
-        }
+        Validate.notEmpty(filePaths, "filePaths can't be null/empty!");
+
         File[] files = ConvertUtil.convert(filePaths, File.class);
         try{
             return FileUtils.toURLs(files);

@@ -28,6 +28,7 @@ import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -183,9 +184,8 @@ public final class IOWriteUtil{
      * @see org.apache.commons.io.FileUtils#writeStringToFile(File, String, Charset, boolean)
      */
     public static void write(String filePath,String content,String charsetType,FileWriteMode fileWriteMode){
-        if (Validator.isNullOrEmpty(filePath)){
-            throw new NullPointerException("filePath can't be null/empty!");
-        }
+        Validate.notEmpty(filePath, "filePath can't be null/empty!");
+
         Date beginDate = new Date();
 
         String useEncode = Validator.isNullOrEmpty(charsetType) ? CharsetType.UTF8 : charsetType;
