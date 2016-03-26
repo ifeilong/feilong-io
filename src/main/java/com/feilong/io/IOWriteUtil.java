@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.io;
+package com.feilong.io;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.date.DateExtensionUtil;
+import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.lang.CharsetType;
 import com.feilong.core.util.Validator;
 
@@ -92,7 +93,7 @@ public final class IOWriteUtil{
      *            文件夹路径 最后不带"/"
      * @param fileName
      *            文件名称
-     * @see com.feilong.core.io.IOWriteUtil#write(InputStream, OutputStream)
+     * @see com.feilong.io.IOWriteUtil#write(InputStream, OutputStream)
      */
     public static void write(InputStream inputStream,String directoryName,String fileName){
         String filePath = directoryName + "/" + fileName;

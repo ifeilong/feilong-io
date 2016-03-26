@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.io;
+package com.feilong.io;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,9 +36,14 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.core.date.DatePattern;
 import com.feilong.core.date.DateUtil;
+import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.lang.CharsetType;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.core.util.Validator;
+import com.feilong.io.FileUtil;
+import com.feilong.io.FileWriteMode;
+import com.feilong.io.IOWriteUtil;
+import com.feilong.io.SpecialFolder;
 
 /**
  * The Class IOWriteUtilTest.

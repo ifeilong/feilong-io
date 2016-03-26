@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.io;
+package com.feilong.io;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.util.Validator;
 
 /**
@@ -398,7 +399,7 @@ public final class FileUtil{
      * @param fileName
      *            文件或者文件夹名称
      * @return {@code true} if the file or directory was deleted, otherwise {@code false}
-     * @see com.feilong.core.io.FileUtil#deleteFileOrDirectory(File)
+     * @see com.feilong.io.FileUtil#deleteFileOrDirectory(File)
      */
     public static boolean deleteFileOrDirectory(String fileName){
         File file = new File(fileName);
@@ -494,7 +495,7 @@ public final class FileUtil{
      *            the file
      * @return the file format size
      * @see #getFileSize(File)
-     * @see com.feilong.core.io.FileUtil#formatSize(long)
+     * @see com.feilong.io.FileUtil#formatSize(long)
      * @see org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)
      * @since 1.0.7
      */

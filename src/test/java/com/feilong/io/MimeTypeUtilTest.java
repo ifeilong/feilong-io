@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.io;
+package com.feilong.io;
 
-import static com.feilong.core.io.MimeTypeUtil.getContentTypeByFileName;
+import static com.feilong.io.MimeTypeUtil.getContentTypeByFileName;
 
 import org.junit.Test;
 import org.slf4j.Logger;

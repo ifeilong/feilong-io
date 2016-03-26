@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.io;
+package com.feilong.io;
 
 /**
  * 图片类型的枚举.
@@ -22,7 +22,7 @@ package com.feilong.core.io;
  * @version 1.0.0 2011-5-30 下午01:19:46
  * @version 1.0.5 2014-5-4 00:24
  * @since 1.0.0
- * @see com.feilong.core.io.MimeType
+ * @see com.feilong.io.MimeType
  */
 public final class ImageType{
 

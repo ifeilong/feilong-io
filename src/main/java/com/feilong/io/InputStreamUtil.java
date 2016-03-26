@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.io;
+package com.feilong.io;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -25,6 +25,8 @@ import java.nio.charset.Charset;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.feilong.core.io.UncheckedIOException;
 
 /**
  * {@link java.io.InputStream} 工具类.

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.core.io;
+package com.feilong.io;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,9 +28,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.io.UncheckedIOException;
 import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.core.tools.jsonlib.JsonUtil;
+import com.feilong.io.FileUtil;
 
 /**
  * The Class FileUtilTest.
@@ -194,7 +196,7 @@ public class FileUtilTest{
     }
 
     /**
-     * {@link com.feilong.core.io.FileUtil#formatSize(long)} 的测试方法。
+     * {@link com.feilong.io.FileUtil#formatSize(long)} 的测试方法。
      */
     @Test
     public void formatFileSize(){
