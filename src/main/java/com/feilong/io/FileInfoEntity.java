@@ -18,7 +18,7 @@ package com.feilong.io;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.feilong.core.date.DatePattern;
+import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
 
 /**
