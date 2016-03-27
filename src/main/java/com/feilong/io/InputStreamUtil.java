@@ -26,7 +26,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.io.UncheckedIOException;
+import com.feilong.core.UncheckedIOException;
 
 /**
  * {@link java.io.InputStream} 工具类.

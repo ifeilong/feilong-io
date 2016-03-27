@@ -23,7 +23,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.Validate;
 
-import com.feilong.core.io.UncheckedIOException;
+import com.feilong.core.UncheckedIOException;
 
 /**
  * {@link java.io.Reader} 工具类.

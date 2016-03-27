@@ -25,7 +25,7 @@ import javax.activation.MimetypesFileTypeMap;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.feilong.core.util.Validator;
+import com.feilong.core.Validator;
 
 /**
  * 获取文件Mime-Type.
