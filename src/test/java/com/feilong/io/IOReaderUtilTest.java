@@ -20,7 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
-import com.feilong.io.IOReaderUtil;
 
 /**
  * The Class IOReaderUtilTest.

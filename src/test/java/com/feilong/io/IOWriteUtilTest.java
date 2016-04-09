@@ -40,10 +40,6 @@ import com.feilong.core.Validator;
 import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
-import com.feilong.io.FileUtil;
-import com.feilong.io.FileWriteMode;
-import com.feilong.io.IOWriteUtil;
-import com.feilong.io.SpecialFolder;
 
 /**
  * The Class IOWriteUtilTest.
