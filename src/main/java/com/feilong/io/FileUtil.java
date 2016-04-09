@@ -30,7 +30,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
-import com.feilong.core.Validator;
 import com.feilong.core.bean.ConvertUtil;
 
 /**
@@ -563,9 +562,7 @@ public final class FileUtil{
      * @since 1.4.0
      */
     public static URL[] toURLs(List<String> filePathList){
-        if (Validator.isNullOrEmpty(filePathList)){
-            throw new NullPointerException("paths can't be null/empty!");
-        }
+        Validate.notEmpty(filePathList, "filePathList can't be null/empty!");
         String[] filePaths = ConvertUtil.toArray(filePathList, String.class);
         return toURLs(filePaths);
     }
