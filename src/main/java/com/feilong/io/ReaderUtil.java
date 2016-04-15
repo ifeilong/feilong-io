@@ -64,7 +64,7 @@ public final class ReaderUtil{
             StringBuilder sb = new StringBuilder();
             String line = "";
 
-            // 读取一个文本行.通过下列字符之一即可认为某行已终止：换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
+            // 读取一个文本行.通过下列字符之一即可认为某行已终止:换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
             while ((line = bufferedReader.readLine()) != null){
                 sb.append(line);
                 sb.append(SystemUtils.LINE_SEPARATOR);
@@ -90,7 +90,7 @@ public final class ReaderUtil{
         Validate.notNull(bufferedReader, "bufferedReader can't be null!");
 
         try{
-            // 读取一个文本行.通过下列字符之一即可认为某行已终止：换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
+            // 读取一个文本行.通过下列字符之一即可认为某行已终止:换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
             return bufferedReader.readLine();
         }catch (IOException e){
             throw new UncheckedIOException(e);

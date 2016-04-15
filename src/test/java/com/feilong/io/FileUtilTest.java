@@ -195,7 +195,7 @@ public class FileUtilTest{
     }
 
     /**
-     * {@link com.feilong.io.FileUtil#formatSize(long)} 的测试方法。
+     * {@link com.feilong.io.FileUtil#formatSize(long)} 的测试方法.
      */
     @Test
     public void formatFileSize(){

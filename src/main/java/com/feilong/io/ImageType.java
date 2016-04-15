@@ -27,12 +27,12 @@ package com.feilong.io;
 public final class ImageType{
 
     /**
-     * JPG Joint Photograhic Experts Group(联合图像专家组),JPEG的文件格式一般有两种文件扩展名：.jpg和.jpeg,这两种扩展名的实质是相同的
+     * JPG Joint Photograhic Experts Group(联合图像专家组),JPEG的文件格式一般有两种文件扩展名:.jpg和.jpeg,这两种扩展名的实质是相同的
      */
     public static final String JPG  = MimeType.JPG.getExtension();
 
     /**
-     * JPEG Joint Photograhic Experts Group(联合图像专家组),JPEG的文件格式一般有两种文件扩展名：.jpg和.jpeg,这两种扩展名的实质是相同的
+     * JPEG Joint Photograhic Experts Group(联合图像专家组),JPEG的文件格式一般有两种文件扩展名:.jpg和.jpeg,这两种扩展名的实质是相同的
      */
     public static final String JPEG = MimeType.JPEG.getExtension();
 

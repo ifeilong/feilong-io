@@ -22,6 +22,7 @@ package com.feilong.io;
  * 
  * @version 1.0.8 2014年11月20日 上午10:57:48
  * @since 1.0.8
+ * @see "org.springframework.http.MediaType"
  */
 public enum MimeType{
 
