@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.LineNumberReader;
 import java.io.Reader;
 import java.nio.ByteBuffer;
@@ -41,7 +42,8 @@ import com.feilong.core.Validator;
  * 
  * @author feilong
  * @version 1.0.6 Dec 23, 2013 10:27:08 PM
- * @version 1.0.8 2014-11-25 20:04 add {@link #getFileContent(String, String)}
+ * @version 1.0.8 2014-11-25 20:04 add {@link #getContent(String, String)}
+ * @version 1.5.3 2016-4-17 06:19
  * @since 1.0.6
  */
 public final class IOReaderUtil{
@@ -66,8 +68,8 @@ public final class IOReaderUtil{
      *            路径
      * @return 文件内容string
      */
-    public static String getFileContent(String path){
-        return getFileContent(path, DEFAULT_CHARSET_NAME);
+    public static String getContent(String path){
+        return getContent(path, DEFAULT_CHARSET_NAME);
     }
 
     /**
@@ -80,9 +82,9 @@ public final class IOReaderUtil{
      * @return the file content
      * @since 1.0.8
      */
-    public static String getFileContent(String path,String charsetName){
+    public static String getContent(String path,String charsetName){
         File file = new File(path);
-        return getFileContent(file, charsetName);
+        return getContent(file, charsetName);
     }
 
     /**
@@ -94,20 +96,43 @@ public final class IOReaderUtil{
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return the file content
      * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
+     * @since 1.5.3
      */
-    public static String getFileContent(File file,String charsetName){
-
+    public static String getContent(File file,String charsetName){
         Validate.notNull(file, "file can't be null!");
+
+        FileInputStream fileInputStream = null;
+        try{
+            fileInputStream = new FileInputStream(file);
+            return getContent(fileInputStream, charsetName);
+        }catch (IOException e){
+            throw new UncheckedIOException(e);
+        }finally{
+            // 用完关闭流 是个好习惯,^_^
+            IOUtils.closeQuietly(fileInputStream);
+        }
+    }
+
+    /**
+     * 读取文件内容.
+     *
+     * @param fileInputStream
+     *            the file input stream
+     * @param charsetName
+     *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
+     * @return the file content
+     * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
+     * @since 1.5.3
+     */
+    public static String getContent(FileInputStream fileInputStream,String charsetName){
+        Validate.notNull(fileInputStream, "inputStream can't be null!");
 
         // 分配新的直接字节缓冲区
         final int capacity = 186140;
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(capacity);
         StringBuilder sb = new StringBuilder(capacity);
 
-        FileInputStream fileInputStream = null;
         try{
-            fileInputStream = new FileInputStream(file);
-
             // 用于读取、写入、映射和操作文件的通道.
             FileChannel fileChannel = fileInputStream.getChannel();
             String useCharsetName = Validator.isNullOrEmpty(charsetName) ? DEFAULT_CHARSET_NAME : charsetName;
@@ -120,14 +145,33 @@ public final class IOReaderUtil{
                 byteBuffer.clear();
             }
             return sb.toString();
-
-        }catch (FileNotFoundException e){
-            throw new UncheckedIOException(e);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
             // 用完关闭流 是个好习惯,^_^
             IOUtils.closeQuietly(fileInputStream);
+        }
+    }
+
+    /**
+     * 读取文件内容.
+     *
+     * @param inputStream
+     *            the input stream
+     * @param charsetName
+     *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
+     * @return the file content
+     * @see org.apache.commons.io.IOUtils#toString(InputStream, String)
+     * @see com.feilong.io.InputStreamUtil#toString(InputStream, String)
+     * @since 1.5.3
+     */
+    public static String getContent(InputStream inputStream,String charsetName){
+        Validate.notNull(inputStream, "inputStream can't be null!");
+        try{
+            return IOUtils.toString(inputStream, charsetName);
+        }catch (IOException e){
+            LOGGER.error("", e);
+            throw new UncheckedIOException(e);
         }
     }
 

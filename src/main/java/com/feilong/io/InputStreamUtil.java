@@ -60,13 +60,13 @@ public final class InputStreamUtil{
      * @param inputStream
      *            the input stream
      * @return 将 {@link java.io.InputStream} 转成string
-     * @see #inputStream2String(InputStream, String)
+     * @see #toString(InputStream, String)
      */
-    public static String inputStream2String(InputStream inputStream){
+    public static String toString(InputStream inputStream){
         Charset defaultCharset = Charset.defaultCharset();
         String charsetName = defaultCharset.name();
         LOGGER.debug("the param defaultCharset:[{}]", charsetName);
-        return inputStream2String(inputStream, charsetName);
+        return toString(inputStream, charsetName);
     }
 
     /**
@@ -85,7 +85,7 @@ public final class InputStreamUtil{
      * @see #toBufferedReader(InputStream, String)
      * @see ReaderUtil#toString(Reader)
      */
-    public static String inputStream2String(InputStream inputStream,String charsetName){
+    public static String toString(InputStream inputStream,String charsetName){
         BufferedReader bufferedReader = toBufferedReader(inputStream, charsetName);
         return ReaderUtil.toString(bufferedReader);
     }

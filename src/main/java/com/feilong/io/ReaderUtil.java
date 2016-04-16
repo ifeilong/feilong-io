@@ -57,9 +57,7 @@ public final class ReaderUtil{
      * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
      */
     public static String toString(Reader reader){
-
         BufferedReader bufferedReader = IOUtils.toBufferedReader(reader);
-
         try{
             StringBuilder sb = new StringBuilder();
             String line = "";
@@ -84,11 +82,8 @@ public final class ReaderUtil{
      * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
      */
     public static String readLine(Reader reader){
-
         BufferedReader bufferedReader = IOUtils.toBufferedReader(reader);
-
         Validate.notNull(bufferedReader, "bufferedReader can't be null!");
-
         try{
             // 读取一个文本行.通过下列字符之一即可认为某行已终止:换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
             return bufferedReader.readLine();

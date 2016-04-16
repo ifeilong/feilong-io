@@ -15,6 +15,8 @@
  */
 package com.feilong.io;
 
+import java.io.InputStream;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +32,9 @@ import com.feilong.core.CharsetType;
 public class IOReaderUtilTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(IOReaderUtilTest.class);
+    private static final Logger LOGGER         = LoggerFactory.getLogger(IOReaderUtilTest.class);
+
+    private static final String propertiesPath = "C:\\Users\\feilong\\.m2\\settings.xml";
 
     /**
      * Testname.
@@ -38,7 +42,7 @@ public class IOReaderUtilTest{
     @Test
     public void testname(){
         String fileName = "F:\\Life 生活\\Job 工作\\淘宝开店\\商家编码.txt";
-        String content = IOReaderUtil.getFileContent(fileName, CharsetType.UTF8);
+        String content = IOReaderUtil.getContent(fileName, CharsetType.UTF8);
         // 将内容以换行符转成数组
         String[] rowsContents = content.split("\r\n");
         LOGGER.info(content);
@@ -51,7 +55,7 @@ public class IOReaderUtilTest{
     @Test
     public void parseNginx(){
         String fileName = "C:\\Users\\feilong\\Documents\\AJ11\\AJ11\\1.txt";
-        String content = IOReaderUtil.getFileContent(fileName, CharsetType.UTF8);
+        String content = IOReaderUtil.getContent(fileName, CharsetType.UTF8);
 
         content.split("");
 
@@ -65,7 +69,12 @@ public class IOReaderUtilTest{
      */
     @Test
     public void testGetFileContent(){
-        String propertiesPath = "I:/Ebook/book.properties";
-        LOGGER.info(IOReaderUtil.getFileContent(propertiesPath, CharsetType.UTF8));
+        LOGGER.info(IOReaderUtil.getContent(propertiesPath, CharsetType.UTF8));
+    }
+
+    @Test
+    public void testGetFileContent2(){
+        InputStream inputStream = FileUtil.getFileInputStream(propertiesPath);
+        LOGGER.info(IOReaderUtil.getContent(inputStream, CharsetType.UTF8));
     }
 }
