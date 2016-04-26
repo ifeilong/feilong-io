@@ -448,6 +448,7 @@ public final class FileUtil{
      * @param filePath
      *            the file path
      * @return 如果文件存在,返回true
+     * @see java.io.File#exists()
      */
     public static boolean isExistFile(String filePath){
         File file = new File(filePath);
@@ -456,10 +457,11 @@ public final class FileUtil{
 
     /**
      * 判断文件不存在.
-     * 
+     *
      * @param filePath
      *            the file path
      * @return 如果文件不存在,返回true
+     * @see com.feilong.io.FileUtil#isExistFile(String)
      * @since 1.0.3
      */
     public static boolean isNotExistFile(String filePath){
