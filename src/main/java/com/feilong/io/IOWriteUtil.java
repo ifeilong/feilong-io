@@ -201,7 +201,7 @@ public final class IOWriteUtil{
         if (LOGGER.isInfoEnabled()){
             File file = new File(filePath);
             LOGGER.info(
-                            "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}],time:{}",
+                            "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}],time:[{}]",
                             useFileWriteMode,
                             useEncode,
                             content.length(),
