@@ -227,12 +227,13 @@ public final class IOWriteUtil{
      *            inputStream
      * @param outputStream
      *            outputStream
+     * @see #writeUseNIO(InputStream, OutputStream,int)
      * @see java.io.OutputStream#write(byte[], int, int)
      * @see org.apache.commons.io.IOUtils#copyLarge(InputStream, OutputStream)
+     * @see org.apache.commons.io.IOUtils#copy(InputStream, OutputStream, int)
      * @see <a href="http://stackoverflow.com/questions/10142409/write-an-inputstream-to-an-httpservletresponse">As creme de la creme with
      *      regard to performance, you could use NIO Channels and ByteBuffer. Create the following utility/helper method in some custom
      *      utility class,</a>
-     * @see #writeUseNIO(InputStream, OutputStream,int)
      */
     public static void write(InputStream inputStream,OutputStream outputStream,int bufferLength){
         writeUseNIO(inputStream, outputStream, bufferLength);
