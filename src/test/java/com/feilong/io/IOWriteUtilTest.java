@@ -88,7 +88,7 @@ public class IOWriteUtilTest{
     public void write(){
         String url = "F:\\test.txt";
         String directoryName = SpecialFolder.getDesktop();
-        IOWriteUtil.write(url, directoryName);
+        IOWriteUtil.writeStringToFile(url, directoryName, CharsetType.UTF8);
     }
 
     /**
@@ -135,7 +135,7 @@ public class IOWriteUtilTest{
     private static void testWriteNio(String content){
         Date beginDate = new Date();
         String type = "nio";
-        IOWriteUtil.write(getPath(type), content);
+        IOWriteUtil.writeStringToFile(getPath(type), content, CharsetType.UTF8);
         LOGGER.info("[{}] time:{}", type, DateExtensionUtil.getIntervalForView(beginDate, new Date()));
     }
 

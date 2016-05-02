@@ -42,7 +42,7 @@ import com.feilong.core.Validator;
  * 
  * @author feilong
  * @version 1.0.6 Dec 23, 2013 10:27:08 PM
- * @version 1.0.8 2014-11-25 20:04 add {@link #getContent(String, String)}
+ * @version 1.0.8 2014-11-25 20:04 add {@link #readFileToString(String, String)}
  * @version 1.5.3 2016-4-17 06:19
  * @since 1.0.6
  */
@@ -62,29 +62,20 @@ public final class IOReaderUtil{
     }
 
     /**
-     * 读取文件内容.
-     *
-     * @param path
-     *            路径
-     * @return 文件内容string
-     */
-    public static String getContent(String path){
-        return getContent(path, DEFAULT_CHARSET_NAME);
-    }
-
-    /**
      * 获得 file content.
      *
-     * @param path
+     * @param filePath
      *            the path
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return the file content
+     * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
+     * @see #readFileToString(File, String)
      * @since 1.0.8
      */
-    public static String getContent(String path,String charsetName){
-        File file = new File(path);
-        return getContent(file, charsetName);
+    public static String readFileToString(String filePath,String charsetName){
+        File file = new File(filePath);
+        return readFileToString(file, charsetName);
     }
 
     /**
@@ -98,7 +89,7 @@ public final class IOReaderUtil{
      * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
      * @since 1.5.3
      */
-    public static String getContent(File file,String charsetName){
+    public static String readFileToString(File file,String charsetName){
         Validate.notNull(file, "file can't be null!");
 
         FileInputStream fileInputStream = null;
@@ -162,7 +153,7 @@ public final class IOReaderUtil{
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
      * @return the file content
      * @see org.apache.commons.io.IOUtils#toString(InputStream, String)
-     * @see com.feilong.io.InputStreamUtil#toString(InputStream, String)
+     * @see InputStreamUtil#toString(InputStream, String)
      * @since 1.5.3
      */
     public static String getContent(InputStream inputStream,String charsetName){

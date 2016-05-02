@@ -42,13 +42,12 @@ import com.feilong.core.date.DateExtensionUtil;
  * 
  * <ul>
  * <li>{@link #write(InputStream, OutputStream)} 写资源,速度最快的方法,速度比较请看 电脑资料 {@code <<压缩解压性能探究>>}</li>
- * <li>{@link #write(String, String)} 将字符串写到文件中</li>
  * <li>{@link #write(InputStream, String, String)} 将inputStream 写到 某个文件夹,名字为fileName</li>
- * <li>{@link #write(String, String, String)} 将字符串/文字写到文件中</li>
- * <li>{@link #write(String, String, String, FileWriteMode)} 将字符串写到文件中</li>
+ * <li>{@link #writeStringToFile(String, String, String)} 将字符串/文字写到文件中</li>
+ * <li>{@link #writeStringToFile(String, String, String, FileWriteMode)} 将字符串写到文件中</li>
  * </ul>
  * 
- * 如果需要覆盖写文件,可以调用 {@link #write(String, String, String, FileWriteMode)}.
+ * 如果需要覆盖写文件,可以调用 {@link #writeStringToFile(String, String, String, FileWriteMode)}.
  *
  * @author feilong
  * @version 1.0.6 Dec 23, 2013 10:23:23 PM
@@ -62,7 +61,7 @@ public final class IOWriteUtil{
     /** The Constant LOGGER. */
     private static final Logger LOGGER                = LoggerFactory.getLogger(IOWriteUtil.class);
 
-    /** 默认缓冲大小 10k <code>{@value}</code> */
+    /** 默认缓冲大小 10k <code>{@value}</code>. */
     public static final int     DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtils.ONE_KB);
 
     /** Don't let anyone instantiate this class. */
@@ -70,63 +69,6 @@ public final class IOWriteUtil{
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
         //see 《Effective Java》 2nd
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
-    }
-
-    /**
-     * 将inputStream 写到 某个文件夹(文件夹路径 最后不带"/"),名字为fileName.
-     * 
-     * <h3>最终的fileAllName 格式是:</h3>
-     * 
-     * <blockquote>
-     * <p>
-     * {@code directoryName + "/" + fileName}
-     * </p>
-     * </blockquote>
-     * 
-     * <p>
-     * 拼接文件路径.<br>
-     * 如果拼接完的文件路径 父路径不存在,则自动创建(支持级联创建 文件夹)
-     * </p>
-     *
-     * @param inputStream
-     *            上传得文件流
-     * @param directoryName
-     *            文件夹路径 最后不带"/"
-     * @param fileName
-     *            文件名称
-     * @see com.feilong.io.IOWriteUtil#write(InputStream, OutputStream)
-     */
-    public static void write(InputStream inputStream,String directoryName,String fileName){
-        String filePath = directoryName + "/" + fileName;
-        FileUtil.createDirectory(directoryName);
-        OutputStream outputStream = FileUtil.getFileOutputStream(filePath);
-        write(inputStream, outputStream);
-    }
-
-    /**
-     * 将字符串写到文件中
-     * 
-     * <h3>相关规则:</h3>
-     * 
-     * <blockquote>
-     * <ul>
-     * <li>如果 <code>Validator.isNullOrEmpty(filePath)</code>,那么抛出 {@link NullPointerException}</li>
-     * <li>如果文件不存在,自动创建,包括其父文件夹 (支持级联创建 文件夹)</li>
-     * <li>如果文件存在则覆盖旧文件,可以设置{@link FileWriteMode#APPEND}表示追加内容而非覆盖</li>
-     * <li>如果不设置 <code>charsetType</code>,则默认使用{@link CharsetType#UTF8}编码</li>
-     * </ul>
-     * </blockquote>
-     *
-     * @param filePath
-     *            文件路径
-     * @param content
-     *            字符串内容
-     * @see FileWriteMode
-     * @see CharsetType
-     */
-    public static void write(String filePath,String content){
-        String encode = null;
-        write(filePath, content, encode);
     }
 
     /**
@@ -147,14 +89,16 @@ public final class IOWriteUtil{
      *            文件路径
      * @param content
      *            字符串内容
-     * @param encode
+     * @param charsetType
      *            编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#UTF8}编码 {@link CharsetType}
      * @see FileWriteMode
      * @see CharsetType
-     * @see #write(String, String, String, FileWriteMode)
+     * @see #writeStringToFile(String, String, String, FileWriteMode)
+     * @see org.apache.commons.io.FileUtils#writeStringToFile(File, String, Charset)
+     * @since 1.5.4
      */
-    public static void write(String filePath,String content,String encode){
-        write(filePath, content, encode, FileWriteMode.COVER);//default_fileWriteMode
+    public static void writeStringToFile(String filePath,String content,String charsetType){
+        writeStringToFile(filePath, content, charsetType, FileWriteMode.COVER);//default_fileWriteMode
     }
 
     /**
@@ -182,8 +126,9 @@ public final class IOWriteUtil{
      * @see java.io.FileOutputStream#FileOutputStream(File, boolean)
      * @see #write(InputStream, OutputStream)
      * @see org.apache.commons.io.FileUtils#writeStringToFile(File, String, Charset, boolean)
+     * @since 1.5.4
      */
-    public static void write(String filePath,String content,String charsetType,FileWriteMode fileWriteMode){
+    public static void writeStringToFile(String filePath,String content,String charsetType,FileWriteMode fileWriteMode){
         Validate.notEmpty(filePath, "filePath can't be null/empty!");
 
         Date beginDate = new Date();
@@ -210,8 +155,38 @@ public final class IOWriteUtil{
                             DateExtensionUtil.getIntervalForView(beginDate, new Date()));
         }
     }
+    //**********************************************************************************************
 
-    // *******************************************************************************************
+    /**
+     * 将inputStream 写到 某个文件夹(文件夹路径 最后不带"/"),名字为fileName.
+     * 
+     * <h3>最终的fileAllName 格式是:</h3>
+     * 
+     * <blockquote>
+     * <p>
+     * {@code directoryName + "/" + fileName}
+     * </p>
+     * </blockquote>
+     * 
+     * <p>
+     * 拼接文件路径.<br>
+     * 如果拼接完的文件路径 父路径不存在,则自动创建(支持级联创建 文件夹)
+     * </p>
+     *
+     * @param inputStream
+     *            上传得文件流
+     * @param directoryName
+     *            文件夹路径 最后不带"/"
+     * @param fileName
+     *            文件名称
+     * @see #write(InputStream, OutputStream)
+     */
+    public static void write(InputStream inputStream,String directoryName,String fileName){
+        String filePath = directoryName + "/" + fileName;
+        FileUtil.createDirectory(directoryName);
+        OutputStream outputStream = FileUtil.getFileOutputStream(filePath);
+        write(inputStream, outputStream);
+    }
 
     /**
      * 写资源,速度最快的方法,速度比较请看 电脑资料 {@code  <<压缩解压性能探究>>}.
@@ -232,11 +207,11 @@ public final class IOWriteUtil{
      * @param outputStream
      *            outputStream
      * @see java.io.OutputStream#write(byte[], int, int)
-     * @see #write(int, InputStream, OutputStream)
+     * @see #write(InputStream, OutputStream,int)
      * @see org.apache.commons.io.IOUtils#copyLarge(InputStream, OutputStream)
      */
     public static void write(InputStream inputStream,OutputStream outputStream){
-        write(DEFAULT_BUFFER_LENGTH, inputStream, outputStream);
+        write(inputStream, outputStream, DEFAULT_BUFFER_LENGTH);
     }
 
     /**
@@ -257,10 +232,10 @@ public final class IOWriteUtil{
      * @see <a href="http://stackoverflow.com/questions/10142409/write-an-inputstream-to-an-httpservletresponse">As creme de la creme with
      *      regard to performance, you could use NIO Channels and ByteBuffer. Create the following utility/helper method in some custom
      *      utility class,</a>
-     * @see #writeUseNIO(int, InputStream, OutputStream)
+     * @see #writeUseNIO(InputStream, OutputStream,int)
      */
-    public static void write(int bufferLength,InputStream inputStream,OutputStream outputStream){
-        writeUseNIO(bufferLength, inputStream, outputStream);
+    public static void write(InputStream inputStream,OutputStream outputStream,int bufferLength){
+        writeUseNIO(inputStream, outputStream, bufferLength);
     }
 
     /**
@@ -313,7 +288,7 @@ public final class IOWriteUtil{
      * @since 1.0.8
      * @since jdk1.4
      */
-    private static void writeUseNIO(int bufferLength,InputStream inputStream,OutputStream outputStream){
+    private static void writeUseNIO(InputStream inputStream,OutputStream outputStream,int bufferLength){
         Date beginDate = new Date();
         ReadableByteChannel readableByteChannel = Channels.newChannel(inputStream);
         WritableByteChannel writableByteChannel = Channels.newChannel(outputStream);
