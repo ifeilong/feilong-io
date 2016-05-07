@@ -119,7 +119,7 @@ public final class FilenameUtil{
     /**
      * 获得文件的不带后缀名的名称.
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * Example 1: 
      * F:/pie2.png, return F:/pie2
@@ -145,7 +145,7 @@ public final class FilenameUtil{
      * 如果文件没有后缀名 返回 "" (EMPTY)
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * Example 1: 
      * F:/pie2.png, return png
@@ -159,7 +159,7 @@ public final class FilenameUtil{
      * <p>
      * This method returns the textual part of the filename after the last dot. There must be no directory separator after the dot.
      * 
-     * <pre>
+     * <pre class="code">
      * foo.txt      --> "txt"
      * a/b/c.jpg    --> "jpg"
      * a/b.txt/c    --> ""
@@ -204,7 +204,7 @@ public final class FilenameUtil{
      * 如果一个文件没有后缀,将会添加 .+newPostfixName
      * </p>
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      * Example 1:
      *      String fileName="F:/pie2.png";
@@ -250,7 +250,7 @@ public final class FilenameUtil{
     /**
      * 获得文件的最顶层 父文件夹名称.
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      *   Example 1:
      *      "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"
@@ -285,7 +285,7 @@ public final class FilenameUtil{
     /**
      * 获得文件的最顶层父文件夹名称.
      * 
-     * <pre>
+     * <pre class="code">
      * {@code
      *   Example 1:
      *      "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"
