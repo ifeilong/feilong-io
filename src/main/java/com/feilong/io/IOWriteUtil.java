@@ -182,10 +182,23 @@ public final class IOWriteUtil{
      * @see #write(InputStream, OutputStream)
      */
     public static void write(InputStream inputStream,String directoryName,String fileName){
+        Date beginDate = new Date();
+
         String filePath = directoryName + "/" + fileName;
         FileUtil.createDirectory(directoryName);
-        OutputStream outputStream = FileUtil.getFileOutputStream(filePath);
+
+        File file = new File(filePath);
+
+        OutputStream outputStream = FileUtil.getFileOutputStream(file, false);
         write(inputStream, outputStream);
+
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(
+                            "fileSize:[{}],absolutePath:[{}],time:[{}]",
+                            FileUtil.getFileFormatSize(file),
+                            file.getAbsolutePath(),
+                            DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+        }
     }
 
     /**
