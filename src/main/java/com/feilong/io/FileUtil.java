@@ -83,7 +83,7 @@ public final class FileUtil{
     }
 
     /**
-     * 将文件转成 {@code byte[] bytes}.
+     * 将文件转成 <code>byte[] bytes</code>.
      *
      * @param fileName
      *            the file name
@@ -97,7 +97,7 @@ public final class FileUtil{
     }
 
     /**
-     * 将文件转成 {@code byte[] bytes}.
+     * 将文件转成 <code>byte[] bytes</code>.
      *
      * @param file
      *            file

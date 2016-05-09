@@ -164,7 +164,7 @@ public final class IOWriteUtil{
      * 
      * <blockquote>
      * <p>
-     * {@code directoryName + "/" + fileName}
+     * <code>directoryName + "/" + fileName</code>
      * </p>
      * </blockquote>
      * 

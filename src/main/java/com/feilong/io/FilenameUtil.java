@@ -120,13 +120,11 @@ public final class FilenameUtil{
      * 获得文件的不带后缀名的名称.
      * 
      * <pre class="code">
-     * {@code
      * Example 1: 
      * F:/pie2.png, return F:/pie2
      * 
      * Example 2: 
      * pie2.png, return pie2
-     * }
      * </pre>
      * 
      * @param fileName
@@ -146,13 +144,11 @@ public final class FilenameUtil{
      * </p>
      * 
      * <pre class="code">
-     * {@code
      * Example 1: 
      * F:/pie2.png, return png
      * 
      * Example 2: 
      * F:/pie2, return ""
-     * }
      * </pre>
      * 
      * Gets the extension of a filename.
@@ -205,13 +201,11 @@ public final class FilenameUtil{
      * </p>
      * 
      * <pre class="code">
-     * {@code
      * Example 1:
      *      String fileName="F:/pie2.png";
      *       FileUtil.getNewFileName(fileName, "gif")
      *       
      *       return F:/pie2.gif
-     * }
      * </pre>
      *
      * @param fileName
@@ -251,12 +245,10 @@ public final class FilenameUtil{
      * 获得文件的最顶层 父文件夹名称.
      * 
      * <pre class="code">
-     * {@code
      *   Example 1:
      *      "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"
      *      
      *      返回 mp2-product
-     * }
      * </pre>
      *
      * @param pathname
@@ -286,12 +278,10 @@ public final class FilenameUtil{
      * 获得文件的最顶层父文件夹名称.
      * 
      * <pre class="code">
-     * {@code
      *   Example 1:
      *      "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"
      *      
      *      返回 mp2-product
-     * }
      * </pre>
      *
      * @param file
