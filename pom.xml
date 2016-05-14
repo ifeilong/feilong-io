@@ -10,6 +10,20 @@
 	<name>feilong-io</name>
 	<description>feilong-io</description>
 
+	<url>https://github.com/venusdrogon/feilong-io</url>
+
+	<!-- 软件配置管理，如cvs 和svn -->
+	<scm>
+		<url>https://github.com/venusdrogon/feilong-io</url>
+		<connection>scm:git:https://github.com/venusdrogon/feilong-io</connection>
+		<developerConnection>scm:git:git@github.com:venusdrogon/feilong-io.git</developerConnection>
+	</scm>
+
+	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/venusdrogon/feilong-io/issues</url>
+	</issueManagement>
 
 	<dependencies>
 		<dependency>
