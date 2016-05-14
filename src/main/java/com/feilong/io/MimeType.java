@@ -26,7 +26,25 @@ package com.feilong.io;
  */
 public enum MimeType{
 
-    /** The json . */
+    /**
+     * JSON(JavaScript Object Notation)是一种轻量级的数据交换格式.
+     * 
+     * <p>
+     * 它基于ECMAScript的一个子集。<br>
+     * JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C、C++、C#、Java、JavaScript、Perl、Python等）。这些特性使JSON成为理想的数据交换语言。<br>
+     * 易于人阅读和编写，同时也易于机器解析和生成(一般用于提升网络传输速率)。
+     * </p>
+     * 
+     * <h3>JSON 语法规则:</h3>
+     * <blockquote>JSON 语法是 JavaScript 对象表示语法的子集。
+     * <ol>
+     * <li>数据在键值对中</li>
+     * <li>数据由逗号分隔</li>
+     * <li>花括号保存对象</li>
+     * <li>方括号保存数组</li>
+     * </ol>
+     * </blockquote>
+     */
     JSON("json","application/json"),
 
     //****************   @see org.apache.catalina.startup.Tomcat#DEFAULT_MIME_MAPPINGS**********************************************************************

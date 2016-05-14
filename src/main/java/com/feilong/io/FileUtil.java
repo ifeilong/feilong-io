@@ -399,7 +399,7 @@ public final class FileUtil{
     }
 
     /**
-     * 删除文件或者文件夹,如果是文件夹 ,递归深层次 删除.
+     * 删除文件或者文件夹,如果是文件夹 ,递归深层次删除.
      * 
      * <p>
      * Deletes a file, never throwing an exception. If file is a directory, delete it and all sub-directories.
@@ -417,7 +417,6 @@ public final class FileUtil{
      * @param file
      *            file or directory to delete, can be {@code null}
      * @return {@code true} if the file or directory was deleted, otherwise {@code false}
-     * 
      * @see org.apache.commons.io.FileUtils#deleteQuietly(File)
      */
     public static boolean deleteFileOrDirectory(File file){

@@ -17,39 +17,33 @@ package com.feilong.io;
 
 /**
  * 图片类型的枚举.
- * 
+ *
  * @author feilong
  * @version 1.0.0 2011-5-30 下午01:19:46
  * @version 1.0.5 2014-5-4 00:24
- * @since 1.0.0
  * @see com.feilong.io.MimeType
+ * @since 1.0.0
  */
 public final class ImageType{
 
-    /**
-     * JPG Joint Photograhic Experts Group(联合图像专家组),JPEG的文件格式一般有两种文件扩展名:.jpg和.jpeg,这两种扩展名的实质是相同的
-     */
+    /** JPG (Joint Photograhic Experts Group)(联合图像专家组),JPEG的文件格式一般有两种文件扩展名:.jpg和.jpeg,这两种扩展名的实质是相同的. */
     public static final String JPG  = MimeType.JPG.getExtension();
 
-    /**
-     * JPEG Joint Photograhic Experts Group(联合图像专家组),JPEG的文件格式一般有两种文件扩展名:.jpg和.jpeg,这两种扩展名的实质是相同的
-     */
+    /** JPEG (Joint Photograhic Experts Group)(联合图像专家组),JPEG的文件格式一般有两种文件扩展名:.jpg和.jpeg,这两种扩展名的实质是相同的. */
     public static final String JPEG = MimeType.JPEG.getExtension();
 
-    /**
-     * PNG (Portable Network Graphic Format) 流式网络图形格式.
-     */
+    /** PNG (Portable Network Graphic Format) 流式网络图形格式. */
     public static final String PNG  = MimeType.PNG.getExtension();
 
-    /**
-     * GIF (Graphics Interchange format)(图形交换格式) .
-     */
+    /** GIF (Graphics Interchange format)(图形交换格式). */
     public static final String GIF  = MimeType.GIF.getExtension();
 
     /**
-     * BMP Windows 位图.<br>
+     * BMP Windows 位图.
+     * <p>
      * 为了保证照片图像的质量,请使用 PNG 、JPEG、TIFF 文件.<br>
      * BMP文件适用于 Windows 中的墙纸 .
+     * </p>
      */
     public static final String BMP  = MimeType.BMP.getExtension();
 

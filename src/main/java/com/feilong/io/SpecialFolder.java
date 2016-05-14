@@ -54,8 +54,11 @@ public final class SpecialFolder{
     }
 
     /**
-     * 获得桌面<br>
-     * example:win7:C:\Users\venusdrogon\Desktop.
+     * 获得桌面.
+     * 
+     * <p>
+     * example:win7:C:\Users\venusdrogon\Desktop
+     * </p>
      * 
      * <br>
      * 或者 通过环境变量 USERPROFILE<br>

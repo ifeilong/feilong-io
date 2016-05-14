@@ -91,7 +91,6 @@ public final class MimeTypeUtil{
      * @see "java.nio.file.Files#probeContentType(java.nio.file.Path)"
      */
     public static String getContentTypeByFileName(String fileName){
-
         String extension = FilenameUtils.getExtension(fileName);
         if (Validator.isNullOrEmpty(extension)){
             return StringUtils.EMPTY;
