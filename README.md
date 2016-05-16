@@ -55,7 +55,7 @@ Reduce development, Release ideas
 			<dependency>
 				<groupId>com.feilong.platform</groupId>
 				<artifactId>feilong-io</artifactId>
-				<version>1.5.3</version>
+				<version>1.5.4</version>
 			</dependency>
 			....
 		</dependencies>
@@ -72,7 +72,7 @@ Category |Name | Description | JDK编译版本
 commons |`feilong-io` | 封装了io操作的常用类 | 1.7
 
 # Javadoc:
-在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.3/feilong-io/)
+在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.4/feilong-io/)
 
 
 # About
