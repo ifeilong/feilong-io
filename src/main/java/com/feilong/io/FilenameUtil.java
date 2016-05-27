@@ -156,10 +156,10 @@ public final class FilenameUtil{
      * This method returns the textual part of the filename after the last dot. There must be no directory separator after the dot.
      * 
      * <pre class="code">
-     * foo.txt      --> "txt"
-     * a/b/c.jpg    --> "jpg"
-     * a/b.txt/c    --> ""
-     * a/b/c        --> ""
+     * foo.txt      {@code -->} "txt"
+     * a/b/c.jpg    {@code -->} "jpg"
+     * a/b.txt/c    {@code -->} ""
+     * a/b/c        {@code -->} ""
      * </pre>
      * <p>
      * The output will be the same irrespective of the machine that the code is running on.

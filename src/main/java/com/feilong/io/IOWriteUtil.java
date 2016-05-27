@@ -204,7 +204,7 @@ public final class IOWriteUtil{
     /**
      * 写资源,速度最快的方法,速度比较请看 电脑资料 {@code  <<压缩解压性能探究>>}.
      * 
-     * <p span style="color:red">
+     * <p style="color:red">
      * <b>(注意,本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
      * </p>
      * 
@@ -228,9 +228,9 @@ public final class IOWriteUtil{
     }
 
     /**
-     * 写资源,速度最快的方法,速度比较请看 电脑资料 {@code <<压缩解压性能探究>>} .
+     * 写资源,速度最快的方法,速度比较请看电脑资料 {@code <<压缩解压性能探究>>} .
      * 
-     * <p span style="color:red">
+     * <p style="color:red">
      * <b>(注意,本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
      * </p>
      *
