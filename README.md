@@ -45,7 +45,7 @@ Reduce development, Release ideas
 	
 		....
 		<properties>
-			<version.feilong-platform>1.5.4</version.feilong-platform>
+			<version.feilong-platform>1.5.5</version.feilong-platform>
 			....
 		</properties>
 		
@@ -80,7 +80,7 @@ Category |Name | Description | JDK编译版本
 commons |`feilong-io` | 封装了io操作的常用类 | 1.7
 
 # Javadoc:
-在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.4/feilong-io/)
+在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.5/feilong-io/)
 
 
 # About
