@@ -252,12 +252,13 @@ public final class FilenameUtil{
      * </pre>
      *
      * @param pathname
-     *            通过将给定路径名字符串转换为抽象路径名来创建一个新 File 实例.如果给定字符串是空字符串,那么结果是空抽象路径名.
-     * @return 如果没有父文件夹,返回自己,比如 E:/ 直接返回 E:/
+     *            通过将给定路径名字符串转换为抽象路径名来创建一个新 File 实例.
+     * @return 如果没有父文件夹,返回自己,比如 E:/ 直接返回 E:/ <br>
+     *         如果 <code>pathname</code> 是blank,抛出 {@link IllegalArgumentException}
      * @since 1.0.7
      */
     public static String getFileTopParentName(String pathname){
-        Validate.notEmpty(pathname, "pathname can't be null/empty!");
+        Validate.notBlank(pathname, "pathname can't be null/empty!");
 
         File file = new File(pathname);
         String parent = file.getParent();
@@ -268,9 +269,7 @@ public final class FilenameUtil{
 
         //递归
         String fileTopParentName = getFileTopParentName(file);
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("pathname:[{}],fileTopParentName:[{}]", pathname, fileTopParentName);
-        }
+        LOGGER.debug("pathname:[{}],fileTopParentName:[{}]", pathname, fileTopParentName);
         return fileTopParentName;
     }
 

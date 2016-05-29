@@ -32,7 +32,7 @@ public interface LineNumberReaderResolver{
      *            {@link java.io.LineNumberReader#getLineNumber()}
      * @param line
      *            the line {@link java.io.LineNumberReader#readLine()}
-     * @return if return ture ,will go on loop; else will break loop;
+     * @return 如果 return ture ,will go on loop; else will break loop;
      * @see java.io.LineNumberReader#getLineNumber()
      * @see java.io.LineNumberReader#readLine()
      * @see java.io.LineNumberReader#read()
