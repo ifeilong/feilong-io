@@ -147,7 +147,7 @@ public final class FilenameUtil{
      * F:/pie2.png, return png
      * 
      * Example 2: 
-     * F:/pie2, return ""
+     * F:/pie2, 返回 {@link StringUtils#EMPTY}
      * </pre>
      * 
      * Gets the extension of a filename.
@@ -211,11 +211,15 @@ public final class FilenameUtil{
      *            文件名称,比如 F:/pie2.png
      * @param newPostfixName
      *            不带.号, 比如 gif
-     * @return 新文件名称
+     * @return 新文件名称 <br>
+     *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>newPostfixName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>newPostfixName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      */
     public static String getNewFileName(String fileName,String newPostfixName){
-        Validate.notEmpty(fileName, "fileName can't be null/empty!");
-        Validate.notEmpty(newPostfixName, "newPostfixName can't be null/empty!");
+        Validate.notBlank(fileName, "fileName can't be null/empty!");
+        Validate.notBlank(newPostfixName, "newPostfixName can't be null/empty!");
 
         // 有后缀
         if (hasExtension(fileName)){

@@ -251,16 +251,16 @@ public final class FileUtil{
      *            指定一个存在的文件夹
      * @return
      *         <ul>
-     *         <li>如果directory isNullOrEmpty,throw IllegalArgumentException</li>
-     *         <li>如果directory don't exists,throw IllegalArgumentException</li>
-     *         <li>如果directory is not Directory,throw IllegalArgumentException</li>
+     *         <li>如果directory isNullOrEmpty,抛出 {@link IllegalArgumentException}</li>
+     *         <li>如果directory don't exists,抛出 {@link IllegalArgumentException}</li>
+     *         <li>如果directory is not Directory,抛出 {@link IllegalArgumentException}</li>
      *         <li>return file.list() ==0</li>
      *         </ul>
      * @see org.apache.commons.io.FileUtils#sizeOf(File)
      * @see org.apache.commons.io.FileUtils#sizeOfDirectory(File)
      */
     public static boolean isEmptyDirectory(String directory){
-        Validate.notEmpty(directory, "directory can't be null/empty!");
+        Validate.notBlank(directory, "directory can't be null/empty!");
 
         File file = new File(directory);
 
@@ -313,7 +313,7 @@ public final class FileUtil{
      * @since 1.2.0
      */
     public static void createDirectoryByFilePath(String filePath){
-        Validate.notEmpty(filePath, "filePath can't be null/empty!");
+        Validate.notBlank(filePath, "filePath can't be null/empty!");
         String directory = getParent(filePath);
         createDirectory(directory);
     }
@@ -344,7 +344,7 @@ public final class FileUtil{
      * @see #createDirectoryByFilePath(String)
      */
     public static void createDirectory(String directory){
-        Validate.notEmpty(directory, "directory can't be null/empty!");
+        Validate.notBlank(directory, "directory can't be null/empty!");
         File directoryFile = new File(directory);
 
         boolean isExists = directoryFile.exists();
@@ -430,11 +430,12 @@ public final class FileUtil{
      *
      * @param path
      *            the path
-     * @return the parent
+     * @return 如果 <code>path</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>path</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see java.io.File#getParent()
      */
     public static String getParent(String path){
-        Validate.notEmpty(path, "path can't be null/empty!");
+        Validate.notBlank(path, "path can't be null/empty!");
         File file = new File(path);
         return file.getParent();
     }

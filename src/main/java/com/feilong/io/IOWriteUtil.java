@@ -128,7 +128,7 @@ public final class IOWriteUtil{
      * @since 1.5.4
      */
     public static void writeStringToFile(String filePath,String content,String charsetType,FileWriteMode fileWriteMode){
-        Validate.notEmpty(filePath, "filePath can't be null/empty!");
+        Validate.notBlank(filePath, "filePath can't be null/empty!");
 
         Date beginDate = new Date();
 
