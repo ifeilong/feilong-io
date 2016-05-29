@@ -102,7 +102,7 @@ public final class FilenameUtil{
      * 获得带后缀的文件纯名称.
      * 
      * <p>
-     * 如:F:/pie2.png,return pie2.png
+     * 如:F:/pie2.png,返回 pie2.png
      * </p>
      * 
      * @param fileName
