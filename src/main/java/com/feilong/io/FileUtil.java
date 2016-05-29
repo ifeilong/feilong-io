@@ -354,18 +354,13 @@ public final class FileUtil{
             LOGGER.debug("exists directoryFile:[{}],don't need mkdirs,nothing to do~", directoryFile);
             return;
         }
-
         //***********do with 不存在******************
         String absolutePath = directoryFile.getAbsolutePath();
 
         // mkdir 如果 parent 目录不存在 会返回false 不会报错
         boolean flag = directoryFile.mkdirs();
         // 级联创建 父级文件夹
-        if (!flag){
-            String msg = "File [" + absolutePath + "] could not be created";
-            LOGGER.error(msg);
-            throw new IllegalArgumentException(msg);
-        }
+        Validate.isTrue(flag, "File [" + absolutePath + "] could not be created");
         //创建成功 记录下日志
         LOGGER.debug("success mkdirs:[{}]~~", absolutePath);
     }
