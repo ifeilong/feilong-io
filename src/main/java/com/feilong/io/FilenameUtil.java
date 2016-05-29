@@ -29,7 +29,6 @@ import com.feilong.core.Validator;
  * The Class FilenameUtil.
  *
  * @author feilong
- * @version 1.4.0 2015年8月4日 上午11:47:18
  * @see org.apache.commons.io.FilenameUtils
  * @since 1.4.0
  */

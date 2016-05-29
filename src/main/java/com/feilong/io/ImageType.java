@@ -19,8 +19,6 @@ package com.feilong.io;
  * 图片类型的枚举.
  *
  * @author feilong
- * @version 1.0.0 2011-5-30 下午01:19:46
- * @version 1.0.5 2014-5-4 00:24
  * @see com.feilong.io.MimeType
  * @since 1.0.0
  */

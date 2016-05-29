@@ -27,7 +27,6 @@ import com.feilong.core.CharsetType;
  * The Class IOReaderUtilTest.
  * 
  * @author feilong
- * @version 1.0 Dec 23, 2013 10:28:59 PM
  */
 public class IOReaderUtilTest{
 

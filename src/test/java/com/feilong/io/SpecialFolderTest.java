@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
  * The Class SpecialFolderTest.
  * 
  * @author feilong
- * @version 1.0.7 2014-6-25 15:25:17
  */
 public class SpecialFolderTest{
 

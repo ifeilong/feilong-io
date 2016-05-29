@@ -50,7 +50,6 @@ import com.feilong.core.date.DateExtensionUtil;
  * 如果需要覆盖写文件,可以调用 {@link #writeStringToFile(String, String, String, FileWriteMode)}.
  *
  * @author feilong
- * @version 1.0.6 Dec 23, 2013 10:23:23 PM
  * @see "org.springframework.util.StreamUtils"
  * @see "org.springframework.util.FileCopyUtils"
  * @see org.apache.commons.io.IOUtils

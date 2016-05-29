@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
  * The Class MimeTypeUtilTest.
  *
  * @author feilong
- * @version 1.0.8 2014年11月19日 上午12:15:27
  * @since 1.0.8
  */
 public class MimeTypeUtilTest{

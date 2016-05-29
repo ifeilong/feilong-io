@@ -23,11 +23,10 @@ import org.apache.commons.lang3.SystemUtils;
 
 /**
  * 特殊文件夹.
- * 
+ *
  * @author feilong
- * @version 1.0.1 2011-3-22 下午11:45:57
- * @since 1.0.1
  * @see org.apache.commons.lang3.SystemUtils
+ * @since 1.0.1
  */
 public final class SpecialFolder{
 

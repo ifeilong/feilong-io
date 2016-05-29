@@ -24,7 +24,6 @@ package com.feilong.io;
  * </ul>
  * 
  * @author feilong
- * @version 1.0.4 Dec 23, 2013 8:11:33 PM
  * @since 1.0.4
  */
 public enum FileWriteMode{

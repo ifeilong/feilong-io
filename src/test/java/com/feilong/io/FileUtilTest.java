@@ -37,7 +37,6 @@ import com.feilong.tools.jsonlib.JsonUtil;
  * The Class FileUtilTest.
  * 
  * @author feilong
- * @version 1.0 2012-5-23 下午5:04:22
  */
 public class FileUtilTest{
 

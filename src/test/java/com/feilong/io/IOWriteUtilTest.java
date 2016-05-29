@@ -45,7 +45,6 @@ import com.feilong.core.lang.StringUtil;
  * The Class IOWriteUtilTest.
  * 
  * @author feilong
- * @version 1.0 Dec 23, 2013 10:29:11 PM
  */
 public class IOWriteUtilTest{
 

@@ -35,7 +35,6 @@ import com.feilong.core.Validator;
  * </p>
  *
  * @author feilong
- * @version 1.0.8 2014年11月19日 上午1:12:50
  * @see com.feilong.io.MimeType
  * @see "org.apache.catalina.startup.Tomcat#DEFAULT_MIME_MAPPINGS"
  * @see "org.apache.http.entity.ContentType"

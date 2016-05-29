@@ -25,7 +25,6 @@ import com.feilong.core.date.DateUtil;
  * 文件信息 entity.
  * 
  * @author feilong
- * @version 1.0.4 Dec 7, 2013 8:13:34 PM
  * @since 1.0.4
  */
 public class FileInfoEntity implements Serializable{

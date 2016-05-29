@@ -41,9 +41,6 @@ import com.feilong.core.Validator;
  * 读文件.
  * 
  * @author feilong
- * @version 1.0.6 Dec 23, 2013 10:27:08 PM
- * @version 1.0.8 2014-11-25 20:04 add {@link #readFileToString(String, String)}
- * @version 1.5.3 2016-4-17 06:19
  * @since 1.0.6
  */
 public final class IOReaderUtil{

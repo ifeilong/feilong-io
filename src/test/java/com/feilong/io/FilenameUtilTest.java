@@ -26,7 +26,6 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * @author feilong
- * @version 1.4.0 2015年8月4日 上午11:50:29
  * @since 1.4.0
  */
 public class FilenameUtilTest{

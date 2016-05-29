@@ -32,7 +32,6 @@ import com.feilong.core.UncheckedIOException;
  * {@link java.io.InputStream} 工具类.
  *
  * @author feilong
- * @version 1.0.9 2015年3月6日 上午10:28:58
  * @see ReaderUtil
  * @see java.io.InputStream
  * @since 1.0.9

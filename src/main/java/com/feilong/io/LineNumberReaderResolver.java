@@ -19,7 +19,6 @@ package com.feilong.io;
  * 定义对 {@link java.io.LineNumberReader} 的解析.
  *
  * @author feilong
- * @version 1.4.1 2015年9月1日 下午12:49:12
  * @since 1.4.1
  */
 public interface LineNumberReaderResolver{
