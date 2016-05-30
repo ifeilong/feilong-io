@@ -31,7 +31,7 @@ import com.feilong.core.UncheckedIOException;
 /**
  * {@link java.io.InputStream} 工具类.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see ReaderUtil
  * @see java.io.InputStream
  * @since 1.0.9

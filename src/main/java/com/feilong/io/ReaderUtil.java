@@ -28,7 +28,7 @@ import com.feilong.core.UncheckedIOException;
 /**
  * {@link java.io.Reader} 工具类.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.io.BufferedReader
  * @see java.io.CharArrayReader
  * @see java.io.FilterReader

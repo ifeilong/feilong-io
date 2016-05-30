@@ -18,7 +18,7 @@ package com.feilong.io;
 /**
  * 图片类型的枚举.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see com.feilong.io.MimeType
  * @since 1.0.0
  */

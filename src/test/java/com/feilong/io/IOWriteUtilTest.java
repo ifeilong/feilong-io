@@ -44,7 +44,7 @@ import com.feilong.core.lang.StringUtil;
 /**
  * The Class IOWriteUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class IOWriteUtilTest{
 

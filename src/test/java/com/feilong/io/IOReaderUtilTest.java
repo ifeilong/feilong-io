@@ -26,7 +26,7 @@ import com.feilong.core.CharsetType;
 /**
  * The Class IOReaderUtilTest.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
 public class IOReaderUtilTest{
 

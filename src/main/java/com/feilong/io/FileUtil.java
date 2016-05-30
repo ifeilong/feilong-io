@@ -59,7 +59,7 @@ import com.feilong.core.bean.ConvertUtil;
  * </ul>
  * </blockquote>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see java.io.File
  * @see org.apache.commons.io.FilenameUtils
  * @see org.apache.commons.io.FileUtils

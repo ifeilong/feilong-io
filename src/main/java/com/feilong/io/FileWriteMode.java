@@ -23,7 +23,7 @@ package com.feilong.io;
  * <li>{@link #APPEND} 追加</li>
  * </ul>
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.4
  */
 public enum FileWriteMode{

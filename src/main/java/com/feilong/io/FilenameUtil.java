@@ -28,7 +28,7 @@ import com.feilong.core.Validator;
 /**
  * The Class FilenameUtil.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.io.FilenameUtils
  * @since 1.4.0
  */

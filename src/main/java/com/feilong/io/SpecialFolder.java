@@ -24,7 +24,7 @@ import org.apache.commons.lang3.SystemUtils;
 /**
  * 特殊文件夹.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see org.apache.commons.lang3.SystemUtils
  * @since 1.0.1
  */

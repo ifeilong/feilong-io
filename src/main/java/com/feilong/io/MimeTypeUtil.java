@@ -34,7 +34,7 @@ import com.feilong.core.Validator;
  * MIME(Multi-Purpose Internet Mail Extensions)
  * </p>
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see com.feilong.io.MimeType
  * @see "org.apache.catalina.startup.Tomcat#DEFAULT_MIME_MAPPINGS"
  * @see "org.apache.http.entity.ContentType"

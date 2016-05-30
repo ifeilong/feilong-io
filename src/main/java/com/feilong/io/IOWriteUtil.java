@@ -49,7 +49,7 @@ import com.feilong.core.date.DateExtensionUtil;
  * 
  * 如果需要覆盖写文件,可以调用 {@link #writeStringToFile(String, String, String, FileWriteMode)}.
  *
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.springframework.util.StreamUtils"
  * @see "org.springframework.util.FileCopyUtils"
  * @see org.apache.commons.io.IOUtils

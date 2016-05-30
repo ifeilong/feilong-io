@@ -24,7 +24,7 @@ import com.feilong.core.date.DateUtil;
 /**
  * 文件信息 entity.
  * 
- * @author feilong
+ * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.4
  */
 public class FileInfoEntity implements Serializable{
