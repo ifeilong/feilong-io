@@ -30,11 +30,10 @@ Reduce development, Release ideas
 
 `封装了io操作的常用类`
 
-#说明
 
-1. 基于`Apache2` 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
-1. 基于`maven3.3`构建;
-1. 需要`jdk1.7`及以上环境;
+# Javadoc:
+在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.6/feilong-io/)
+
 
 
 # Maven使用配置
@@ -73,15 +72,11 @@ Reduce development, Release ideas
 	</project>
 ```
 
-# feilong-platform module:
+#说明
 
-Category |Name | Description | JDK编译版本
-----|------------ | ---------|------------
-commons |`feilong-io` | 封装了io操作的常用类 | 1.7
-
-# Javadoc:
-在此,我们提供在线的Javadoc,以便查阅,参见 [Javadoc](http://venusdrogon.github.io/feilong-platform/javadocs/1.5.6/feilong-io/)
-
+1. 基于`Apache2` 协议,您可以下载,代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
+1. 基于`maven3.3`构建;
+1. 需要`jdk1.7`及以上环境;
 
 # About
 
