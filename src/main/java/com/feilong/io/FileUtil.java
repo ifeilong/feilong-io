@@ -568,14 +568,14 @@ public final class FileUtil{
      * @param filePaths
      *            the file paths
      * @return the UR l[]
-     * @see com.feilong.core.bean.ConvertUtil#convert(String[], Class)
+     * @see com.feilong.core.bean.ConvertUtil#toArray(String[], Class)
      * @see org.apache.commons.io.FileUtils#toURLs(File[])
      * @since 1.4.0
      */
     public static URL[] toURLs(String...filePaths){
         Validate.notEmpty(filePaths, "filePaths can't be null/empty!");
 
-        File[] files = ConvertUtil.convert(filePaths, File.class);
+        File[] files = ConvertUtil.toArray(filePaths, File.class);
         try{
             return FileUtils.toURLs(files);
         }catch (IOException e){
