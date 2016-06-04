@@ -149,9 +149,9 @@ public class IOWriteUtilTest{
         String templateString = "/home/webuser/nike_int/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}_${type}.log";
         Date date = new Date();
         Map<String, String> valuesMap = new HashMap<String, String>();
-        valuesMap.put("yearMonth", DateUtil.date2String(date, DatePattern.YEAR_AND_MONTH));
+        valuesMap.put("yearMonth", DateUtil.toString(date, DatePattern.YEAR_AND_MONTH));
         valuesMap.put("expressDeliveryType", "sf");
-        valuesMap.put("fileName", DateUtil.date2String(date, DatePattern.TIMESTAMP));
+        valuesMap.put("fileName", DateUtil.toString(date, DatePattern.TIMESTAMP));
         valuesMap.put("type", type);
         return StringUtil.replace(templateString, valuesMap);
     }

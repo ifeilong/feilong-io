@@ -148,7 +148,7 @@ public class FileInfoEntity implements Serializable{
      */
     public String getFormatLastModified(){
         Date date = new Date(lastModified);
-        formatLastModified = DateUtil.date2String(date, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
+        formatLastModified = DateUtil.toString(date, DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND);
         return formatLastModified;
     }
 }
