@@ -120,10 +120,10 @@ public final class FilenameUtil{
      * 
      * <pre class="code">
      * Example 1: 
-     * F:/pie2.png, return F:/pie2
+     * F:/pie2.png, 返回  F:/pie2
      * 
      * Example 2: 
-     * pie2.png, return pie2
+     * pie2.png, 返回  pie2
      * </pre>
      * 
      * @param fileName
@@ -144,7 +144,7 @@ public final class FilenameUtil{
      * 
      * <pre class="code">
      * Example 1: 
-     * F:/pie2.png, return png
+     * F:/pie2.png, 返回  png
      * 
      * Example 2: 
      * F:/pie2, 返回 {@link StringUtils#EMPTY}
