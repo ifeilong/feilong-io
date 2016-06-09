@@ -15,6 +15,10 @@
  */
 package com.feilong.io;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -22,7 +26,6 @@ import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -118,24 +121,24 @@ public class FileUtilTest{
         // 不存在的文件
         try{
             FileUtil.isEmptyDirectory("E:\\test\\1\\2011-07-07\\test\\1\\2011-07-07");
-            Assert.fail();
+            fail();
         }catch (IllegalArgumentException e){
-            Assert.assertTrue(true);
+            assertTrue(true);
         }
 
         // 文件
         try{
             FileUtil.isEmptyDirectory("E:\\1.txt");
-            Assert.fail();
+            fail();
         }catch (IllegalArgumentException e){
-            Assert.assertTrue(true);
+            assertTrue(true);
         }
 
         // 非空目录
-        Assert.assertEquals(false, FileUtil.isEmptyDirectory("E:\\Workspaces"));
+        assertEquals(false, FileUtil.isEmptyDirectory("E:\\Workspaces"));
 
         // 正确的 空目录
-        Assert.assertEquals(true, FileUtil.isEmptyDirectory("E:\\empty"));
+        assertEquals(true, FileUtil.isEmptyDirectory("E:\\empty"));
     }
 
     /**
@@ -144,7 +147,7 @@ public class FileUtilTest{
     @Test
     public void testIsEmptyDirectory1(){
         // 正确的 空目录
-        Assert.assertEquals(true, FileUtil.isEmptyDirectory("E:\\empty"));
+        assertEquals(true, FileUtil.isEmptyDirectory("E:\\empty"));
     }
 
     /**
