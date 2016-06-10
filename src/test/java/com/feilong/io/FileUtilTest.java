@@ -31,7 +31,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.UncheckedIOException;
 import com.feilong.core.lang.ClassLoaderUtil;
 import com.feilong.core.net.URLUtil;
 import com.feilong.tools.jsonlib.JsonUtil;
@@ -51,25 +50,26 @@ public class FileUtilTest{
 
     /**
      * Test get content length.
+     * 
+     * @throws IOException
      */
     @Test
-    public void testGetContentLength(){
-        try{
-            URL url = URLUtil.newURL("http://www.jinbaowang.cn/images//20110722/096718c3d1c9b4a1.jpg");
-            URLConnection urlConnection = url.openConnection();
-            int contentLength = urlConnection.getContentLength();
-            LOGGER.info(FileUtil.formatSize(contentLength));
-        }catch (IOException e){
-            throw new UncheckedIOException(e);
-        }
-        try{
-            URL url = URLUtil.newURL("http://localhost:8080/TestHttpURLConnectionPro/index.jsp");
-            url.openConnection();
-        }catch (MalformedURLException e){
-            LOGGER.error(e.getClass().getName(), e);
-        }catch (IOException e){
-            throw new UncheckedIOException(e);
-        }
+    public void testGetContentLength() throws IOException{
+        URL url = URLUtil.newURL("http://www.jinbaowang.cn/images//20110722/096718c3d1c9b4a1.jpg");
+        URLConnection urlConnection = url.openConnection();
+        int contentLength = urlConnection.getContentLength();
+        LOGGER.info(FileUtil.formatSize(contentLength));
+    }
+
+    /**
+     * TestFileUtilTest.
+     * 
+     * @throws IOException
+     */
+    @Test
+    public void testFileUtilTest() throws IOException{
+        URL url = URLUtil.newURL("http://localhost:8080/TestHttpURLConnectionPro/index.jsp");
+        url.openConnection();
     }
 
     /**
