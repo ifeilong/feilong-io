@@ -17,19 +17,26 @@ package com.feilong.io;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.tools.jsonlib.JsonUtil;
+
 /**
+ * The Class FilenameUtilTest.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.4.0
  */
 public class FilenameUtilTest{
 
+    /** The Constant LOGGER. */
     private static final Logger LOGGER    = LoggerFactory.getLogger(FilenameUtilTest.class);
 
     /** The file name1. */
@@ -139,4 +146,18 @@ public class FilenameUtilTest{
                                         "mp2-product\\mp2-product-impl\\src\\..\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
         assertEquals("package-info.java", FilenameUtil.getFileTopParentName("package-info.java"));
     }
+
+    /**
+     * Test get file top parent name1.
+     */
+    @Test
+    public void testGetFileTopParentName1(){
+        String remoteDirectory = "/home/sftp-speedo/test/aa/bbb/ccc/ddd/201606160101/";
+        List<String> list = FilenameUtil.getParentPathList(remoteDirectory);
+        LOGGER.debug(JsonUtil.format(list));
+
+        Collections.reverse(list);
+        LOGGER.debug(JsonUtil.format(list));
+    }
+
 }

@@ -16,6 +16,8 @@
 package com.feilong.io;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -262,16 +264,13 @@ public final class FilenameUtil{
      */
     public static String getFileTopParentName(String pathname){
         Validate.notBlank(pathname, "pathname can't be null/empty!");
-
-        File file = new File(pathname);
-        String parent = file.getParent();
-
+        String parent = FileUtil.getParent(pathname);
         if (Validator.isNullOrEmpty(parent)){
             return pathname;
         }
 
         //递归
-        String fileTopParentName = getFileTopParentName(file);
+        String fileTopParentName = getFileTopParentName(parent);
         LOGGER.debug("pathname:[{}],fileTopParentName:[{}]", pathname, fileTopParentName);
         return fileTopParentName;
     }
@@ -310,5 +309,70 @@ public final class FilenameUtil{
             LOGGER.debug("file.getAbsolutePath():[{}],fileTopParentName:[{}]", file.getAbsolutePath(), fileTopParentName);
         }
         return fileTopParentName;
+    }
+
+    /**
+     * 获得路径的所有 parent路径.
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * String remoteDirectory = "/home/sftp-speedo/test/aa/bbb/ccc/ddd/201606160101/";
+     * List{@code <String>} list = getParentPathList(remoteDirectory);
+     * LOGGER.debug(JsonUtil.format(list));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * [
+     * "/home/sftp-speedo/test/aa/bbb/ccc/ddd",
+     * "/home/sftp-speedo/test/aa/bbb/ccc",
+     * "/home/sftp-speedo/test/aa/bbb",
+     * "/home/sftp-speedo/test/aa",
+     * "/home/sftp-speedo/test",
+     * "/home/sftp-speedo",
+     * "/home",
+     * "/"
+     * ]
+     * 
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param path
+     *            the path
+     * @return 如果 <code>path</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>path</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.7.1
+     */
+    public static List<String> getParentPathList(String path){
+        Validate.notBlank(path, "path can't be blank!");
+        List<String> list = new ArrayList<String>();
+        resolverGetParentPath(path, list);
+        return list;
+    }
+
+    /**
+     * Resolver get parent path.
+     *
+     * @param path
+     *            the path
+     * @param list
+     *            the list
+     */
+    private static void resolverGetParentPath(String path,List<String> list){
+        String parent = FileUtil.getParent(path);
+        if (null != parent){
+
+            parent = parent.replace("\\", "/");
+            if (Validator.isNotNullOrEmpty(parent)){
+                list.add(parent);
+                resolverGetParentPath(parent, list);//级联
+            }
+        }
     }
 }
