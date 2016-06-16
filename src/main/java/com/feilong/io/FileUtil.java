@@ -22,10 +22,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,10 +71,17 @@ import com.feilong.core.bean.ConvertUtil;
 public final class FileUtil{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER                = LoggerFactory.getLogger(FileUtil.class);
+    private static final Logger            LOGGER                = LoggerFactory.getLogger(FileUtil.class);
 
     /** 默认缓冲大小 10k <code>{@value}</code>. */
-    public static final int     DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtils.ONE_KB);
+    public static final int                DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtils.ONE_KB);
+
+    /** 除数和单位的map,必须是有顺序的 从大到小. */
+    private static final Map<Long, String> DIVISOR_AND_UNIT_MAP  = ConvertUtil.toMap(
+                    Pair.of(FileUtils.ONE_TB, "TB"),                                                        //(Terabyte，太字节，或百万兆字节)=1024GB，其中1024=2^10 ( 2 的10次方)。 
+                    Pair.of(FileUtils.ONE_GB, "GB"),                                                        //(Gigabyte，吉字节，又称“千兆”)=1024MB， 
+                    Pair.of(FileUtils.ONE_MB, "MB"),                                                        //(Megabyte，兆字节，简称“兆”)=1024KB， 
+                    Pair.of(FileUtils.ONE_KB, "KB"));                                                       //(Kilobyte 千字节)=1024B
 
     /** Don't let anyone instantiate this class. */
     private FileUtil(){
@@ -172,8 +182,7 @@ public final class FileUtil{
      */
     //默认 Access Modifiers 权限修饰符
     static FileOutputStream getFileOutputStream(String filePath,boolean append){
-        File file = new File(filePath);
-        return getFileOutputStream(file, append);
+        return getFileOutputStream(new File(filePath), append);
     }
 
     /**
@@ -214,8 +223,7 @@ public final class FileUtil{
      * @see #getFileInputStream(File)
      */
     public static FileInputStream getFileInputStream(String fileName){
-        File file = new File(fileName);
-        return getFileInputStream(file);
+        return getFileInputStream(new File(fileName));
     }
 
     /**
@@ -387,8 +395,7 @@ public final class FileUtil{
      * @see com.feilong.io.FileUtil#deleteFileOrDirectory(File)
      */
     public static boolean deleteFileOrDirectory(String fileName){
-        File file = new File(fileName);
-        return deleteFileOrDirectory(file);
+        return deleteFileOrDirectory(new File(fileName));
     }
 
     /**
@@ -494,8 +501,28 @@ public final class FileUtil{
      * 文件大小格式化.
      * 
      * <p>
-     * 目前支持单位有 GB MB KB以及最小单位 Bytes
+     * 目前支持单位有TB GB MB KB以及最小单位 Bytes
      * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * LOGGER.info(FileUtil.formatSize(8981528));
+     * LOGGER.info(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
+     * 
+     * </pre>
+     * 
+     * 返回:
+     * 
+     * <pre class="code">
+     * 00:06 INFO (FileUtilTest.java:204) [formatFileSize()] 8.56MB
+     * 00:07 INFO (FileUtilTest.java:205) [formatFileSize()] 8 MB
+     * </pre>
+     * 
+     * </blockquote>
      * 
      * <p>
      * Common-io 2.4{@link org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)}有缺点,显示的是整数GB 不带小数(比如1.99G 显示为1G),apache 论坛上争议比较大
@@ -503,34 +530,30 @@ public final class FileUtil{
      * 
      * @param fileSize
      *            文件大小 单位byte
-     * @return 文件大小byte 转换
+     * @return 如果 <code>fileSize{@code <}0</code> ,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>fileSize{@code <} {@link FileUtils#ONE_KB}</code>,直接返回 <code>fileSize + "Bytes"</code><br>
      * @see #getFileSize(File)
+     * @see org.apache.commons.io.FileUtils#ONE_TB
      * @see org.apache.commons.io.FileUtils#ONE_GB
      * @see org.apache.commons.io.FileUtils#ONE_MB
      * @see org.apache.commons.io.FileUtils#ONE_KB
-     * 
      * @see org.apache.commons.io.FileUtils#byteCountToDisplaySize(long)
      */
     public static String formatSize(long fileSize){
-        String danwei = "";
-        long chushu = 1;// 除数
-        if (fileSize >= FileUtils.ONE_GB){
-            danwei = "GB";
-            chushu = FileUtils.ONE_GB;
-        }else if (fileSize >= FileUtils.ONE_MB){
-            danwei = "MB";
-            chushu = FileUtils.ONE_MB;
-        }else if (fileSize >= FileUtils.ONE_KB){
-            danwei = "KB";
-            chushu = FileUtils.ONE_KB;
-        }else{
+        Validate.isTrue(fileSize >= 0, "fileSize :[%s] must >=0");
+        if (fileSize < FileUtils.ONE_KB){
             return fileSize + "Bytes";
         }
-        String yushu = 100 * (fileSize % chushu) / chushu + ""; // 除完之后的余数
-        if ("0".equals(yushu)){
-            return fileSize / chushu + danwei;
+        for (Map.Entry<Long, String> entry : DIVISOR_AND_UNIT_MAP.entrySet()){
+            Long divisor = entry.getKey();
+            String unit = entry.getValue();
+            if (fileSize >= divisor){
+                //100的作用是 保持2位小数
+                long remainder = 100 * (fileSize % divisor) / divisor; // 除完之后的余数
+                return fileSize / divisor + (0 == remainder ? StringUtils.EMPTY : ("." + remainder)) + unit;
+            }
         }
-        return fileSize / chushu + "." + yushu + danwei;
+        throw new UnsupportedOperationException("fileSize:[" + fileSize + "] not support!");//理论上不会到这里
     }
 
     /**

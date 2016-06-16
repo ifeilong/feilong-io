@@ -196,13 +196,27 @@ public class FileUtilTest{
         LOGGER.info("比如文件 {} 字节, 格式化大小 : {}", fileSizes, FileUtil.getFileFormatSize(file));
     }
 
-    /**
-     * {@link com.feilong.io.FileUtil#formatSize(long)} 的测试方法.
-     */
     @Test
     public void formatFileSize(){
+        LOGGER.info(FileUtil.formatSize(1134));
+        LOGGER.info(FileUtil.formatSize(800000001));
+        LOGGER.info(FileUtil.formatSize(8000003333001L));
+        LOGGER.info(FileUtil.formatSize(800000333222223001L));
+        LOGGER.info(FileUtil.formatSize(8000222200333223001L));
+        LOGGER.info(FileUtil.formatSize(898152));
         LOGGER.info(FileUtil.formatSize(8981528));
         LOGGER.info(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
+    }
+
+    @Test
+    public void formatFileSize1(){
+        assertEquals("0Bytes", FileUtil.formatSize(0));
+        assertEquals("0Bytes", FileUtil.formatSize(-0));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void formatFileSize2(){
+        FileUtil.formatSize(-1);
     }
 
     /**
