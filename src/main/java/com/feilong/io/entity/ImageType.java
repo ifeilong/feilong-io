@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io;
+package com.feilong.io.entity;
 
 /**
  * 图片类型的枚举.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see com.feilong.io.MimeType
- * @since 1.0.0
+ * @see com.feilong.io.entity.MimeType
+ * @since 1.7.1
  */
 public final class ImageType{
 

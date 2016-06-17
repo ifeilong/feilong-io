@@ -26,6 +26,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.core.Validator;
+import com.feilong.io.entity.MimeType;
 
 /**
  * 获取文件Mime-Type.
@@ -35,7 +36,7 @@ import com.feilong.core.Validator;
  * </p>
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @see com.feilong.io.MimeType
+ * @see com.feilong.io.entity.MimeType
  * @see "org.apache.catalina.startup.Tomcat#DEFAULT_MIME_MAPPINGS"
  * @see "org.apache.http.entity.ContentType"
  * @see <a href="http://stackoverflow.com/questions/4348810/java-library-to-find-the-mime-type-from-file-content/10140531#10140531">java

@@ -13,19 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io;
+package com.feilong.io.entity;
 
 /**
- * 文件类型.
+ * 文件写入的方式.
+ * 
+ * <ul>
+ * <li>{@link #COVER} 覆盖</li>
+ * <li>{@link #APPEND} 追加</li>
+ * </ul>
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0.4
+ * @since 1.7.1
  */
-public enum FileType{
+public enum FileWriteMode{
 
-    /** 文件. */
-    FILE,
+    /** 覆盖. */
+    COVER,
 
-    /** 文件夹. */
-    DIRECTORY
+    /**
+     * 追加 then bytes will be written to the end of the file rather than the beginning.
+     * 
+     * @see java.io.FileOutputStream#FileOutputStream(java.io.File, boolean)
+     */
+    APPEND
 }

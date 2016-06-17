@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io;
+package com.feilong.io.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import com.feilong.core.DatePattern;
 import com.feilong.core.date.DateUtil;
+import com.feilong.io.FileUtil;
 
 /**
  * 文件信息 entity.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.0.4
+ * @since 1.7.1
  */
 public class FileInfoEntity implements Serializable{
 

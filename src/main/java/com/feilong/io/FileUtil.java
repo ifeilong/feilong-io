@@ -34,6 +34,8 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.bean.ConvertUtil;
+import com.feilong.io.entity.FileType;
+import com.feilong.io.entity.FileWriteMode;
 
 /**
  * {@link File}文件操作.

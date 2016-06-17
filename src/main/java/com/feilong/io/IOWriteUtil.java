@@ -36,6 +36,7 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.Validator;
 import com.feilong.core.date.DateExtensionUtil;
+import com.feilong.io.entity.FileWriteMode;
 
 /**
  * 提供写文件操作.

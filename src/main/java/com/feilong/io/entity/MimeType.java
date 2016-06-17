@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io;
+package com.feilong.io.entity;
 
 /**
  * The Enum MimeType.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @see "org.springframework.http.MediaType"
- * @since 1.0.8
+ * @since 1.7.1
  */
 public enum MimeType{
 
