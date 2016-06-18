@@ -91,8 +91,8 @@ public final class FilenameUtil{
             String[] arrayElement = MICROSOFT_PC[i];
 
             String oldChar = arrayElement[0];
-            String newChar = arrayElement[1];
             if (formatFileName.contains(oldChar)){
+                String newChar = arrayElement[1];
                 LOGGER.warn("formatFileName:[{}] contains oldChar:[{}],will replace newChar:[{}]", formatFileName, oldChar, newChar);
                 formatFileName = formatFileName.replace(oldChar, newChar);
             }
@@ -297,17 +297,13 @@ public final class FilenameUtil{
         if (Validator.isNullOrEmpty(parent)){
             String name = file.getPath();//E:/--->E:\
 
-            if (LOGGER.isDebugEnabled()){
-                LOGGER.debug("parent is isNullOrEmpty,return file name:{}", name);
-            }
+            LOGGER.debug("parent is isNullOrEmpty,return file name:{}", name);
             return name;
         }
         //递归
         String fileTopParentName = getFileTopParentName(parent);
 
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("file.getAbsolutePath():[{}],fileTopParentName:[{}]", file.getAbsolutePath(), fileTopParentName);
-        }
+        LOGGER.debug("file.getAbsolutePath():[{}],fileTopParentName:[{}]", file.getAbsolutePath(), fileTopParentName);
         return fileTopParentName;
     }
 
@@ -367,7 +363,6 @@ public final class FilenameUtil{
     private static void resolverGetParentPath(String path,List<String> list){
         String parent = FileUtil.getParent(path);
         if (null != parent){
-
             parent = parent.replace("\\", "/");
             if (Validator.isNotNullOrEmpty(parent)){
                 list.add(parent);

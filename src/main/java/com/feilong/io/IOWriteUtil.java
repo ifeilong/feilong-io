@@ -145,14 +145,10 @@ public final class IOWriteUtil{
 
         if (LOGGER.isInfoEnabled()){
             File file = new File(filePath);
-            LOGGER.info(
-                            "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}],time:[{}]",
-                            useFileWriteMode,
-                            useEncode,
-                            content.length(),
-                            FileUtil.getFileFormatSize(file),
-                            file.getAbsolutePath(),
-                            DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+            String useTime = DateExtensionUtil.getIntervalForView(beginDate, new Date());
+            String fileFormatSize = FileUtil.getFileFormatSize(file);
+            String pattern = "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}],time:[{}]";
+            LOGGER.info(pattern, useFileWriteMode, useEncode, content.length(), fileFormatSize, file.getAbsolutePath(), useTime);
         }
     }
     //**********************************************************************************************
@@ -193,11 +189,8 @@ public final class IOWriteUtil{
         write(inputStream, outputStream);
 
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
-                            "fileSize:[{}],absolutePath:[{}],time:[{}]",
-                            FileUtil.getFileFormatSize(file),
-                            file.getAbsolutePath(),
-                            DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+            String useTime = DateExtensionUtil.getIntervalForView(beginDate, new Date());
+            LOGGER.info("fileSize:[{}],absolutePath:[{}],time:[{}]", FileUtil.getFileFormatSize(file), file.getAbsolutePath(), useTime);
         }
     }
 
@@ -320,12 +313,8 @@ public final class IOWriteUtil{
             if (LOGGER.isDebugEnabled()){
                 String formatSize = FileUtil.formatSize(sumSize);
                 String time = DateExtensionUtil.getIntervalForView(beginDate, new Date());
-                LOGGER.debug(
-                                "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],time:{}",
-                                formatSize,
-                                bufferLength,
-                                loopCount,
-                                time);
+                String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],time:{}";
+                LOGGER.debug(pattern, formatSize, bufferLength, loopCount, time);
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);

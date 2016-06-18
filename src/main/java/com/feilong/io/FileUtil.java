@@ -124,8 +124,7 @@ public final class FileUtil{
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
-            // 为避免内存泄漏,Stream的Close是必须的.即使中途发生了异常,也必须Close,
-            IOUtils.closeQuietly(inputStream);
+            IOUtils.closeQuietly(inputStream);// 为避免内存泄漏,Stream的Close是必须的.即使中途发生了异常,也必须Close
         }
     }
 
@@ -143,8 +142,7 @@ public final class FileUtil{
      * @see #getFileOutputStream(String, boolean)
      */
     public static FileOutputStream getFileOutputStream(String filePath){
-        //默认 append 是 false
-        return getFileOutputStream(filePath, false);
+        return getFileOutputStream(filePath, false);//默认 append 是 false
     }
 
     /**
@@ -273,7 +271,6 @@ public final class FileUtil{
         Validate.notBlank(directory, "directory can't be null/empty!");
 
         File file = new File(directory);
-
         Validate.isTrue(file.exists(), "directory file " + directory + " don't exists!");
         Validate.isTrue(file.isDirectory(), "directory file " + directory + " is not Directory!");
 
@@ -282,9 +279,7 @@ public final class FileUtil{
 
         // ubuntu 已经 测试ok
         File[] listFiles = file.listFiles();
-
         int fileListLength = listFiles.length;
-
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("file :[{}] list length:[{}]", directory, fileListLength);
             for (File tempFile : listFiles){

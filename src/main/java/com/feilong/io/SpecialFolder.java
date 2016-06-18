@@ -39,6 +39,7 @@ public final class SpecialFolder{
 
     /**
      * 获得操作系统临时文件夹.
+     * 
      * <ul>
      * <li>win7:C:\Users\VENUSD~1\AppData\Local\Temp\</li>
      * <li>win7:C:\Users\feilong\AppData\Local\Temp\</li>

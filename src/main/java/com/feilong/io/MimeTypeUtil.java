@@ -69,7 +69,8 @@ public final class MimeTypeUtil{
      * 获得 content type by file name.
      * 
      * <p>
-     * <b>Very incomplete function. As of Java 7, html, pdf and jpeg extensions return the correct mime-type but js and css 返回 null!
+     * <b>Very incomplete function.<br>
+     * As of Java 7, html, pdf and jpeg extensions 返回 正确的 mime-type,但是js 和 css 返回 null!
      * </b>
      * </p>
      * 
@@ -102,10 +103,6 @@ public final class MimeTypeUtil{
         String contentType = fileNameMap.getContentTypeFor(fileName);
 
         // 2. nothing found -> lookup our in extension map to find types like ".doc" or ".docx"
-        if (Validator.isNullOrEmpty(contentType)){
-            contentType = FILE_EXTENSION_MAP.get(extension.toLowerCase());
-        }
-
-        return contentType;
+        return Validator.isNullOrEmpty(contentType) ? FILE_EXTENSION_MAP.get(extension.toLowerCase()) : contentType;
     }
 }
