@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -39,8 +40,8 @@ public class FilenameUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER    = LoggerFactory.getLogger(FilenameUtilTest.class);
 
-    /** The file name1. */
-    private static String       fileName1 = "F:/pie2.png";
+    /** <code>{@value}</code>. */
+    private static String       FILE_NAME = "F:/pie2.png";
 
     /**
      * Gets the file postfix name lower case.
@@ -48,8 +49,7 @@ public class FilenameUtilTest{
      */
     @Test
     public void tstGetFilePostfixNameLowerCase(){
-        fileName1 = "a.A";
-        LOGGER.debug(FilenameUtil.getFilePostfixNameLowerCase(fileName1) + "");
+        assertEquals("a", FilenameUtil.getExtensionLowerCase("a.A"));
     }
 
     /**
@@ -57,9 +57,9 @@ public class FilenameUtilTest{
      */
     @Test
     public void testGetExtension(){
-        assertEquals("png", FilenameUtil.getExtension(fileName1));
-        LOGGER.info(fileName1.substring(fileName1.lastIndexOf(".")));
-        LOGGER.info(fileName1.substring(fileName1.lastIndexOf("\\") + 1));
+        assertEquals("png", FilenameUtil.getExtension(FILE_NAME));
+        LOGGER.info(FILE_NAME.substring(FILE_NAME.lastIndexOf(".")));
+        LOGGER.info(FILE_NAME.substring(FILE_NAME.lastIndexOf("\\") + 1));
     }
 
     /**
@@ -67,8 +67,8 @@ public class FilenameUtilTest{
      */
     @Test
     public void hasPostfixName(){
-        fileName1 = "a";
-        LOGGER.debug(FilenameUtil.hasExtension(fileName1) + "");
+        FILE_NAME = "a";
+        LOGGER.debug(FilenameUtil.hasExtension(FILE_NAME) + "");
     }
 
     /**
@@ -76,7 +76,7 @@ public class FilenameUtilTest{
      */
     @Test
     public void testGetNewFileName(){
-        assertEquals("F:/pie2.gif", FilenameUtil.getNewFileName(fileName1, "gif"));
+        assertEquals("F:/pie2.gif", FilenameUtil.getNewFileName(FILE_NAME, "gif"));
     }
 
     /**
@@ -84,7 +84,7 @@ public class FilenameUtilTest{
      */
     @Test
     public void testGetFileName(){
-        LOGGER.info(FilenameUtil.getFileName(fileName1));
+        LOGGER.info(FilenameUtil.getFileName(FILE_NAME));
     }
 
     /**
@@ -93,7 +93,8 @@ public class FilenameUtilTest{
     @Test
     @Ignore
     public void testGetFilePreName(){
-        assertEquals("F:/pie2", FilenameUtil.getFilePreName(fileName1));
+        assertEquals("F:/pie2", FilenameUtil.getFilePreName(FILE_NAME));
+        assertEquals("F:/pie2", FilenameUtils.getBaseName(FILE_NAME));
     }
 
     /**

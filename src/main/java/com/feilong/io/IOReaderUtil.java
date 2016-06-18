@@ -125,7 +125,7 @@ public final class IOReaderUtil{
             FileChannel fileChannel = fileInputStream.getChannel();
             String useCharsetName = Validator.isNullOrEmpty(charsetName) ? DEFAULT_CHARSET_NAME : charsetName;
             Charset charset = Charset.forName(useCharsetName);
-            while (fileChannel.read(byteBuffer) != -1){
+            while (fileChannel.read(byteBuffer) != org.apache.commons.io.IOUtils.EOF){
                 // 反转此缓冲区
                 byteBuffer.flip();
                 CharBuffer charBuffer = charset.decode(byteBuffer);

@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
@@ -118,13 +117,10 @@ public final class FileUtil{
      * @see org.apache.commons.io.IOUtils#toByteArray(InputStream, int)
      */
     public static byte[] toByteArray(File file){
-        InputStream inputStream = getFileInputStream(file);
         try{
-            return IOUtils.toByteArray(inputStream);
+            return FileUtils.readFileToByteArray(file);
         }catch (IOException e){
             throw new UncheckedIOException(e);
-        }finally{
-            IOUtils.closeQuietly(inputStream);// 为避免内存泄漏,Stream的Close是必须的.即使中途发生了异常,也必须Close
         }
     }
 
@@ -466,6 +462,25 @@ public final class FileUtil{
     }
 
     // ************************************************************
+    /**
+     * 返回指定的文件或目录的大小, 取得文件大小(单位字节).
+     * <p>
+     * 返回指定的文件或目录的大小。<br>
+     * 如果提供的文件是一个常规文件，那么文件的长度将被返回。<br>
+     * 如果参数是一个目录，那么目录的大小是递归计算的。
+     * </p>
+     * 
+     * @param file
+     *            文件
+     * @return 此抽象路径名表示的文件的长度,以字节为单位;<br>
+     *         如果文件不存在,则返回 0L.<br>
+     *         对于表示特定于系统的实体(比如设备或管道)的路径名,某些操作系统可能返回 0L.
+     * @see File#length()
+     * @see org.apache.commons.io.FileUtils#sizeOf(File)
+     */
+    public static long getFileSize(File file){
+        return FileUtils.sizeOf(file);
+    }
 
     /**
      * 获得文件格式化大小.
@@ -477,7 +492,7 @@ public final class FileUtil{
      * </p>
      * 
      * <p>
-     * 目前支持单位有 GB MB KB以及最小单位 Bytes
+     * 目前支持单位有TB GB MB KB以及最小单位 Bytes
      * </p>
      *
      * @param file
@@ -529,7 +544,6 @@ public final class FileUtil{
      *            文件大小 单位byte
      * @return 如果 <code>fileSize{@code <}0</code> ,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>fileSize{@code <} {@link FileUtils#ONE_KB}</code>,直接返回 <code>fileSize + "Bytes"</code><br>
-     * @see #getFileSize(File)
      * @see org.apache.commons.io.FileUtils#ONE_TB
      * @see org.apache.commons.io.FileUtils#ONE_GB
      * @see org.apache.commons.io.FileUtils#ONE_MB
@@ -551,20 +565,6 @@ public final class FileUtil{
             }
         }
         throw new UnsupportedOperationException("fileSize:[" + fileSize + "] not support!");//理论上不会到这里
-    }
-
-    /**
-     * 取得文件大小(单位字节).
-     * 
-     * @param file
-     *            文件
-     * @return 此抽象路径名表示的文件的长度,以字节为单位;<br>
-     *         如果文件不存在,则返回 0L.<br>
-     *         对于表示特定于系统的实体(比如设备或管道)的路径名,某些操作系统可能返回 0L.
-     * @see File#length()
-     */
-    public static long getFileSize(File file){
-        return file.length();
     }
 
     /**

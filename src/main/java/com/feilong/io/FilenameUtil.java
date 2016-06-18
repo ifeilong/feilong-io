@@ -111,6 +111,7 @@ public final class FilenameUtil{
      *            the file name
      * @return the file name
      * @see java.io.File#getName()
+     * @see org.apache.commons.io.FilenameUtils#getName(String)
      */
     public static String getFileName(String fileName){
         File file = new File(fileName);
@@ -132,6 +133,7 @@ public final class FilenameUtil{
      *            文件名称
      * @return 获得文件的不带后缀名的名称
      * @see java.lang.String#substring(int, int)
+     * @see org.apache.commons.io.FilenameUtils#getBaseName(String)
      */
     public static String getFilePreName(String fileName){
         return fileName.substring(0, fileName.lastIndexOf("."));
@@ -167,7 +169,8 @@ public final class FilenameUtil{
      * 
      * @param fileName
      *            文件名称
-     * @return 不带. 的后缀
+     * @return 不带. 的后缀,<br>
+     *         如果 <code>fileName</code> 是null,返回 {@link StringUtils#EMPTY}<br>
      * @see org.apache.commons.io.FilenameUtils#getExtension(String)
      * @see java.lang.String#substring(int, int)
      * @since 1.4.0
@@ -187,8 +190,9 @@ public final class FilenameUtil{
      *            文件名称
      * @return 不带. 的后缀
      * @see org.apache.commons.io.FilenameUtils#getExtension(String)
+     * @since 1.7.1
      */
-    public static String getFilePostfixNameLowerCase(String fileName){
+    public static String getExtensionLowerCase(String fileName){
         return getExtension(fileName).toLowerCase();
     }
 
@@ -295,10 +299,10 @@ public final class FilenameUtil{
 
         File parent = file.getParentFile();
         if (Validator.isNullOrEmpty(parent)){
-            String name = file.getPath();//E:/--->E:\
+            String patch = file.getPath();//E:/--->E:\
 
-            LOGGER.debug("parent is isNullOrEmpty,return file name:{}", name);
-            return name;
+            LOGGER.debug("parent isNullOrEmpty,return file patch:{}", patch);
+            return patch;
         }
         //递归
         String fileTopParentName = getFileTopParentName(parent);

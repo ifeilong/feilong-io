@@ -304,7 +304,7 @@ public final class IOWriteUtil{
         try{
             int loopCount = 0;
             int sumSize = 0;
-            while (readableByteChannel.read(byteBuffer) != -1){
+            while (readableByteChannel.read(byteBuffer) != org.apache.commons.io.IOUtils.EOF){
                 byteBuffer.flip();
                 sumSize += writableByteChannel.write(byteBuffer);
                 byteBuffer.clear();

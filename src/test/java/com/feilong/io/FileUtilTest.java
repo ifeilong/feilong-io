@@ -197,6 +197,20 @@ public class FileUtilTest{
     }
 
     @Test
+    public void testGetFileSizes1() throws IOException{
+        String testFile = "E:\\DataCommon\\test\\1.png";
+        testFile = "E:/test1";
+
+        File file = new File(testFile);
+
+        long fileSizes = FileUtil.getFileSize(file);
+        LOGGER.info(fileSizes + "");
+        LOGGER.info(FileUtil.formatSize(fileSizes) + "");
+        LOGGER.info(FileUtil.formatSize(file.length()) + "");
+        LOGGER.info("比如文件 {} 字节, 格式化大小 : {}", fileSizes, FileUtil.getFileFormatSize(file));
+    }
+
+    @Test
     public void formatFileSize(){
         LOGGER.info(FileUtil.formatSize(1134));
         LOGGER.info(FileUtil.formatSize(800000001));
@@ -216,7 +230,7 @@ public class FileUtilTest{
 
     @Test(expected = IllegalArgumentException.class)
     public void formatFileSize2(){
-        FileUtil.formatSize(-1);
+        FileUtil.formatSize(-255);
     }
 
     /**
