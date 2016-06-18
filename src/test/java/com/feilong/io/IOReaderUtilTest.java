@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * The Class IOReaderUtilTest.
@@ -43,7 +44,7 @@ public class IOReaderUtilTest{
         String fileName = "F:\\Life 生活\\Job 工作\\淘宝开店\\商家编码.txt";
         String content = IOReaderUtil.readFileToString(fileName, CharsetType.UTF8);
         // 将内容以换行符转成数组
-        String[] rowsContents = content.split("\r\n");
+        String[] rowsContents = StringUtil.split(content, "\r\n");
         LOGGER.info(content);
         LOGGER.info("" + rowsContents.length);
     }
@@ -55,11 +56,6 @@ public class IOReaderUtilTest{
     public void parseNginx(){
         String fileName = "C:\\Users\\feilong\\Documents\\AJ11\\AJ11\\1.txt";
         String content = IOReaderUtil.readFileToString(fileName, CharsetType.UTF8);
-
-        content.split("");
-
-        // 将内容以换行符转成数组
-        // String[] rowsContents = content.split("\r\n");
         LOGGER.info(content);
     }
 
