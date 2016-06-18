@@ -44,7 +44,7 @@ Reduce development, Release ideas
 	
 		....
 		<properties>
-			<version.feilong-platform>1.7.0</version.feilong-platform>
+			<version.feilong-platform>1.7.1</version.feilong-platform>
 			....
 		</properties>
 		

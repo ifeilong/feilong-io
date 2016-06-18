@@ -542,8 +542,8 @@ public final class FileUtil{
      * 
      * @param fileSize
      *            文件大小 单位byte
-     * @return 如果 <code>fileSize{@code <}0</code> ,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>fileSize{@code <} {@link FileUtils#ONE_KB}</code>,直接返回 <code>fileSize + "Bytes"</code><br>
+     * @return 如果 {@code fileSize < 0} ,抛出 {@link IllegalArgumentException}<br>
+     *         如果 {@code fileSize < } {@link FileUtils#ONE_KB},直接返回 <code>fileSize + "Bytes"</code><br>
      * @see org.apache.commons.io.FileUtils#ONE_TB
      * @see org.apache.commons.io.FileUtils#ONE_GB
      * @see org.apache.commons.io.FileUtils#ONE_MB
