@@ -245,7 +245,7 @@ public final class FilenameUtil{
      * @since 1.4.0
      */
     public static boolean hasExtension(String fileName){
-        return -1 != FilenameUtils.indexOfExtension(fileName);
+        return StringUtils.INDEX_NOT_FOUND != FilenameUtils.indexOfExtension(fileName);
     }
 
     // [end]
