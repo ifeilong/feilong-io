@@ -203,6 +203,56 @@ public final class IOReaderUtil{
 
     /**
      * 使用 {@link LineNumberReaderResolver}解析 {@link Reader}.
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * try{
+     *     Set{@code <String>} set = new HashSet{@code <String>}();
+     *     log.info("io流开启了");
+     *     BufferedReader bufferedReader = new BufferedReader(read);
+     *     String txt = null;
+     *     while ((txt = bufferedReader.readLine()) != null){ // 读取文件，将文件内容放入到set中
+     *         txt = txt.trim();// 忽略前面前后空格
+     *         txt = txt.replace(" ", "");// 文中过滤空格
+     *         set.add(txt);
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     log.info("io流关闭了");
+     *     read.close(); // 关闭文件流
+     * }
+     * return set;
+     * 
+     * </pre>
+     * 
+     * 现在可以重构为:
+     * 
+     * <pre class="code">
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * 
+     * final Set{@code <String>} set = new HashSet{@code <String>}();
+     * 
+     * log.info("io流开启了");
+     * IOReaderUtil.resolverFile(read, new LineNumberReaderResolver(){
+     * 
+     *     {@code @Override}
+     *     public boolean excute(int lineNumber,String line){
+     *         line = line.trim();// 忽略前面前后空格
+     *         line = line.replace(" ", "");// 文中过滤空格
+     *         set.add(line);// 读取文件，将文件内容放入到set中
+     *         return true;
+     *     }
+     * });
+     * return set;
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param reader
      *            the reader
