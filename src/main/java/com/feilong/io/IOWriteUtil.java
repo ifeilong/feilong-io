@@ -190,7 +190,7 @@ public final class IOWriteUtil{
 
         if (LOGGER.isInfoEnabled()){
             String useTime = DateExtensionUtil.getIntervalForView(beginDate, new Date());
-            LOGGER.info("fileSize:[{}],absolutePath:[{}],time:[{}]", FileUtil.getFileFormatSize(file), file.getAbsolutePath(), useTime);
+            LOGGER.info("fileSize:[{}],absolutePath:[{}],use time:[{}]", FileUtil.getFileFormatSize(file), file.getAbsolutePath(), useTime);
         }
     }
 
@@ -313,7 +313,7 @@ public final class IOWriteUtil{
             if (LOGGER.isDebugEnabled()){
                 String formatSize = FileUtil.formatSize(sumSize);
                 String time = DateExtensionUtil.getIntervalForView(beginDate, new Date());
-                String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],time:{}";
+                String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],use time:{}";
                 LOGGER.debug(pattern, formatSize, bufferLength, loopCount, time);
             }
         }catch (IOException e){

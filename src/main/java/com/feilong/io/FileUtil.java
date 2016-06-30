@@ -352,7 +352,7 @@ public final class FileUtil{
 
         //***********do with 存在******************
         if (isExists){//存在
-            LOGGER.debug("exists directoryFile:[{}],don't need mkdirs,nothing to do~", directoryFile);
+            LOGGER.debug("directory:[{}] exists,don't need mkdirs,nothing to do~", directoryFile);
             return;
         }
         //***********do with 不存在******************
