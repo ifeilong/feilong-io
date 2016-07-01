@@ -15,6 +15,8 @@
  */
 package com.feilong.io;
 
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,7 +37,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.Validator;
-import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.io.entity.FileWriteMode;
 
 /**
@@ -145,9 +146,9 @@ public final class IOWriteUtil{
 
         if (LOGGER.isInfoEnabled()){
             File file = new File(filePath);
-            String useTime = DateExtensionUtil.getIntervalForView(beginDate, new Date());
             String fileFormatSize = FileUtil.getFileFormatSize(file);
             String pattern = "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}],time:[{}]";
+            String useTime = getIntervalForView(beginDate, new Date());
             LOGGER.info(pattern, useFileWriteMode, useEncode, content.length(), fileFormatSize, file.getAbsolutePath(), useTime);
         }
     }
@@ -189,7 +190,7 @@ public final class IOWriteUtil{
         write(inputStream, outputStream);
 
         if (LOGGER.isInfoEnabled()){
-            String useTime = DateExtensionUtil.getIntervalForView(beginDate, new Date());
+            String useTime = getIntervalForView(beginDate, new Date());
             LOGGER.info("fileSize:[{}],absolutePath:[{}],use time:[{}]", FileUtil.getFileFormatSize(file), file.getAbsolutePath(), useTime);
         }
     }
@@ -312,9 +313,8 @@ public final class IOWriteUtil{
             }
             if (LOGGER.isDebugEnabled()){
                 String formatSize = FileUtil.formatSize(sumSize);
-                String time = DateExtensionUtil.getIntervalForView(beginDate, new Date());
                 String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],use time:{}";
-                LOGGER.debug(pattern, formatSize, bufferLength, loopCount, time);
+                LOGGER.debug(pattern, formatSize, bufferLength, loopCount, getIntervalForView(beginDate, new Date()));
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);

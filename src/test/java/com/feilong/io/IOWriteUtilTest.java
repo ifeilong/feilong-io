@@ -15,6 +15,8 @@
  */
 package com.feilong.io;
 
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +39,6 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.DatePattern;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.Validator;
-import com.feilong.core.date.DateExtensionUtil;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.io.entity.FileWriteMode;
@@ -78,7 +79,7 @@ public class IOWriteUtilTest{
         IOWriteUtil.write(inputStream, outputStream);
 
         Date endDate = new Date();
-        LOGGER.info("time:{}", DateExtensionUtil.getIntervalForView(beginDate, endDate));
+        LOGGER.info("time:{}", getIntervalForView(beginDate, endDate));
     }
 
     /**
@@ -102,7 +103,7 @@ public class IOWriteUtilTest{
         for (int i = 0; i < 10; ++i){
             testWriteNio(content);
         }
-        LOGGER.info("use time:{}", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+        LOGGER.info("use time:{}", getIntervalForView(beginDate, new Date()));
 
     }
 
@@ -116,7 +117,7 @@ public class IOWriteUtilTest{
         for (int i = 0; i < 10; ++i){
             testWriteIO(content);
         }
-        LOGGER.info("time:{}", DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+        LOGGER.info("time:{}", getIntervalForView(beginDate, new Date()));
     }
 
     /**
@@ -126,7 +127,7 @@ public class IOWriteUtilTest{
         Date beginDate = new Date();
         String type = "io";
         write(getPath(type), content, null, FileWriteMode.COVER);
-        LOGGER.info("[{}] time:{}", type, DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+        LOGGER.info("[{}] time:{}", type, getIntervalForView(beginDate, new Date()));
     }
 
     /**
@@ -136,7 +137,7 @@ public class IOWriteUtilTest{
         Date beginDate = new Date();
         String type = "nio";
         IOWriteUtil.writeStringToFile(getPath(type), content, CharsetType.UTF8);
-        LOGGER.info("[{}] time:{}", type, DateExtensionUtil.getIntervalForView(beginDate, new Date()));
+        LOGGER.info("[{}] time:{}", type, getIntervalForView(beginDate, new Date()));
     }
 
     /**
