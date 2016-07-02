@@ -58,8 +58,8 @@ public class FilenameUtilTest{
     @Test
     public void testGetExtension(){
         assertEquals("png", FilenameUtil.getExtension(FILE_NAME));
-        LOGGER.info(FILE_NAME.substring(FILE_NAME.lastIndexOf(".")));
-        LOGGER.info(FILE_NAME.substring(FILE_NAME.lastIndexOf("\\") + 1));
+        LOGGER.debug(FILE_NAME.substring(FILE_NAME.lastIndexOf(".")));
+        LOGGER.debug(FILE_NAME.substring(FILE_NAME.lastIndexOf("\\") + 1));
     }
 
     /**
@@ -84,7 +84,7 @@ public class FilenameUtilTest{
      */
     @Test
     public void testGetFileName(){
-        LOGGER.info(FilenameUtil.getFileName(FILE_NAME));
+        LOGGER.debug(FilenameUtil.getFileName(FILE_NAME));
     }
 
     /**

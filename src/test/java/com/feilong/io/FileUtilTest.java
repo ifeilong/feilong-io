@@ -58,7 +58,7 @@ public class FileUtilTest{
         URL url = URLUtil.newURL("http://www.jinbaowang.cn/images//20110722/096718c3d1c9b4a1.jpg");
         URLConnection urlConnection = url.openConnection();
         int contentLength = urlConnection.getContentLength();
-        LOGGER.info(FileUtil.formatSize(contentLength));
+        LOGGER.debug(FileUtil.formatSize(contentLength));
     }
 
     /**
@@ -78,8 +78,8 @@ public class FileUtilTest{
     @Test
     public void testGetP(){
         File file = new File(fString);
-        LOGGER.info(file.getAbsolutePath());
-        LOGGER.info(file.getParent());
+        LOGGER.debug(file.getAbsolutePath());
+        LOGGER.debug(file.getParent());
     }
 
     /**
@@ -93,7 +93,7 @@ public class FileUtilTest{
         URL resource = ClassLoaderUtil.getResource("org/apache/commons/collections4/map");
         URI uri = URLUtil.toURI(resource);
         File esapiDirectory = new File(uri);
-        LOGGER.info(esapiDirectory.getAbsolutePath());
+        LOGGER.debug(esapiDirectory.getAbsolutePath());
     }
 
     /**
@@ -109,7 +109,7 @@ public class FileUtilTest{
         File file = new File(localPath);
         File[] files = file.listFiles();
         for (int i = 0; i < files.length; i++){
-            LOGGER.info("File:" + files[i].getCanonicalPath());
+            LOGGER.debug("File:" + files[i].getCanonicalPath());
         }
     }
 
@@ -155,7 +155,7 @@ public class FileUtilTest{
      */
     @Test
     public void testToURLs(){
-        LOGGER.info(JsonUtil.format(FileUtil.toURLs("D:\\Program Files", "D:\\新建文件夹")));
+        LOGGER.debug(JsonUtil.format(FileUtil.toURLs("D:\\Program Files", "D:\\新建文件夹")));
     }
 
     /**
@@ -190,10 +190,10 @@ public class FileUtilTest{
         File file = new File(testFile);
 
         long fileSizes = FileUtil.getFileSize(file);
-        LOGGER.info(fileSizes + "");
-        LOGGER.info(FileUtil.formatSize(fileSizes) + "");
-        LOGGER.info(FileUtil.formatSize(file.length()) + "");
-        LOGGER.info("比如文件 {} 字节, 格式化大小 : {}", fileSizes, FileUtil.getFileFormatSize(file));
+        LOGGER.debug(fileSizes + "");
+        LOGGER.debug(FileUtil.formatSize(fileSizes) + "");
+        LOGGER.debug(FileUtil.formatSize(file.length()) + "");
+        LOGGER.debug("比如文件 {} 字节, 格式化大小 : {}", fileSizes, FileUtil.getFileFormatSize(file));
     }
 
     @Test
@@ -204,22 +204,22 @@ public class FileUtilTest{
         File file = new File(testFile);
 
         long fileSizes = FileUtil.getFileSize(file);
-        LOGGER.info(fileSizes + "");
-        LOGGER.info(FileUtil.formatSize(fileSizes) + "");
-        LOGGER.info(FileUtil.formatSize(file.length()) + "");
-        LOGGER.info("比如文件 {} 字节, 格式化大小 : {}", fileSizes, FileUtil.getFileFormatSize(file));
+        LOGGER.debug(fileSizes + "");
+        LOGGER.debug(FileUtil.formatSize(fileSizes) + "");
+        LOGGER.debug(FileUtil.formatSize(file.length()) + "");
+        LOGGER.debug("比如文件 {} 字节, 格式化大小 : {}", fileSizes, FileUtil.getFileFormatSize(file));
     }
 
     @Test
     public void formatFileSize(){
-        LOGGER.info(FileUtil.formatSize(1134));
-        LOGGER.info(FileUtil.formatSize(800000001));
-        LOGGER.info(FileUtil.formatSize(8000003333001L));
-        LOGGER.info(FileUtil.formatSize(800000333222223001L));
-        LOGGER.info(FileUtil.formatSize(8000222200333223001L));
-        LOGGER.info(FileUtil.formatSize(898152));
-        LOGGER.info(FileUtil.formatSize(8981528));
-        LOGGER.info(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
+        LOGGER.debug(FileUtil.formatSize(1134));
+        LOGGER.debug(FileUtil.formatSize(800000001));
+        LOGGER.debug(FileUtil.formatSize(8000003333001L));
+        LOGGER.debug(FileUtil.formatSize(800000333222223001L));
+        LOGGER.debug(FileUtil.formatSize(8000222200333223001L));
+        LOGGER.debug(FileUtil.formatSize(898152));
+        LOGGER.debug(FileUtil.formatSize(8981528));
+        LOGGER.debug(org.apache.commons.io.FileUtils.byteCountToDisplaySize(8981528));
     }
 
     @Test

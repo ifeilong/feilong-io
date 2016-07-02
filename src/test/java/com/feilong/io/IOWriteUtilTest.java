@@ -63,7 +63,7 @@ public class IOWriteUtilTest{
     public void unescapeHtml2() throws Exception{
         String a = "第572章 三十年后(大结局) *局";
         String result = (String) MethodUtils.invokeExactStaticMethod(IOWriteUtil.class, "getFormatFilePath", a);
-        LOGGER.info(result);
+        LOGGER.debug(result);
     }
 
     /**
@@ -79,7 +79,7 @@ public class IOWriteUtilTest{
         IOWriteUtil.write(inputStream, outputStream);
 
         Date endDate = new Date();
-        LOGGER.info("time:{}", getIntervalForView(beginDate, endDate));
+        LOGGER.debug("time:{}", getIntervalForView(beginDate, endDate));
     }
 
     /**
@@ -103,7 +103,7 @@ public class IOWriteUtilTest{
         for (int i = 0; i < 10; ++i){
             testWriteNio(content);
         }
-        LOGGER.info("use time:{}", getIntervalForView(beginDate, new Date()));
+        LOGGER.debug("use time:{}", getIntervalForView(beginDate, new Date()));
 
     }
 
@@ -117,7 +117,7 @@ public class IOWriteUtilTest{
         for (int i = 0; i < 10; ++i){
             testWriteIO(content);
         }
-        LOGGER.info("time:{}", getIntervalForView(beginDate, new Date()));
+        LOGGER.debug("time:{}", getIntervalForView(beginDate, new Date()));
     }
 
     /**
@@ -127,7 +127,7 @@ public class IOWriteUtilTest{
         Date beginDate = new Date();
         String type = "io";
         write(getPath(type), content, null, FileWriteMode.COVER);
-        LOGGER.info("[{}] time:{}", type, getIntervalForView(beginDate, new Date()));
+        LOGGER.debug("[{}] time:{}", type, getIntervalForView(beginDate, new Date()));
     }
 
     /**
@@ -137,7 +137,7 @@ public class IOWriteUtilTest{
         Date beginDate = new Date();
         String type = "nio";
         IOWriteUtil.writeStringToFile(getPath(type), content, CharsetType.UTF8);
-        LOGGER.info("[{}] time:{}", type, getIntervalForView(beginDate, new Date()));
+        LOGGER.debug("[{}] time:{}", type, getIntervalForView(beginDate, new Date()));
     }
 
     /**
@@ -209,7 +209,7 @@ public class IOWriteUtilTest{
             writer.close();
 
             File file = new File(filePath);
-            LOGGER.info(
+            LOGGER.debug(
                             "fileWriteMode:[{}],useEncode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}]",
                             fileWriteMode,
                             useEncode,

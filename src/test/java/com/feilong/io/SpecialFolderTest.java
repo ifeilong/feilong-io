@@ -34,7 +34,7 @@ public class SpecialFolderTest{
      */
     @Test
     public void testGetDesktop(){
-        LOGGER.info("桌面地址:" + SpecialFolder.getDesktop());
+        LOGGER.debug("桌面地址:" + SpecialFolder.getDesktop());
     }
 
     /**
@@ -42,7 +42,7 @@ public class SpecialFolderTest{
      */
     @Test
     public void testGetMyDocuments(){
-        LOGGER.info("我的文档:" + SpecialFolder.getMyDocuments());
+        LOGGER.debug("我的文档:" + SpecialFolder.getMyDocuments());
     }
 
     /**
@@ -50,6 +50,6 @@ public class SpecialFolderTest{
      */
     @Test
     public void testGetTemp(){
-        LOGGER.info("临时文件夹:" + SpecialFolder.getTemp());
+        LOGGER.debug("临时文件夹:" + SpecialFolder.getTemp());
     }
 }

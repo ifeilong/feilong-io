@@ -45,8 +45,8 @@ public class IOReaderUtilTest{
         String content = IOReaderUtil.readFileToString(fileName, CharsetType.UTF8);
         // 将内容以换行符转成数组
         String[] rowsContents = StringUtil.split(content, "\r\n");
-        LOGGER.info(content);
-        LOGGER.info("" + rowsContents.length);
+        LOGGER.debug(content);
+        LOGGER.debug("" + rowsContents.length);
     }
 
     /**
@@ -56,7 +56,7 @@ public class IOReaderUtilTest{
     public void parseNginx(){
         String fileName = "C:\\Users\\feilong\\Documents\\AJ11\\AJ11\\1.txt";
         String content = IOReaderUtil.readFileToString(fileName, CharsetType.UTF8);
-        LOGGER.info(content);
+        LOGGER.debug(content);
     }
 
     /**
@@ -64,12 +64,12 @@ public class IOReaderUtilTest{
      */
     @Test
     public void testGetFileContent(){
-        LOGGER.info(IOReaderUtil.readFileToString(propertiesPath, CharsetType.UTF8));
+        LOGGER.debug(IOReaderUtil.readFileToString(propertiesPath, CharsetType.UTF8));
     }
 
     @Test
     public void testGetFileContent2(){
         InputStream inputStream = FileUtil.getFileInputStream(propertiesPath);
-        LOGGER.info(IOReaderUtil.getContent(inputStream, CharsetType.UTF8));
+        LOGGER.debug(IOReaderUtil.getContent(inputStream, CharsetType.UTF8));
     }
 }
