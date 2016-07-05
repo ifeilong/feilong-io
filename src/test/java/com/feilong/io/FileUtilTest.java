@@ -55,7 +55,7 @@ public class FileUtilTest{
      */
     @Test
     public void testGetContentLength() throws IOException{
-        URL url = URLUtil.newURL("http://www.jinbaowang.cn/images//20110722/096718c3d1c9b4a1.jpg");
+        URL url = URLUtil.toURL("http://www.jinbaowang.cn/images//20110722/096718c3d1c9b4a1.jpg");
         URLConnection urlConnection = url.openConnection();
         int contentLength = urlConnection.getContentLength();
         LOGGER.debug(FileUtil.formatSize(contentLength));
@@ -68,7 +68,7 @@ public class FileUtilTest{
      */
     @Test
     public void testFileUtilTest() throws IOException{
-        URL url = URLUtil.newURL("http://localhost:8080/TestHttpURLConnectionPro/index.jsp");
+        URL url = URLUtil.toURL("http://localhost:8080/TestHttpURLConnectionPro/index.jsp");
         url.openConnection();
     }
 
