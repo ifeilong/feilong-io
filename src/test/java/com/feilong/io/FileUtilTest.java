@@ -21,7 +21,6 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
@@ -84,12 +83,9 @@ public class FileUtilTest{
 
     /**
      * Test get p1.
-     *
-     * @throws MalformedURLException
-     *             the malformed url exception
      */
     @Test
-    public void testGetP1() throws MalformedURLException{
+    public void testGetP1(){
         URL resource = ClassLoaderUtil.getResource("org/apache/commons/collections4/map");
         URI uri = URLUtil.toURI(resource);
         File esapiDirectory = new File(uri);
