@@ -48,7 +48,7 @@ public final class ReaderUtil{
     }
 
     /**
-     * 将 {@link java.io.Reader} 装成 {@link java.lang.String}.
+     * 将 {@link java.io.Reader} 转成 {@link java.lang.String}.
      *
      * @param reader
      *            the reader
@@ -73,7 +73,7 @@ public final class ReaderUtil{
     }
 
     /**
-     * 将 {@link java.io.Reader} 装成 {@link java.lang.String}.
+     * 将 {@link java.io.Reader} 转成 {@link java.lang.String}.
      *
      * @param reader
      *            the reader

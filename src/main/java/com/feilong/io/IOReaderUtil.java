@@ -216,7 +216,7 @@ public final class IOReaderUtil{
      *     log.info("io流开启了");
      *     BufferedReader bufferedReader = new BufferedReader(read);
      *     String txt = null;
-     *     while ((txt = bufferedReader.readLine()) != null){ // 读取文件，将文件内容放入到set中
+     *     while ((txt = bufferedReader.readLine()) != null){ // 读取文件,将文件内容放入到set中
      *         txt = txt.trim();// 忽略前面前后空格
      *         txt = txt.replace(" ", "");// 文中过滤空格
      *         set.add(txt);
@@ -245,7 +245,7 @@ public final class IOReaderUtil{
      *     public boolean excute(int lineNumber,String line){
      *         line = line.trim();// 忽略前面前后空格
      *         line = line.replace(" ", "");// 文中过滤空格
-     *         set.add(line);// 读取文件，将文件内容放入到set中
+     *         set.add(line);// 读取文件,将文件内容放入到set中
      *         return true;
      *     }
      * });
