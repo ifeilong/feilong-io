@@ -146,10 +146,10 @@ public final class IOWriteUtil{
 
         if (LOGGER.isInfoEnabled()){
             File file = new File(filePath);
-            String fileFormatSize = FileUtil.getFileFormatSize(file);
+            String size = FileUtil.getFileFormatSize(file);
             String pattern = "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}],time:[{}]";
-            String useTime = getIntervalForView(beginDate, new Date());
-            LOGGER.info(pattern, useFileWriteMode, useEncode, content.length(), fileFormatSize, file.getAbsolutePath(), useTime);
+            String useTime = getIntervalForView(beginDate);
+            LOGGER.info(pattern, useFileWriteMode, useEncode, content.length(), size, file.getAbsolutePath(), useTime);
         }
     }
     //**********************************************************************************************
@@ -190,8 +190,8 @@ public final class IOWriteUtil{
         write(inputStream, outputStream);
 
         if (LOGGER.isInfoEnabled()){
-            String useTime = getIntervalForView(beginDate, new Date());
-            LOGGER.info("fileSize:[{}],absolutePath:[{}],use time:[{}]", FileUtil.getFileFormatSize(file), file.getAbsolutePath(), useTime);
+            String messagePattern = "fileSize:[{}],absolutePath:[{}],use time:[{}]";
+            LOGGER.info(messagePattern, FileUtil.getFileFormatSize(file), file.getAbsolutePath(), getIntervalForView(beginDate));
         }
     }
 
@@ -312,9 +312,8 @@ public final class IOWriteUtil{
                 loopCount++;
             }
             if (LOGGER.isDebugEnabled()){
-                String formatSize = FileUtil.formatSize(sumSize);
-                String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],use time:{}";
-                LOGGER.debug(pattern, formatSize, bufferLength, loopCount, getIntervalForView(beginDate, new Date()));
+                String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],use time:[{}]";
+                LOGGER.debug(pattern, FileUtil.formatSize(sumSize), bufferLength, loopCount, getIntervalForView(beginDate));
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);

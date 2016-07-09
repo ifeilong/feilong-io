@@ -15,6 +15,7 @@
  */
 package com.feilong.io;
 
+import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 import java.io.File;
@@ -71,15 +72,13 @@ public class IOWriteUtilTest{
      */
     @Test
     public void write1(){
-
         Date beginDate = new Date();
 
-        InputStream inputStream = FileUtil.getFileInputStream("K:\\Movie 电影\\1993 超级战警 马可·布拉姆贝拉 史泰龙.rmvb");
-        OutputStream outputStream = FileUtil.getFileOutputStream("D:\\1993 超级战警 马可·布拉姆贝拉 史泰龙.rmvb");
+        InputStream inputStream = FileUtil.getFileInputStream("C:\\Users\\feilong\\feilong\\1993 超级战警 马可·布拉姆贝拉 史泰龙.rmvb");
+        OutputStream outputStream = FileUtil.getFileOutputStream("C:\\Users\\feilong\\feilong\\1993 超级战警 马可·布拉姆贝拉 史泰龙1.rmvb");
         IOWriteUtil.write(inputStream, outputStream);
 
-        Date endDate = new Date();
-        LOGGER.debug("time:{}", getIntervalForView(beginDate, endDate));
+        LOGGER.debug("time:{}", getIntervalForView(beginDate));
     }
 
     /**
@@ -103,7 +102,7 @@ public class IOWriteUtilTest{
         for (int i = 0; i < 10; ++i){
             testWriteNio(content);
         }
-        LOGGER.debug("use time:{}", getIntervalForView(beginDate, new Date()));
+        LOGGER.debug("use time:{}", getIntervalForView(beginDate));
 
     }
 
@@ -117,7 +116,7 @@ public class IOWriteUtilTest{
         for (int i = 0; i < 10; ++i){
             testWriteIO(content);
         }
-        LOGGER.debug("time:{}", getIntervalForView(beginDate, new Date()));
+        LOGGER.debug("time:{}", getIntervalForView(beginDate));
     }
 
     /**
@@ -127,7 +126,7 @@ public class IOWriteUtilTest{
         Date beginDate = new Date();
         String type = "io";
         write(getPath(type), content, null, FileWriteMode.COVER);
-        LOGGER.debug("[{}] time:{}", type, getIntervalForView(beginDate, new Date()));
+        LOGGER.debug("[{}] time:{}", type, getIntervalForView(beginDate));
     }
 
     /**
@@ -136,8 +135,8 @@ public class IOWriteUtilTest{
     private static void testWriteNio(String content){
         Date beginDate = new Date();
         String type = "nio";
-        IOWriteUtil.writeStringToFile(getPath(type), content, CharsetType.UTF8);
-        LOGGER.debug("[{}] time:{}", type, getIntervalForView(beginDate, new Date()));
+        IOWriteUtil.writeStringToFile(getPath(type), content, UTF8);
+        LOGGER.debug("[{}] time:{}", type, getIntervalForView(beginDate));
     }
 
     /**
