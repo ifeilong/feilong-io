@@ -21,8 +21,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.CharsetType;
 import com.feilong.core.lang.StringUtil;
+
+import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class IOReaderUtilTest.
@@ -42,7 +43,7 @@ public class IOReaderUtilTest{
     @Test
     public void testname(){
         String fileName = "F:\\Life 生活\\Job 工作\\淘宝开店\\商家编码.txt";
-        String content = IOReaderUtil.readFileToString(fileName, CharsetType.UTF8);
+        String content = IOReaderUtil.readFileToString(fileName, UTF8);
         // 将内容以换行符转成数组
         String[] rowsContents = StringUtil.split(content, "\r\n");
         LOGGER.debug(content);
@@ -55,8 +56,7 @@ public class IOReaderUtilTest{
     @Test
     public void parseNginx(){
         String fileName = "C:\\Users\\feilong\\Documents\\AJ11\\AJ11\\1.txt";
-        String content = IOReaderUtil.readFileToString(fileName, CharsetType.UTF8);
-        LOGGER.debug(content);
+        LOGGER.debug(IOReaderUtil.readFileToString(fileName, UTF8));
     }
 
     /**
@@ -64,12 +64,12 @@ public class IOReaderUtilTest{
      */
     @Test
     public void testGetFileContent(){
-        LOGGER.debug(IOReaderUtil.readFileToString(propertiesPath, CharsetType.UTF8));
+        LOGGER.debug(IOReaderUtil.readFileToString(propertiesPath, UTF8));
     }
 
     @Test
     public void testGetFileContent2(){
         InputStream inputStream = FileUtil.getFileInputStream(propertiesPath);
-        LOGGER.debug(IOReaderUtil.getContent(inputStream, CharsetType.UTF8));
+        LOGGER.debug(IOReaderUtil.getContent(inputStream, UTF8));
     }
 }

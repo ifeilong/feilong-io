@@ -15,9 +15,6 @@
  */
 package com.feilong.io;
 
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,12 +34,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
-import com.feilong.core.DatePattern;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.Validator;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.io.entity.FileWriteMode;
+
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+
+import static com.feilong.core.DatePattern.TIMESTAMP;
+import static com.feilong.core.DatePattern.YEAR_AND_MONTH;
 
 /**
  * The Class IOWriteUtilTest.
@@ -88,7 +90,7 @@ public class IOWriteUtilTest{
     public void write(){
         String url = "F:\\test.txt";
         String directoryName = SpecialFolder.getDesktop();
-        IOWriteUtil.writeStringToFile(url, directoryName, CharsetType.UTF8);
+        IOWriteUtil.writeStringToFile(url, directoryName, UTF8);
     }
 
     /**
@@ -150,9 +152,9 @@ public class IOWriteUtilTest{
         String templateString = "/home/webuser/nike_int/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}_${type}.log";
         Date date = new Date();
         Map<String, String> valuesMap = new HashMap<String, String>();
-        valuesMap.put("yearMonth", DateUtil.toString(date, DatePattern.YEAR_AND_MONTH));
+        valuesMap.put("yearMonth", DateUtil.toString(date, YEAR_AND_MONTH));
         valuesMap.put("expressDeliveryType", "sf");
-        valuesMap.put("fileName", DateUtil.toString(date, DatePattern.TIMESTAMP));
+        valuesMap.put("fileName", DateUtil.toString(date, TIMESTAMP));
         valuesMap.put("type", type);
         return StringUtil.replace(templateString, valuesMap);
     }
@@ -196,7 +198,7 @@ public class IOWriteUtilTest{
      * @see java.io.FileOutputStream#FileOutputStream(File, boolean)
      */
     public static void write(String filePath,String content,String encode,FileWriteMode fileWriteMode){
-        String useEncode = Validator.isNullOrEmpty(encode) ? CharsetType.UTF8 : encode;
+        String useEncode = Validator.isNullOrEmpty(encode) ? UTF8 : encode;
         FileUtil.createDirectoryByFilePath(filePath);
         OutputStream outputStream = null;
         try{

@@ -15,8 +15,6 @@
  */
 package com.feilong.io;
 
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,8 +34,11 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
-import com.feilong.core.Validator;
 import com.feilong.io.entity.FileWriteMode;
+
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 /**
  * 提供写文件操作.
@@ -134,8 +135,8 @@ public final class IOWriteUtil{
 
         Date beginDate = new Date();
 
-        String useEncode = Validator.isNullOrEmpty(charsetType) ? CharsetType.UTF8 : charsetType;
-        FileWriteMode useFileWriteMode = Validator.isNullOrEmpty(fileWriteMode) ? FileWriteMode.COVER : fileWriteMode;
+        String useEncode = isNullOrEmpty(charsetType) ? UTF8 : charsetType;
+        FileWriteMode useFileWriteMode = isNullOrEmpty(fileWriteMode) ? FileWriteMode.COVER : fileWriteMode;
 
         FileUtil.createDirectoryByFilePath(filePath);
 

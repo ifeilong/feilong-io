@@ -37,6 +37,8 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.Validator;
 
+import static com.feilong.core.CharsetType.UTF8;
+
 /**
  * 读文件.
  * 
@@ -49,7 +51,7 @@ public final class IOReaderUtil{
     private static final Logger LOGGER               = LoggerFactory.getLogger(IOReaderUtil.class);
 
     /** 默认编码. */
-    private static final String DEFAULT_CHARSET_NAME = CharsetType.UTF8;
+    private static final String DEFAULT_CHARSET_NAME = UTF8;
 
     /** Don't let anyone instantiate this class. */
     private IOReaderUtil(){
