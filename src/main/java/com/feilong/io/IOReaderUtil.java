@@ -35,9 +35,9 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
-import com.feilong.core.Validator;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 
 /**
  * 读文件.
@@ -125,8 +125,7 @@ public final class IOReaderUtil{
         try{
             // 用于读取、写入、映射和操作文件的通道.
             FileChannel fileChannel = fileInputStream.getChannel();
-            String useCharsetName = Validator.isNullOrEmpty(charsetName) ? DEFAULT_CHARSET_NAME : charsetName;
-            Charset charset = Charset.forName(useCharsetName);
+            Charset charset = Charset.forName(defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
             while (fileChannel.read(byteBuffer) != org.apache.commons.io.IOUtils.EOF){
                 // 反转此缓冲区
                 byteBuffer.flip();

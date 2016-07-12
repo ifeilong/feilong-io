@@ -25,8 +25,9 @@ import javax.activation.MimetypesFileTypeMap;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import com.feilong.core.Validator;
 import com.feilong.io.entity.MimeType;
+
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 获取文件Mime-Type.
@@ -93,7 +94,7 @@ public final class MimeTypeUtil{
      */
     public static String getContentTypeByFileName(String fileName){
         String extension = FilenameUtils.getExtension(fileName);
-        if (Validator.isNullOrEmpty(extension)){
+        if (isNullOrEmpty(extension)){
             return StringUtils.EMPTY;
         }
 
@@ -103,6 +104,6 @@ public final class MimeTypeUtil{
         String contentType = fileNameMap.getContentTypeFor(fileName);
 
         // 2. nothing found -> lookup our in extension map to find types like ".doc" or ".docx"
-        return Validator.isNullOrEmpty(contentType) ? FILE_EXTENSION_MAP.get(extension.toLowerCase()) : contentType;
+        return isNullOrEmpty(contentType) ? FILE_EXTENSION_MAP.get(extension.toLowerCase()) : contentType;
     }
 }

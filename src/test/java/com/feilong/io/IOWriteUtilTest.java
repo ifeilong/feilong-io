@@ -35,12 +35,12 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
-import com.feilong.core.Validator;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.io.entity.FileWriteMode;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
 
 import static com.feilong.core.DatePattern.TIMESTAMP;
@@ -198,7 +198,7 @@ public class IOWriteUtilTest{
      * @see java.io.FileOutputStream#FileOutputStream(File, boolean)
      */
     public static void write(String filePath,String content,String encode,FileWriteMode fileWriteMode){
-        String useEncode = Validator.isNullOrEmpty(encode) ? UTF8 : encode;
+        String useEncode = isNullOrEmpty(encode) ? UTF8 : encode;
         FileUtil.createDirectoryByFilePath(filePath);
         OutputStream outputStream = null;
         try{

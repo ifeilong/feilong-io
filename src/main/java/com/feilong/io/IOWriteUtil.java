@@ -80,7 +80,7 @@ public final class IOWriteUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>如果 <code>Validator.isNullOrEmpty(filePath)</code>,那么抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>isNullOrEmpty(filePath)</code>,那么抛出 {@link NullPointerException}</li>
      * <li>如果文件不存在,自动创建,包括其父文件夹 (支持级联创建 文件夹)</li>
      * <li>如果文件存在则覆盖旧文件,可以设置{@link FileWriteMode#APPEND}表示追加内容而非覆盖</li>
      * <li>如果不设置 <code>charsetType</code>,则默认使用{@link CharsetType#UTF8}编码</li>
@@ -110,7 +110,7 @@ public final class IOWriteUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>如果 <code>Validator.isNullOrEmpty(filePath)</code>,那么抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>isNullOrEmpty(filePath)</code>,那么抛出 {@link NullPointerException}</li>
      * <li>如果文件不存在,自动创建,包括其父文件夹 (支持级联创建 文件夹)</li>
      * <li>如果文件存在则覆盖旧文件,可以设置{@link FileWriteMode#APPEND}表示追加内容而非覆盖</li>
      * <li>如果不设置 <code>charsetType</code>,则默认使用{@link CharsetType#UTF8}编码</li>

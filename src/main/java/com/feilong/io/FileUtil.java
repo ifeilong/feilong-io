@@ -332,7 +332,7 @@ public final class FileUtil{
      * 
      * <h3>代码流程:</h3> <blockquote>
      * <ol>
-     * <li>{@code if Validator.isNullOrEmpty(directory)---->NullPointerException}</li>
+     * <li>{@code if isNullOrEmpty(directory)---->NullPointerException}</li>
      * <li>{@code if directory exists---->log debug and return}</li>
      * <li>{@link java.io.File#mkdirs()}</li>
      * <li>{@code if mkdirs's result is false ---> return IllegalArgumentException}</li>

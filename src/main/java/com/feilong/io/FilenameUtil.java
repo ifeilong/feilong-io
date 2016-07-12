@@ -25,7 +25,8 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.Validator;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class FilenameUtil.
@@ -269,7 +270,7 @@ public final class FilenameUtil{
     public static String getFileTopParentName(String pathname){
         Validate.notBlank(pathname, "pathname can't be null/empty!");
         String parent = FileUtil.getParent(pathname);
-        if (Validator.isNullOrEmpty(parent)){
+        if (isNullOrEmpty(parent)){
             return pathname;
         }
 
@@ -298,7 +299,7 @@ public final class FilenameUtil{
         Validate.notNull(file, "file can't be null!");
 
         File parent = file.getParentFile();
-        if (Validator.isNullOrEmpty(parent)){
+        if (isNullOrEmpty(parent)){
             String patch = file.getPath();//E:/--->E:\
 
             LOGGER.debug("parent isNullOrEmpty,return file patch:{}", patch);
@@ -368,7 +369,7 @@ public final class FilenameUtil{
         String parent = FileUtil.getParent(path);
         if (null != parent){
             parent = parent.replace("\\", "/");
-            if (Validator.isNotNullOrEmpty(parent)){
+            if (isNotNullOrEmpty(parent)){
                 list.add(parent);
                 resolverGetParentPath(parent, list);//级联
             }
