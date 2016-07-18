@@ -423,7 +423,7 @@ public final class FileUtil{
     // ************************************************************
 
     /**
-     * 返回此抽象路径名父目录的路径名字符串;如果此路径名没有指定父目录,则返回 null.
+     * 返回此抽象路径名 <code>path</code> 父目录的路径名字符串;如果此路径名没有指定父目录,则返回 null.
      *
      * @param path
      *            the path
@@ -438,7 +438,7 @@ public final class FileUtil{
     }
 
     /**
-     * 判断文件是否存在.
+     * 判断文件 <code>filePath</code> 是否存在.
      * 
      * @param filePath
      *            the file path
@@ -451,7 +451,7 @@ public final class FileUtil{
     }
 
     /**
-     * 判断文件不存在.
+     * 判断文件 <code>filePath</code> 不存在.
      *
      * @param filePath
      *            the file path
@@ -465,7 +465,8 @@ public final class FileUtil{
 
     // ************************************************************
     /**
-     * 返回指定的文件或目录的大小, 取得文件大小(单位字节).
+     * 返回指定的文件或目录 <code>file</code> 的大小, 取得文件大小(单位字节).
+     * 
      * <p>
      * 返回指定的文件或目录的大小。<br>
      * 如果提供的文件是一个常规文件,那么文件的长度将被返回。<br>
@@ -485,7 +486,7 @@ public final class FileUtil{
     }
 
     /**
-     * 获得文件格式化大小.
+     * 获得文件 <code>file</code> 格式化大小.
      * 
      * <p>
      * 比如文件3834字节,格式化大小 3.74KB<br>
@@ -512,7 +513,7 @@ public final class FileUtil{
     }
 
     /**
-     * 文件大小格式化.
+     * 文件大小 <code>fileSize</code> 格式化.
      * 
      * <p>
      * 目前支持单位有TB GB MB KB以及最小单位 Bytes
