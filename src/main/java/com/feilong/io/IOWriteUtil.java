@@ -15,6 +15,9 @@
  */
 package com.feilong.io;
 
+import static com.feilong.io.entity.FileWriteMode.COVER;
+import static org.apache.commons.io.IOUtils.EOF;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -100,7 +103,7 @@ public final class IOWriteUtil{
      * @since 1.5.4
      */
     public static void writeStringToFile(String filePath,String content,String charsetType){
-        writeStringToFile(filePath, content, charsetType, FileWriteMode.COVER);//default_fileWriteMode
+        writeStringToFile(filePath, content, charsetType, COVER);//default_fileWriteMode
     }
 
     /**
@@ -136,7 +139,7 @@ public final class IOWriteUtil{
         Date beginDate = new Date();
 
         String useEncode = isNullOrEmpty(charsetType) ? UTF8 : charsetType;
-        FileWriteMode useFileWriteMode = isNullOrEmpty(fileWriteMode) ? FileWriteMode.COVER : fileWriteMode;
+        FileWriteMode useFileWriteMode = isNullOrEmpty(fileWriteMode) ? COVER : fileWriteMode;
 
         FileUtil.createDirectoryByFilePath(filePath);
 
@@ -306,7 +309,7 @@ public final class IOWriteUtil{
         try{
             int loopCount = 0;
             int sumSize = 0;
-            while (readableByteChannel.read(byteBuffer) != org.apache.commons.io.IOUtils.EOF){
+            while (readableByteChannel.read(byteBuffer) != EOF){
                 byteBuffer.flip();
                 sumSize += writableByteChannel.write(byteBuffer);
                 byteBuffer.clear();

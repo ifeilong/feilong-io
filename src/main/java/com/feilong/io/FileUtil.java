@@ -15,6 +15,10 @@
  */
 package com.feilong.io;
 
+import static com.feilong.io.entity.FileType.DIRECTORY;
+import static com.feilong.io.entity.FileType.FILE;
+import static com.feilong.io.entity.FileWriteMode.APPEND;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -33,7 +37,6 @@ import org.slf4j.LoggerFactory;
 
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.bean.ConvertUtil;
-import com.feilong.io.entity.FileType;
 import com.feilong.io.entity.FileWriteMode;
 
 import static com.feilong.core.bean.ConvertUtil.toMap;
@@ -157,7 +160,7 @@ public final class FileUtil{
      * @since 1.2.0
      */
     public static FileOutputStream getFileOutputStream(String filePath,FileWriteMode fileWriteMode){
-        boolean append = fileWriteMode == FileWriteMode.APPEND;
+        boolean append = fileWriteMode == APPEND;
         return getFileOutputStream(filePath, append);
     }
 
@@ -281,7 +284,7 @@ public final class FileUtil{
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("file :[{}] list length:[{}]", directory, fileListLength);
             for (File tempFile : listFiles){
-                LOGGER.debug("[{}] [{}]", tempFile.getName(), tempFile.isDirectory() ? FileType.DIRECTORY : FileType.FILE);
+                LOGGER.debug("[{}] [{}]", tempFile.getName(), tempFile.isDirectory() ? DIRECTORY : FILE);
             }
         }
         return 0 == fileListLength;

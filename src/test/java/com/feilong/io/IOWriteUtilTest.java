@@ -15,6 +15,9 @@
  */
 package com.feilong.io;
 
+import static com.feilong.io.entity.FileWriteMode.COVER;
+import static org.apache.commons.io.IOUtils.EOF;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -127,7 +130,7 @@ public class IOWriteUtilTest{
     private static void testWriteIO(String content){
         Date beginDate = new Date();
         String type = "io";
-        write(getPath(type), content, null, FileWriteMode.COVER);
+        write(getPath(type), content, null, COVER);
         LOGGER.debug("[{}] time:{}", type, getIntervalForView(beginDate));
     }
 
@@ -210,13 +213,8 @@ public class IOWriteUtilTest{
             writer.close();
 
             File file = new File(filePath);
-            LOGGER.debug(
-                            "fileWriteMode:[{}],useEncode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}]",
-                            fileWriteMode,
-                            useEncode,
-                            content.length(),
-                            FileUtil.getFileFormatSize(file),
-                            file.getAbsolutePath());
+            String pattern = "fileWriteMode:[{}],useEncode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}]";
+            LOGGER.debug(pattern, fileWriteMode, useEncode, content.length(), FileUtil.getFileFormatSize(file), file.getAbsolutePath());
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
@@ -250,7 +248,7 @@ public class IOWriteUtilTest{
             //将读取的第一个字节存储在元素 bytes[0] 中,下一个存储在 b[1] 中,依次类推.
             //读取的字节数最多等于 b 的长度.设 k 为实际读取的字节数;这些字节将存储在 b[0] 到 b[k-1] 的元素中,不影响 b[k] 到 b[b.length-1] 的元素. 
             //类 InputStream 的 read(b) 方法的效果等同于:read(b, 0, b.length) 
-            while ((j = inputStream.read(bytes)) != org.apache.commons.io.IOUtils.EOF){
+            while ((j = inputStream.read(bytes)) != EOF){
 
                 //迅雷下载会报下面的异常,但是不影响下载效果
                 //ClientAbortException:  java.net.SocketException: Software caused connection abort: socket write error
