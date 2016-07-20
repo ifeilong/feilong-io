@@ -18,6 +18,7 @@ package com.feilong.io;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
 import static com.feilong.io.entity.FileWriteMode.APPEND;
+import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.commons.lang3.tuple.Pair;
 import org.slf4j.Logger;
@@ -567,7 +567,7 @@ public final class FileUtil{
             if (fileSize >= divisor){
                 //100的作用是 保持2位小数
                 long remainder = 100 * (fileSize % divisor) / divisor; // 除完之后的余数
-                return fileSize / divisor + (0 == remainder ? StringUtils.EMPTY : ("." + remainder)) + unit;
+                return fileSize / divisor + (0 == remainder ? EMPTY : ("." + remainder)) + unit;
             }
         }
         throw new UnsupportedOperationException("fileSize:[" + fileSize + "] not support!");//理论上不会到这里

@@ -15,6 +15,8 @@
  */
 package com.feilong.io;
 
+import static org.apache.commons.lang3.StringUtils.EMPTY;
+
 import java.net.FileNameMap;
 import java.net.URLConnection;
 import java.util.HashMap;
@@ -23,7 +25,6 @@ import java.util.Map;
 import javax.activation.MimetypesFileTypeMap;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import com.feilong.io.entity.MimeType;
 
@@ -95,7 +96,7 @@ public final class MimeTypeUtil{
     public static String getContentTypeByFileName(String fileName){
         String extension = FilenameUtils.getExtension(fileName);
         if (isNullOrEmpty(extension)){
-            return StringUtils.EMPTY;
+            return EMPTY;
         }
 
         // 1. first use java's build-in utils
