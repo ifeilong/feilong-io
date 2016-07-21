@@ -15,12 +15,13 @@
  */
 package com.feilong.io;
 
+import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.Validate;
 
 import com.feilong.core.UncheckedIOException;
@@ -64,7 +65,7 @@ public final class ReaderUtil{
             // 读取一个文本行.通过下列字符之一即可认为某行已终止:换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
             while ((line = bufferedReader.readLine()) != null){
                 sb.append(line);
-                sb.append(SystemUtils.LINE_SEPARATOR);
+                sb.append(LINE_SEPARATOR);
             }
             return sb.toString();
         }catch (IOException e){

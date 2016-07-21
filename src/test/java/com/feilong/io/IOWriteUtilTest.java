@@ -17,6 +17,7 @@ package com.feilong.io;
 
 import static com.feilong.io.entity.FileWriteMode.COVER;
 import static org.apache.commons.io.IOUtils.EOF;
+import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -169,11 +169,11 @@ public class IOWriteUtilTest{
      */
     private static String getContent(){
         StringBuilder sb = new StringBuilder();
-        sb.append("****************************************************" + SystemUtils.LINE_SEPARATOR);
-        sb.append("2011-05-13 22:24:37调用,系统顺丰在途订单597件" + SystemUtils.LINE_SEPARATOR);
-        sb.append("耗时:429020" + SystemUtils.LINE_SEPARATOR);
-        sb.append("****************************************************" + SystemUtils.LINE_SEPARATOR);
-        sb.append("派送成功订单495条" + SystemUtils.LINE_SEPARATOR);
+        sb.append("****************************************************" + LINE_SEPARATOR);
+        sb.append("2011-05-13 22:24:37调用,系统顺丰在途订单597件" + LINE_SEPARATOR);
+        sb.append("耗时:429020" + LINE_SEPARATOR);
+        sb.append("****************************************************" + LINE_SEPARATOR);
+        sb.append("派送成功订单495条" + LINE_SEPARATOR);
         for (int i = 0; i < 100000; i++){
             sb.append("订单号:20850010运单号:102085592089\t寄件时间:2011-05-09 19:00:00\t签收人:张寄件时间:2011-05-10 14:49:00\t回单类型:1\n");
         }
