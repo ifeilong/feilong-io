@@ -15,6 +15,8 @@
  */
 package com.feilong.io;
 
+import static org.apache.commons.io.IOUtils.EOF;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -126,7 +128,7 @@ public final class IOReaderUtil{
             // 用于读取、写入、映射和操作文件的通道.
             FileChannel fileChannel = fileInputStream.getChannel();
             Charset charset = Charset.forName(defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
-            while (fileChannel.read(byteBuffer) != org.apache.commons.io.IOUtils.EOF){
+            while (fileChannel.read(byteBuffer) != EOF){
                 // 反转此缓冲区
                 byteBuffer.flip();
                 CharBuffer charBuffer = charset.decode(byteBuffer);
