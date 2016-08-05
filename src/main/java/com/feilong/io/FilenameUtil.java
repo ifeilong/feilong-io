@@ -25,6 +25,8 @@ import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.lang.StringUtil;
+
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 
@@ -95,7 +97,7 @@ public final class FilenameUtil{
             if (formatFileName.contains(oldChar)){
                 String newChar = arrayElement[1];
                 LOGGER.warn("formatFileName:[{}] contains oldChar:[{}],will replace newChar:[{}]", formatFileName, oldChar, newChar);
-                formatFileName = formatFileName.replace(oldChar, newChar);
+                formatFileName = StringUtil.replace(formatFileName, oldChar, newChar);
             }
         }
         return formatFileName;
@@ -368,7 +370,7 @@ public final class FilenameUtil{
     private static void resolverGetParentPath(String path,List<String> list){
         String parent = FileUtil.getParent(path);
         if (null != parent){
-            parent = parent.replace("\\", "/");
+            parent = StringUtil.replace(parent, "\\", "/");
             if (isNotNullOrEmpty(parent)){
                 list.add(parent);
                 resolverGetParentPath(parent, list);//级联
