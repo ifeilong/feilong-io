@@ -41,7 +41,7 @@ import com.feilong.io.entity.FileWriteMode;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 /**
  * 提供写文件操作.
@@ -152,7 +152,7 @@ public final class IOWriteUtil{
             File file = new File(filePath);
             String size = FileUtil.getFileFormatSize(file);
             String pattern = "fileWriteMode:[{}],encode:[{}],contentLength:[{}],fileSize:[{}],absolutePath:[{}],time:[{}]";
-            String useTime = getIntervalForView(beginDate);
+            String useTime = formatDuration(beginDate);
             LOGGER.info(pattern, useFileWriteMode, useEncode, content.length(), size, file.getAbsolutePath(), useTime);
         }
     }
@@ -195,7 +195,7 @@ public final class IOWriteUtil{
 
         if (LOGGER.isInfoEnabled()){
             String messagePattern = "fileSize:[{}],absolutePath:[{}],use time:[{}]";
-            LOGGER.info(messagePattern, FileUtil.getFileFormatSize(file), file.getAbsolutePath(), getIntervalForView(beginDate));
+            LOGGER.info(messagePattern, FileUtil.getFileFormatSize(file), file.getAbsolutePath(), formatDuration(beginDate));
         }
     }
 
@@ -317,7 +317,7 @@ public final class IOWriteUtil{
             }
             if (LOGGER.isDebugEnabled()){
                 String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],use time:[{}]";
-                LOGGER.debug(pattern, FileUtil.formatSize(sumSize), bufferLength, loopCount, getIntervalForView(beginDate));
+                LOGGER.debug(pattern, FileUtil.formatSize(sumSize), bufferLength, loopCount, formatDuration(beginDate));
             }
         }catch (IOException e){
             throw new UncheckedIOException(e);

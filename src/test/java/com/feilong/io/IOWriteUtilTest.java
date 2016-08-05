@@ -44,7 +44,7 @@ import com.feilong.io.entity.FileWriteMode;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.getIntervalForView;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 import static com.feilong.core.DatePattern.TIMESTAMP;
 import static com.feilong.core.DatePattern.YEAR_AND_MONTH;
@@ -83,7 +83,7 @@ public class IOWriteUtilTest{
         OutputStream outputStream = FileUtil.getFileOutputStream("C:\\Users\\feilong\\feilong\\1993 超级战警 马可·布拉姆贝拉 史泰龙1.rmvb");
         IOWriteUtil.write(inputStream, outputStream);
 
-        LOGGER.debug("time:{}", getIntervalForView(beginDate));
+        LOGGER.debug("time:{}", formatDuration(beginDate));
     }
 
     /**
@@ -107,7 +107,7 @@ public class IOWriteUtilTest{
         for (int i = 0; i < 10; ++i){
             testWriteNio(content);
         }
-        LOGGER.debug("use time:{}", getIntervalForView(beginDate));
+        LOGGER.debug("use time:{}", formatDuration(beginDate));
 
     }
 
@@ -121,7 +121,7 @@ public class IOWriteUtilTest{
         for (int i = 0; i < 10; ++i){
             testWriteIO(content);
         }
-        LOGGER.debug("time:{}", getIntervalForView(beginDate));
+        LOGGER.debug("time:{}", formatDuration(beginDate));
     }
 
     /**
@@ -131,7 +131,7 @@ public class IOWriteUtilTest{
         Date beginDate = new Date();
         String type = "io";
         write(getPath(type), content, null, COVER);
-        LOGGER.debug("[{}] time:{}", type, getIntervalForView(beginDate));
+        LOGGER.debug("[{}] time:{}", type, formatDuration(beginDate));
     }
 
     /**
@@ -141,7 +141,7 @@ public class IOWriteUtilTest{
         Date beginDate = new Date();
         String type = "nio";
         IOWriteUtil.writeStringToFile(getPath(type), content, UTF8);
-        LOGGER.debug("[{}] time:{}", type, getIntervalForView(beginDate));
+        LOGGER.debug("[{}] time:{}", type, formatDuration(beginDate));
     }
 
     /**
