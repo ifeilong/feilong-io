@@ -29,7 +29,7 @@ feilong-io jar 你可以在这里 https://github.com/venusdrogon/feilong-platfor
 	
 		....
 		<properties>
-			<version.feilong-platform>1.8.3</version.feilong-platform>
+			<version.feilong-platform>1.8.4</version.feilong-platform>
 			....
 		</properties>
 		
