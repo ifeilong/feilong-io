@@ -95,7 +95,7 @@ public final class IOWriteUtil{
      * @param content
      *            字符串内容
      * @param charsetType
-     *            编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#UTF8}编码 {@link CharsetType}
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量,如果isNullOrEmpty,则默认使用 {@link CharsetType#UTF8}编码 {@link CharsetType}
      * @see FileWriteMode
      * @see CharsetType
      * @see #writeStringToFile(String, String, String, FileWriteMode)
@@ -125,7 +125,7 @@ public final class IOWriteUtil{
      * @param content
      *            字符串内容
      * @param charsetType
-     *            {@link CharsetType} 编码,如果isNullOrEmpty,则默认使用 {@link CharsetType#UTF8}编码
+     *            字符编码,建议使用 {@link CharsetType} 定义好的常量,如果isNullOrEmpty,则默认使用 {@link CharsetType#UTF8}编码
      * @param fileWriteMode
      *            写模式 {@link FileWriteMode}
      * @see java.io.FileOutputStream#FileOutputStream(File, boolean)
