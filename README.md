@@ -20,9 +20,9 @@ Reduce development, Release ideas
 
 # :dragon: Maven使用配置
 
-feilong-io jar你可以在 [仓库](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-io "仓库") 浏览 
+feilong-io jar你可以直接在 [仓库](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-io "仓库") 浏览 
 
-在maven `pom.xml` 中,您可以通过以下方式来配置:
+如果你使用 `maven`, 您可以通过以下方式来配置 `pom.xml`:
 
 ```XML
 
