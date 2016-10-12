@@ -298,8 +298,9 @@ public final class FileUtil{
      * 
      * <ol>
      * <li>此处<span style="color:red">参数是文件路径</span>,如果需要传递文件夹路径自动创建文件夹,那么请调用 {@link #createDirectory(String)}</li>
-     * <li>对于不存在的文件夹/文件夹: "E:\\test\\1\\2011-07-07" 这么一个路径, 没有办法自动区别到底你是要创建文件还是文件夹</li>
+     * <li>对于不存在的文件夹/文件夹: "E:\\test\\1\\2011-07-07" 这么一个路径,没有办法自动区别到底你是要创建文件还是文件夹</li>
      * <li>{@link File#isDirectory()} 这个方法,必须文件存在 才能判断</li>
+     * <li>如果文件所属的文件夹已经存在,那么仅会记录debug level的日志</li>
      * </ol>
      * 
      * <h3>代码流程:</h3>
@@ -332,7 +333,8 @@ public final class FileUtil{
      * <ol>
      * <li>此处<span style="color:red">参数是文件夹</span>,如果需要传递文件路径自动创建父文件夹,那么请调用 {@link #createDirectoryByFilePath(String)}</li>
      * <li>对于不存在的文件夹/文件夹: "E:\\test\\1\\2011-07-07" 这么一个路径, 没有办法自动区别到底你是要创建文件还是文件夹</li>
-     * <li>{@link File#isDirectory()} 这个方法,必须文件存在 才能判断</li>
+     * <li>{@link File#isDirectory()} 这个方法,必须文件存在才能判断</li>
+     * <li>如果文件夹已经存在,那么仅会记录debug level的日志</li>
      * </ol>
      * 
      * <h3>代码流程:</h3> <blockquote>
