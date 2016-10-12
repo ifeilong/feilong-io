@@ -354,7 +354,7 @@ public final class FilenameUtil{
      */
     public static List<String> getParentPathList(String path){
         Validate.notBlank(path, "path can't be blank!");
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         resolverGetParentPath(path, list);
         return list;
     }
