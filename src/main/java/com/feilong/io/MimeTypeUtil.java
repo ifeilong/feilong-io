@@ -61,7 +61,7 @@ public final class MimeTypeUtil{
     }
 
     static{
-        FILE_EXTENSION_MAP = new HashMap<String, String>();
+        FILE_EXTENSION_MAP = new HashMap<>();
         for (MimeType mimeType : MimeType.values()){
             FILE_EXTENSION_MAP.put(mimeType.getExtension(), mimeType.getMime());
         }

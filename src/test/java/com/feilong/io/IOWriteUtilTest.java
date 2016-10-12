@@ -154,7 +154,7 @@ public class IOWriteUtilTest{
     private static String getPath(String type){
         String templateString = "/home/webuser/nike_int/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}_${type}.log";
         Date date = new Date();
-        Map<String, String> valuesMap = new HashMap<String, String>();
+        Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put("yearMonth", DateUtil.toString(date, YEAR_AND_MONTH));
         valuesMap.put("expressDeliveryType", "sf");
         valuesMap.put("fileName", DateUtil.toString(date, TIMESTAMP));
