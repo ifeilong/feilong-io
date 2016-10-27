@@ -63,6 +63,12 @@ feilong-io jar你可以直接在 [仓库](https://github.com/venusdrogon/feilong
 1. 基于 [Apache2](https://www.apache.org/licenses/LICENSE-2.0) 协议,您可以下载代码用于闭源项目,但每个修改的过的文件必须放置版权说明;
 1. 需要`jdk1.7`及以上环境;
 
+# :cyclone: feilong 即时交流
+
+微信公众号 `feilongjava`							|QQ 群 `243306798`
+:---- 										|:---------
+ ![](http://i.imgur.com/hM83Xv9.jpg)		|![](http://i.imgur.com/cIfglCa.png)
+
 # :panda_face: About
 
 如果您对本项目有任何建议和批评,可以使用下面的联系方式：
