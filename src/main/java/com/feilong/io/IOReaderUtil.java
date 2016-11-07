@@ -215,7 +215,7 @@ public final class IOReaderUtil{
      * 
      * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
      * try{
-     *     Set{@code <String>} set = new HashSet{@code <String>}();
+     *     Set{@code <String>} set = new HashSet{@code <>}();
      *     log.info("io流开启了");
      *     BufferedReader bufferedReader = new BufferedReader(read);
      *     String txt = null;
@@ -239,7 +239,7 @@ public final class IOReaderUtil{
      * <pre class="code">
      * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
      * 
-     * final Set{@code <String>} set = new HashSet{@code <String>}();
+     * final Set{@code <String>} set = new HashSet{@code <>}();
      * 
      * log.info("io流开启了");
      * IOReaderUtil.resolverFile(read, new LineNumberReaderResolver(){
