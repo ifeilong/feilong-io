@@ -39,7 +39,7 @@ import com.feilong.core.UncheckedIOException;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.io.entity.FileWriteMode;
 
-import static com.feilong.core.bean.ConvertUtil.toMap;
+import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 
 /**
  * {@link File}文件操作.
@@ -83,7 +83,7 @@ public final class FileUtil{
     public static final int                DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtils.ONE_KB);
 
     /** 除数和单位的map,必须是有顺序的 从大到小. */
-    private static final Map<Long, String> DIVISOR_AND_UNIT_MAP  = toMap(
+    private static final Map<Long, String> DIVISOR_AND_UNIT_MAP  = toMapUseEntrys(
                     Pair.of(FileUtils.ONE_TB, "TB"),                                                        //(Terabyte,太字节,或百万兆字节)=1024GB,其中1024=2^10 ( 2 的10次方)。 
                     Pair.of(FileUtils.ONE_GB, "GB"),                                                        //(Gigabyte,吉字节,又称“千兆”)=1024MB, 
                     Pair.of(FileUtils.ONE_MB, "MB"),                                                        //(Megabyte,兆字节,简称“兆”)=1024KB, 
