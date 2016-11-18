@@ -2,7 +2,6 @@ feilong-io
 ================
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-![build](https://img.shields.io/jenkins/s/https/jenkins.qa.ubuntu.com/precise-desktop-amd64_default.svg "build") 
 ![JDK 1.7](https://img.shields.io/badge/JDK-1.7-green.svg "JDK 1.7")
 [![jar size 31K](https://img.shields.io/badge/size-31K-green.svg "size 31K")](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-io/1.9.5)
 
