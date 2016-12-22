@@ -655,16 +655,6 @@ public enum MimeType{
     }
 
     /**
-     * 设置 扩展名.
-     *
-     * @param extension
-     *            the extension to set
-     */
-    public void setExtension(String extension){
-        this.extension = extension;
-    }
-
-    /**
      * 获得 mime.
      *
      * @return the mime
@@ -673,13 +663,4 @@ public enum MimeType{
         return mime;
     }
 
-    /**
-     * 设置 mime.
-     *
-     * @param mime
-     *            the mime to set
-     */
-    public void setMime(String mime){
-        this.mime = mime;
-    }
 }
