@@ -139,7 +139,7 @@ public final class FilenameUtil{
      * @see org.apache.commons.io.FilenameUtils#getBaseName(String)
      */
     public static String getFilePreName(String fileName){
-        return fileName.substring(0, fileName.lastIndexOf("."));
+        return fileName.substring(0, fileName.lastIndexOf('.'));
     }
 
     /**
@@ -208,12 +208,13 @@ public final class FilenameUtil{
      * 如果一个文件没有后缀,将会添加 .+newPostfixName
      * </p>
      * 
+     * <h3>Example 1:</h3>
+     * 
      * <pre class="code">
-     * Example 1:
-     *      String fileName="F:/pie2.png";
-     *       FileUtil.getNewFileName(fileName, "gif")
-     *       
-     *       return F:/pie2.gif
+     * String fileName="F:/pie2.png";
+     * FileUtil.getNewFileName(fileName, "gif")
+     * 
+     * return F:/pie2.gif
      * </pre>
      *
      * @param fileName
@@ -232,7 +233,7 @@ public final class FilenameUtil{
 
         // 有后缀
         if (hasExtension(fileName)){
-            return fileName.substring(0, fileName.lastIndexOf(".") + 1) + newPostfixName;
+            return fileName.substring(0, fileName.lastIndexOf('.') + 1) + newPostfixName;
         }
         // 没有后缀直接拼接
         return fileName + "." + newPostfixName;
