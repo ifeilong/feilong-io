@@ -3,7 +3,7 @@ feilong-io
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 ![JDK 1.7](https://img.shields.io/badge/JDK-1.7-green.svg "JDK 1.7")
-[![jar size 31K](https://img.shields.io/badge/size-31K-green.svg "size 31K")](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-io/1.9.6)
+[![jar size 31K](https://img.shields.io/badge/size-31K-green.svg "size 31K")](https://github.com/venusdrogon/feilong-platform/tree/repository/com/feilong/platform/feilong-io/1.10.0)
 
 > Reduce development, Release ideas (减少开发,释放思想)
 
@@ -25,7 +25,7 @@ feilong-io jar你可以直接在 [仓库](https://github.com/venusdrogon/feilong
 
 	....
 	<properties>
-		<version.feilong-platform>1.9.6</version.feilong-platform>
+		<version.feilong-platform>1.10.0</version.feilong-platform>
 		....
 	</properties>
 	
