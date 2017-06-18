@@ -15,6 +15,8 @@
  */
 package com.feilong.io;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static org.apache.commons.io.IOUtils.EOF;
 
 import java.io.File;
@@ -38,11 +40,8 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
 
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
-
 /**
- * 读文件.
+ * focus 在文件读取以及解析.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.0.6
@@ -62,8 +61,10 @@ public final class IOReaderUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
-     * 获得 file content.
+     * 获得文件内容直接转成字符串.
      *
      * @param filePath
      *            the path
@@ -80,7 +81,7 @@ public final class IOReaderUtil{
     }
 
     /**
-     * 读取文件内容.
+     * 获得文件内容直接转成字符串.
      *
      * @param file
      *            文件
@@ -92,6 +93,7 @@ public final class IOReaderUtil{
      */
     public static String readFileToString(File file,String charsetName){
         Validate.notNull(file, "file can't be null!");
+        //---------------------------------------------------------------
 
         FileInputStream fileInputStream = null;
         try{
@@ -104,6 +106,8 @@ public final class IOReaderUtil{
             IOUtils.closeQuietly(fileInputStream);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 读取文件内容.
@@ -145,7 +149,7 @@ public final class IOReaderUtil{
     }
 
     /**
-     * 读取文件内容.
+     * 读取 {@link InputStream} 内容.
      *
      * @param inputStream
      *            the input stream
@@ -165,6 +169,8 @@ public final class IOReaderUtil{
             throw new UncheckedIOException(e);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 使用 {@link LineNumberReaderResolver}解析文件.
@@ -216,19 +222,17 @@ public final class IOReaderUtil{
      * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
      * try{
      *     Set{@code <String>} set = new HashSet{@code <>}();
-     *     log.info("io流开启了");
      *     BufferedReader bufferedReader = new BufferedReader(read);
      *     String txt = null;
-     *     while ((txt = bufferedReader.readLine()) != null){ // 读取文件,将文件内容放入到set中
-     *         txt = txt.trim();// 忽略前面前后空格
-     *         txt = txt.replace(" ", "");// 文中过滤空格
+     *     while ((txt = bufferedReader.readLine()) != null){ <span style="color:green">// 读取文件,将文件内容放入到set中</span>
+     *         txt = txt.trim();<span style="color:green">// 忽略前面前后空格</span>
+     *         txt = txt.replace(" ", "");<span style="color:green">// 文中过滤空格</span>
      *         set.add(txt);
      *     }
      * }catch (Exception e){
      *     log.error(e.getMessage());
      * }finally{
-     *     log.info("io流关闭了");
-     *     read.close(); // 关闭文件流
+     *     read.close(); <span style="color:green">// 关闭文件流</span>
      * }
      * return set;
      * 
@@ -241,14 +245,13 @@ public final class IOReaderUtil{
      * 
      * final Set{@code <String>} set = new HashSet{@code <>}();
      * 
-     * log.info("io流开启了");
      * IOReaderUtil.resolverFile(read, new LineNumberReaderResolver(){
      * 
      *     {@code @Override}
      *     public boolean excute(int lineNumber,String line){
-     *         line = line.trim();// 忽略前面前后空格
-     *         line = line.replace(" ", "");// 文中过滤空格
-     *         set.add(line);// 读取文件,将文件内容放入到set中
+     *         line = line.trim();<span style="color:green">// 忽略前面前后空格</span>
+     *         line = line.replace(" ", "");<span style="color:green">// 文中过滤空格</span>
+     *         set.add(line);<span style="color:green">// 读取文件,将文件内容放入到set中</span>
      *         return true;
      *     }
      * });

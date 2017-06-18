@@ -15,9 +15,14 @@
  */
 package com.feilong.io;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.DatePattern.TIMESTAMP;
+import static com.feilong.core.DatePattern.YEAR_AND_MONTH;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.io.entity.FileWriteMode.COVER;
+import static java.lang.System.lineSeparator;
 import static org.apache.commons.io.IOUtils.EOF;
-import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,13 +46,6 @@ import com.feilong.core.UncheckedIOException;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
 import com.feilong.io.entity.FileWriteMode;
-
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.formatDuration;
-
-import static com.feilong.core.DatePattern.TIMESTAMP;
-import static com.feilong.core.DatePattern.YEAR_AND_MONTH;
 
 /**
  * The Class IOWriteUtilTest.
@@ -169,13 +167,13 @@ public class IOWriteUtilTest{
      */
     private static String getContent(){
         StringBuilder sb = new StringBuilder();
-        sb.append("****************************************************" + LINE_SEPARATOR);
-        sb.append("2011-05-13 22:24:37调用,系统顺丰在途订单597件" + LINE_SEPARATOR);
-        sb.append("耗时:429020" + LINE_SEPARATOR);
-        sb.append("****************************************************" + LINE_SEPARATOR);
-        sb.append("派送成功订单495条" + LINE_SEPARATOR);
+        sb.append("****************************************************" + lineSeparator());
+        sb.append("2011-05-13 22:24:37调用,系统顺丰在途订单597件" + lineSeparator());
+        sb.append("耗时:429020" + lineSeparator());
+        sb.append("****************************************************" + lineSeparator());
+        sb.append("派送成功订单495条" + lineSeparator());
         for (int i = 0; i < 100000; i++){
-            sb.append("订单号:20850010运单号:102085592089\t寄件时间:2011-05-09 19:00:00\t签收人:张寄件时间:2011-05-10 14:49:00\t回单类型:1" + LINE_SEPARATOR);
+            sb.append("订单号:20850010运单号:102085592089\t寄件时间:2011-05-09 19:00:00\t签收人:张寄件时间:2011-05-10 14:49:00\t回单类型:1" + lineSeparator());
         }
         return sb.toString();
     }
