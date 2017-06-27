@@ -105,7 +105,7 @@ public class IOWriteUtilTest{
         for (int i = 0; i < 10; ++i){
             testWriteNio(content);
         }
-        LOGGER.debug("use time:{}", formatDuration(beginDate));
+        LOGGER.debug("use time: [{}]", formatDuration(beginDate));
 
     }
 
