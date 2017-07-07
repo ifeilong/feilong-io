@@ -59,10 +59,10 @@ feilong-io jar你可以直接在 [仓库](https://github.com/venusdrogon/feilong
 
 ```bat
 git clone https://github.com/venusdrogon/feilong-platform.git --depth 1
-mvn install -f feilong-platform
+mvn install -f feilong-platform/pom.xml
 
 git clone https://github.com/venusdrogon/feilong-io.git --depth 1
-mvn install -f feilong-io
+mvn install -f feilong-io/pom.xml
 ```
 
 ## :memo: 说明
