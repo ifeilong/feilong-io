@@ -53,12 +53,16 @@ public final class ReaderUtil{
      *
      * @param reader
      *            the reader
-     * @return the string
+     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
+     * @see org.apache.commons.io.IOUtils#toString(Reader)
      */
     public static String toString(Reader reader){
-        BufferedReader bufferedReader = IOUtils.toBufferedReader(reader);
-        try{
+        Validate.notNull(reader, "reader can't be null!");
+
+        //---------------------------------------------------------------
+
+        try (BufferedReader bufferedReader = IOUtils.toBufferedReader(reader)){
             StringBuilder sb = new StringBuilder();
             String line = "";
 
@@ -74,17 +78,17 @@ public final class ReaderUtil{
     }
 
     /**
-     * 将 {@link java.io.Reader} 转成 {@link java.lang.String}.
+     * 读取 {@link java.io.Reader} 第一行内容.
      *
      * @param reader
      *            the reader
-     * @return the string
+     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
      */
     public static String readLine(Reader reader){
-        BufferedReader bufferedReader = IOUtils.toBufferedReader(reader);
-        Validate.notNull(bufferedReader, "bufferedReader can't be null!");
-        try{
+        Validate.notNull(reader, "reader can't be null!");
+
+        try (BufferedReader bufferedReader = IOUtils.toBufferedReader(reader)){
             // 读取一个文本行.通过下列字符之一即可认为某行已终止:换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
             return bufferedReader.readLine();
         }catch (IOException e){
