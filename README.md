@@ -25,7 +25,7 @@ feilong-io jar你可以直接在 [仓库](https://github.com/venusdrogon/feilong
 
 	....
 	<properties>
-		<version.feilong-platform>1.10.4</version.feilong-platform>
+		<version.feilong-platform>1.10.5</version.feilong-platform>
 		....
 	</properties>
 	
