@@ -15,6 +15,8 @@
  */
 package com.feilong.io;
 
+import static com.feilong.core.CharsetType.UTF8;
+
 import java.io.InputStream;
 
 import org.junit.Test;
@@ -22,8 +24,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
-
-import static com.feilong.core.CharsetType.UTF8;
 
 /**
  * The Class IOReaderUtilTest.
