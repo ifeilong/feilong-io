@@ -19,13 +19,14 @@ package com.feilong.io.entity;
  * The Enum MimeType.
  *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>
  * @see "org.springframework.http.MediaType"
  * @since 1.7.1
  */
 public enum MimeType{
 
     /**
-     * JSON(JavaScript Object Notation)是一种轻量级的数据交换格式.
+     * JSON(JavaScript Object Notation)是一种轻量级的数据交换格式 application/json.
      * 
      * <p>
      * 它基于ECMAScript的一个子集。<br>
@@ -92,7 +93,7 @@ public enum MimeType{
     /** The bmp. */
     BMP("bmp","image/bmp"),
 
-    /** The body. */
+    /** The body HTML文本，文件扩展名.htm和.html. */
     BODY("body","text/html"),
 
     /** The cdf. */
@@ -134,7 +135,7 @@ public enum MimeType{
     /** The exe. */
     EXE("exe","application/octet-stream"),
 
-    /** The gif. */
+    /** The gif.GIF格式的图片，文件扩展名.gif */
     GIF("gif","image/gif"),
 
     /** The gtar. */
@@ -152,10 +153,10 @@ public enum MimeType{
     /** The htc. */
     HTC("htc","text/x-component"),
 
-    /** The htm. */
+    /** The htm HTML文本，文件扩展名.htm和.html. */
     HTM("htm","text/html"),
 
-    /** The html. */
+    /** The html HTML文本，文件扩展名.htm和.html. */
     HTML("html","text/html"),
 
     /** The ief. */
@@ -173,13 +174,13 @@ public enum MimeType{
     /** The jnlp. */
     JNLP("jnlp","application/x-java-jnlp-file"),
 
-    /** The jpe. */
+    /** The jpe. jpeg格式的图片，文件扩展名.jpg */
     JPE("jpe","image/jpeg"),
 
-    /** The jpeg. */
+    /** The jpeg. jpeg格式的图片，文件扩展名.jpg */
     JPEG("jpeg","image/jpeg"),
 
-    /** The jpg. */
+    /** The jpg.jpeg格式的图片，文件扩展名.jpg */
     JPG("jpg","image/jpeg"),
 
     /** The js. */
@@ -227,34 +228,34 @@ public enum MimeType{
     /** The movie. */
     MOVIE("movie","video/x-sgi-movie"),
 
-    /** The M p1. */
+    /** The M p1 MP3格式的音频，文件扩展名.mp3. */
     MP1("mp1","audio/mpeg"),
 
-    /** The M p2. */
+    /** The M p2 MP3格式的音频，文件扩展名.mp3. */
     MP2("mp2","audio/mpeg"),
 
-    /** The M p3. */
+    /** The M p3 MP3格式的音频，文件扩展名.mp3. */
     MP3("mp3","audio/mpeg"),
 
     /** The M p4. */
     MP4("mp4","video/mp4"),
 
-    /** The mpa. */
+    /** The mpa MP3格式的音频，文件扩展名.mp3. */
     MPA("mpa","audio/mpeg"),
 
-    /** The mpe. */
+    /** The mpe MPEG格式的视频，文件扩展名.mpg. */
     MPE("mpe","video/mpeg"),
 
-    /** The mpeg. */
+    /** The mpeg MPEG格式的视频，文件扩展名.mpg. */
     MPEG("mpeg","video/mpeg"),
 
     /** The mpega. */
     MPEGA("mpega","audio/x-mpeg"),
 
-    /** The mpg. */
+    /** The mpg MPEG格式的视频，文件扩展名.mpg. */
     MPG("mpg","video/mpeg"),
 
-    /** The MP v2. */
+    /** The MP v2 MPEG格式的视频，文件扩展名.mpg. */
     MPV2("mpv2","video/mpeg2"),
 
     /** The nc. */
@@ -422,7 +423,23 @@ public enum MimeType{
     /** The tsv. */
     TSV("tsv","text/tab-separated-values"),
 
-    /** The txt. */
+    /**
+     * <code>text/plain</code> 纯文本，文件扩展名.txt.
+     * 
+     * <p>
+     * Content-Type表明信息类型，缺省值为" text/plain"。它包含了主要类型（primary type）和次要类型（subtype）两个部分，两者之间用"/"分割。
+     * </p>
+     * 
+     * <p>
+     * 主要类型有9种，分别是application、audio、example、image、message、model、multipart、text、video。
+     * </p>
+     * 
+     * 如果信息的主要类型是"text"，那么还必须指明编码类型"charset"，缺省值是ASCII，其他可能值有"ISO-8859-1"、"UTF-8"、"GB2312"等等。<br>
+     * 
+     * 整个Content-Type这一行，不仅使用在电子邮件，后来也被移植到了HTTP协议中，所以现在只要是在网上传播的HTTP信息，都带有Content-Type头，以表明信息类型。
+     * 
+     * @see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>
+     */
     TXT("txt","text/plain"),
 
     /** The ulw. */
@@ -494,7 +511,7 @@ public enum MimeType{
     /** The z. */
     Z("Z","application/x-compress"),
 
-    /** The zip. */
+    /** The zip. PK-ZIP格式的压缩文件，文件扩展名.zip */
     ZIP("zip","application/zip"),
 
     //****************************************************************************************************
