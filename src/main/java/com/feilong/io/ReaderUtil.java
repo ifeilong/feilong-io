@@ -15,8 +15,6 @@
  */
 package com.feilong.io;
 
-import static java.lang.System.lineSeparator;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -48,6 +46,8 @@ public final class ReaderUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将 {@link java.io.Reader} 转成 {@link java.lang.String}.
      *
@@ -56,22 +56,13 @@ public final class ReaderUtil{
      * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
      * @see org.apache.commons.io.IOUtils#toString(Reader)
+     * @since 1.10.6 call {@link org.apache.commons.io.IOUtils#toString(Reader)}
      */
     public static String toString(Reader reader){
         Validate.notNull(reader, "reader can't be null!");
 
-        //---------------------------------------------------------------
-
-        try (BufferedReader bufferedReader = IOUtils.toBufferedReader(reader)){
-            StringBuilder sb = new StringBuilder();
-            String line = "";
-
-            // 读取一个文本行.通过下列字符之一即可认为某行已终止:换行 ('\n')、回车 ('\r') 或回车后直接跟着换行.
-            while ((line = bufferedReader.readLine()) != null){
-                sb.append(line);
-                sb.append(lineSeparator());
-            }
-            return sb.toString();
+        try{
+            return IOUtils.toString(reader);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
