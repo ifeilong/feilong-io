@@ -15,6 +15,7 @@
  */
 package com.feilong.io;
 
+import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 import static com.feilong.io.entity.FileType.DIRECTORY;
 import static com.feilong.io.entity.FileType.FILE;
 import static com.feilong.io.entity.FileWriteMode.APPEND;
@@ -38,8 +39,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.bean.ConvertUtil;
 import com.feilong.io.entity.FileWriteMode;
-
-import static com.feilong.core.bean.ConvertUtil.toMapUseEntrys;
 
 /**
  * {@link File}文件操作.
@@ -129,7 +128,7 @@ public final class FileUtil{
         }
     }
 
-    //*******************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 获得 {@link java.io.FileOutputStream} 文件输出流 (或其他文件写入对象)打开文件进行写入 .<br>
@@ -211,7 +210,7 @@ public final class FileUtil{
         }
     }
 
-    //********************************************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 从文件系统中的某个文件中获得输入字节.哪些文件可用取决于主机环境.<br>
@@ -425,7 +424,7 @@ public final class FileUtil{
 
     // [end]
 
-    // ************************************************************
+    //---------------------------------------------------------------
 
     /**
      * 返回此抽象路径名 <code>path</code> 父目录的路径名字符串;如果此路径名没有指定父目录,则返回 null.
@@ -468,7 +467,8 @@ public final class FileUtil{
         return !isExistFile(filePath);
     }
 
-    // ************************************************************
+    //---------------------------------------------------------------
+
     /**
      * 返回指定的文件或目录 <code>file</code> 的大小, 取得文件大小(单位字节).
      * 

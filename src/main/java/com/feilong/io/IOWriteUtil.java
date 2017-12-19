@@ -15,6 +15,9 @@
  */
 package com.feilong.io;
 
+import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.io.entity.FileWriteMode.COVER;
 import static org.apache.commons.io.IOUtils.EOF;
 
@@ -38,10 +41,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.io.entity.FileWriteMode;
-
-import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.Validator.isNullOrEmpty;
-import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 
 /**
  * 提供写文件操作.
@@ -156,7 +155,8 @@ public final class IOWriteUtil{
             LOGGER.info(pattern, useFileWriteMode, useEncode, content.length(), size, file.getAbsolutePath(), useTime);
         }
     }
-    //**********************************************************************************************
+
+    //---------------------------------------------------------------
 
     /**
      * 将inputStream 写到 某个文件夹(文件夹路径 最后不带"/"),名字为fileName.
