@@ -15,8 +15,11 @@
  */
 package com.feilong.io;
 
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.newArrayList;
+
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
@@ -26,9 +29,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.lang.StringUtil;
-
-import static com.feilong.core.Validator.isNotNullOrEmpty;
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * The Class FilenameUtil.
@@ -355,7 +355,7 @@ public final class FilenameUtil{
      */
     public static List<String> getParentPathList(String path){
         Validate.notBlank(path, "path can't be blank!");
-        List<String> list = new ArrayList<>();
+        List<String> list = newArrayList();
         resolverGetParentPath(path, list);
         return list;
     }

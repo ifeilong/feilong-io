@@ -20,6 +20,7 @@ import static com.feilong.core.DatePattern.TIMESTAMP;
 import static com.feilong.core.DatePattern.YEAR_AND_MONTH;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static com.feilong.io.entity.FileWriteMode.COVER;
 import static java.lang.System.lineSeparator;
 import static org.apache.commons.io.IOUtils.EOF;
@@ -32,7 +33,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -152,7 +152,7 @@ public class IOWriteUtilTest{
     private static String getPath(String type){
         String templateString = "/home/webuser/nike_int/expressdelivery/${yearMonth}/${expressDeliveryType}/vipQuery_${fileName}_${type}.log";
         Date date = new Date();
-        Map<String, String> valuesMap = new HashMap<>();
+        Map<String, String> valuesMap = newHashMap();
         valuesMap.put("yearMonth", DateUtil.toString(date, YEAR_AND_MONTH));
         valuesMap.put("expressDeliveryType", "sf");
         valuesMap.put("fileName", DateUtil.toString(date, TIMESTAMP));

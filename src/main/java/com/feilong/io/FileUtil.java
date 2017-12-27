@@ -356,18 +356,19 @@ public final class FileUtil{
 
         boolean isExists = directoryFile.exists();
 
-        //***********do with 存在******************
+        //---------------do with 存在------------------------------------------------
         if (isExists){//存在
             LOGGER.debug("directory:[{}] exists,don't need mkdirs,nothing to do~", directoryFile);
             return;
         }
-        //***********do with 不存在******************
+
+        //----------------do with 不存在-----------------------------------------------
         String absolutePath = directoryFile.getAbsolutePath();
 
         // mkdir 如果 parent 目录不存在 会返回false 不会报错
         boolean flag = directoryFile.mkdirs();
         // 级联创建 父级文件夹
-        Validate.isTrue(flag, "File [" + absolutePath + "] could not be created");
+        Validate.isTrue(flag, "could't create directory:[%s]", absolutePath);
         //创建成功 记录下日志
         LOGGER.debug("success mkdirs:[{}]~~", absolutePath);
     }

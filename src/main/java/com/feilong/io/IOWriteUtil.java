@@ -16,8 +16,8 @@
 package com.feilong.io;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.io.entity.FileWriteMode.COVER;
 import static org.apache.commons.io.IOUtils.EOF;
 
@@ -137,15 +137,23 @@ public final class IOWriteUtil{
 
         Date beginDate = new Date();
 
-        String useEncode = isNullOrEmpty(charsetType) ? UTF8 : charsetType;
-        FileWriteMode useFileWriteMode = isNullOrEmpty(fileWriteMode) ? COVER : fileWriteMode;
+        String useEncode = defaultIfNullOrEmpty(charsetType, UTF8);
+        FileWriteMode useFileWriteMode = defaultIfNullOrEmpty(fileWriteMode, COVER);
+
+        //---------------------------------------------------------------
 
         FileUtil.createDirectoryByFilePath(filePath);
+
+        //---------------------------------------------------------------
 
         InputStream inputStream = IOUtils.toInputStream(content, Charset.forName(useEncode));
         OutputStream outputStream = FileUtil.getFileOutputStream(filePath, useFileWriteMode);
 
+        //---------------------------------------------------------------
+
         write(inputStream, outputStream);
+
+        //---------------------------------------------------------------
 
         if (LOGGER.isInfoEnabled()){
             File file = new File(filePath);

@@ -15,11 +15,12 @@
  */
 package com.feilong.io;
 
+import static com.feilong.core.Validator.isNullOrEmpty;
+import static com.feilong.core.util.MapUtil.newHashMap;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 
 import java.net.FileNameMap;
 import java.net.URLConnection;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.activation.MimetypesFileTypeMap;
@@ -27,8 +28,6 @@ import javax.activation.MimetypesFileTypeMap;
 import org.apache.commons.io.FilenameUtils;
 
 import com.feilong.io.entity.MimeType;
-
-import static com.feilong.core.Validator.isNullOrEmpty;
 
 /**
  * 获取文件Mime-Type.
@@ -61,7 +60,7 @@ public final class MimeTypeUtil{
     }
 
     static{
-        FILE_EXTENSION_MAP = new HashMap<>();
+        FILE_EXTENSION_MAP = newHashMap();
         for (MimeType mimeType : MimeType.values()){
             FILE_EXTENSION_MAP.put(mimeType.getExtension(), mimeType.getMime());
         }
