@@ -72,9 +72,9 @@ mvn install -f feilong-io/pom.xml
 
 ## :cyclone: feilong 即时交流
 
-微信公众号 `feilongjava`							|QQ 群 `243306798`
-:---- 										|:---------
- ![](http://i.imgur.com/hM83Xv9.jpg)		|![](http://i.imgur.com/cIfglCa.png)
+|QQ 群 `243306798`
+|:---------
+|![](http://i.imgur.com/cIfglCa.png)
 
 ## :panda_face: About
 
