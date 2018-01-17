@@ -15,13 +15,13 @@
  */
 package com.feilong.io.entity;
 
+import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND;
+
 import java.io.Serializable;
 import java.util.Date;
 
 import com.feilong.core.date.DateUtil;
 import com.feilong.io.FileUtil;
-
-import static com.feilong.core.DatePattern.COMMON_DATE_AND_TIME_WITHOUT_YEAR_AND_SECOND;
 
 /**
  * 文件信息 entity.
@@ -33,6 +33,8 @@ public class FileInfoEntity implements Serializable{
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 288232184048495608L;
+
+    //---------------------------------------------------------------
 
     /** 名称. */
     private String            name;
@@ -54,6 +56,8 @@ public class FileInfoEntity implements Serializable{
 
     /** 格式化显示的时间默认 yy-mm hh:ss. */
     private String            formatLastModified;
+
+    //---------------------------------------------------------------
 
     /**
      * Gets the 名称.
