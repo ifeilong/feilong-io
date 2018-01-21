@@ -142,6 +142,8 @@ public final class FilenameUtil{
         return fileName.substring(0, fileName.lastIndexOf('.'));
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得文件后缀名(不带. 的后缀),并返回原样字母.
      * 
@@ -183,19 +185,38 @@ public final class FilenameUtil{
     }
 
     /**
-     * 获得文件后缀名,并返回小写字母.
+     * 获得文件后缀名,并返回<span style="color:red">小写字母</span>.
      * 
-     * <p>
-     * 如果文件没有后缀名 返回 ""
-     * </p>
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * FilenameUtil.getExtensionLowerCase("苍老师.AVI") = "avi"
+     * FilenameUtil.getExtensionLowerCase("苍老师") = ""
+     * FilenameUtil.getExtensionLowerCase(".苍老师") = "苍老师"
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * <ol>
+     * <li>如果文件没有后缀名, 返回 {@link org.apache.commons.lang3.StringUtils#EMPTY}</li>
+     * </ol>
+     * </blockquote>
+     * 
      * 
      * @param fileName
      *            文件名称
-     * @return 不带. 的后缀
+     * @return 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @see org.apache.commons.io.FilenameUtils#getExtension(String)
+     * @see #getExtension(String)
      * @since 1.7.1
      */
     public static String getExtensionLowerCase(String fileName){
+        Validate.notBlank(fileName, "fileName can't be blank!");
         return getExtension(fileName).toLowerCase();
     }
 
