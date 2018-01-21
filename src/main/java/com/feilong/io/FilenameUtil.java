@@ -153,13 +153,16 @@ public final class FilenameUtil{
      * 如果文件没有后缀名 返回 "" (EMPTY)
      * </p>
      * 
-     * <pre class="code">
-     * Example 1: 
-     * F:/pie2.png, 返回  png
+     * <h3>示例:</h3>
      * 
-     * Example 2: 
-     * F:/pie2, 返回 {@link StringUtils#EMPTY}
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * F:/pie2.png  返回  png
+     * F:/pie2      返回 {@link StringUtils#EMPTY}
      * </pre>
+     * 
+     * </blockquote>
      * 
      * Gets the extension of a filename.
      * <p>
@@ -260,19 +263,6 @@ public final class FilenameUtil{
         }
         // 没有后缀直接拼接
         return fileName + "." + newPostfixName;
-    }
-
-    /**
-     * 判断是否有后缀.
-     * 
-     * @param fileName
-     *            the file name
-     * @return true, if successful
-     * @see org.apache.commons.io.FilenameUtils#indexOfExtension(String)
-     * @since 1.4.0
-     */
-    public static boolean hasExtension(String fileName){
-        return StringUtils.INDEX_NOT_FOUND != FilenameUtils.indexOfExtension(fileName);
     }
 
     // [end]
@@ -402,5 +392,19 @@ public final class FilenameUtil{
                 resolverGetParentPath(parent, list);//级联
             }
         }
+    }
+
+    /**
+     * 判断文件名是否有后缀.
+     * 
+     * @param fileName
+     *            the file name
+     * @return true, if successful
+     * @see org.apache.commons.io.FilenameUtils#indexOfExtension(String)
+     * @since 1.4.0
+     * @since 1.11.0 change to private
+     */
+    private static boolean hasExtension(String fileName){
+        return StringUtils.INDEX_NOT_FOUND != FilenameUtils.indexOfExtension(fileName);
     }
 }
