@@ -331,6 +331,10 @@ public final class FilenameUtil{
     /**
      * 获得路径的所有 parent路径.
      * 
+     * <p>
+     * 目前的使用场景有, 创建远程sftp目录地址
+     * </p>
+     * 
      * <h3>示例:</h3>
      * 
      * <blockquote>
@@ -346,14 +350,14 @@ public final class FilenameUtil{
      * 
      * <pre class="code">
      * [
-     * "/home/sftp-speedo/test/aa/bbb/ccc/ddd",
-     * "/home/sftp-speedo/test/aa/bbb/ccc",
-     * "/home/sftp-speedo/test/aa/bbb",
-     * "/home/sftp-speedo/test/aa",
-     * "/home/sftp-speedo/test",
-     * "/home/sftp-speedo",
-     * "/home",
-     * "/"
+     *  "/home/sftp-speedo/test/aa/bbb/ccc/ddd",
+     *  "/home/sftp-speedo/test/aa/bbb/ccc",
+     *  "/home/sftp-speedo/test/aa/bbb",
+     *  "/home/sftp-speedo/test/aa",
+     *  "/home/sftp-speedo/test",
+     *  "/home/sftp-speedo",
+     *  "/home",
+     *  "/"
      * ]
      * 
      * </pre>
@@ -368,6 +372,7 @@ public final class FilenameUtil{
      */
     public static List<String> getParentPathList(String path){
         Validate.notBlank(path, "path can't be blank!");
+
         List<String> list = newArrayList();
         resolverGetParentPath(path, list);
         return list;
