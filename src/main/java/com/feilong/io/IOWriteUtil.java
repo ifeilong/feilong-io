@@ -75,6 +75,8 @@ public final class IOWriteUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将字符串/文字写到文件中.
      * 

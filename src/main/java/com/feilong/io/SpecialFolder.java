@@ -37,6 +37,8 @@ public final class SpecialFolder{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得操作系统临时文件夹.
      * 

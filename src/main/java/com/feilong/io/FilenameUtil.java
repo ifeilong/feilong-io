@@ -78,6 +78,8 @@ public final class FilenameUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 不同的操作系统 对系统文件名称有要求,此方法的作用就是处理这些文件名称.
      * 
@@ -380,6 +382,8 @@ public final class FilenameUtil{
         resolverGetParentPath(path, list);
         return list;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * Resolver get parent path.

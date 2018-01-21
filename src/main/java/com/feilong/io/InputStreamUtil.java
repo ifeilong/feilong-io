@@ -48,6 +48,8 @@ public final class InputStreamUtil{
         throw new AssertionError("No " + getClass().getName() + " instances for you!");
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将 {@link java.io.InputStream} 转成string.<br>
      * 使用默认的编码集 {@link Charset#defaultCharset()}
