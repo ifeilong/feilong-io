@@ -247,8 +247,7 @@ public final class FilenameUtil{
      *            文件名称,比如 F:/pie2.png
      * @param newPostfixName
      *            不带.号, 比如 gif
-     * @return 新文件名称 <br>
-     *         如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     * @return 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>newPostfixName</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>newPostfixName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
@@ -257,15 +256,21 @@ public final class FilenameUtil{
         Validate.notBlank(fileName, "fileName can't be null/empty!");
         Validate.notBlank(newPostfixName, "newPostfixName can't be null/empty!");
 
+        //---------------------------------------------------------------
+
         // 有后缀
         if (hasExtension(fileName)){
             return fileName.substring(0, fileName.lastIndexOf('.') + 1) + newPostfixName;
         }
+
+        //---------------------------------------------------------------
         // 没有后缀直接拼接
         return fileName + "." + newPostfixName;
     }
 
     // [end]
+
+    //---------------------------------------------------------------
 
     /**
      * 获得文件的最顶层 父文件夹名称.
@@ -289,6 +294,8 @@ public final class FilenameUtil{
         if (isNullOrEmpty(parent)){
             return pathname;
         }
+
+        //---------------------------------------------------------------
 
         //递归
         String fileTopParentName = getFileTopParentName(parent);
@@ -321,12 +328,16 @@ public final class FilenameUtil{
             LOGGER.debug("parent isNullOrEmpty,return file patch:{}", patch);
             return patch;
         }
+
+        //---------------------------------------------------------------
         //递归
         String fileTopParentName = getFileTopParentName(parent);
 
         LOGGER.debug("file.getAbsolutePath():[{}],fileTopParentName:[{}]", file.getAbsolutePath(), fileTopParentName);
         return fileTopParentName;
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 获得路径的所有 parent路径.
