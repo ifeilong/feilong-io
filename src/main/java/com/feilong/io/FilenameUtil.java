@@ -277,7 +277,7 @@ public final class FilenameUtil{
      * 
      * <pre class="code">
      *   Example 1:
-     *      "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"
+     *      "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\mp2\\rpc\\impl\\item\\repo\\package-info.java"
      *      
      *      返回 mp2-product
      * </pre>
@@ -308,7 +308,7 @@ public final class FilenameUtil{
      * 
      * <pre class="code">
      *   Example 1:
-     *      "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"
+     *      "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\mp2\\rpc\\impl\\item\\repo\\package-info.java"
      *      
      *      返回 mp2-product
      * </pre>

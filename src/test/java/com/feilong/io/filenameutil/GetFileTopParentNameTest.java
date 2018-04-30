@@ -43,11 +43,11 @@ public class GetFileTopParentNameTest{
         assertEquals(
                         "mp2-product",
                         FilenameUtil.getFileTopParentName(
-                                        "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
+                                        "mp2-product\\mp2-product-impl\\src\\main\\java\\com\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
         assertEquals(
                         "mp2-product",
                         FilenameUtil.getFileTopParentName(
-                                        "mp2-product\\mp2-product-impl\\src\\..\\java\\com\\baozun\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
+                                        "mp2-product\\mp2-product-impl\\src\\..\\java\\com\\mp2\\rpc\\impl\\item\\repo\\package-info.java"));
         assertEquals("package-info.java", FilenameUtil.getFileTopParentName("package-info.java"));
     }
 
