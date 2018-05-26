@@ -95,15 +95,12 @@ public final class IOReaderUtil{
         Validate.notNull(file, "file can't be null!");
         //---------------------------------------------------------------
 
-        FileInputStream fileInputStream = null;
-        try{
-            fileInputStream = new FileInputStream(file);
+        try (FileInputStream fileInputStream = new FileInputStream(file)){
+
             return getContent(fileInputStream, charsetName);
+
         }catch (IOException e){
             throw new UncheckedIOException(e);
-        }finally{
-            // 用完关闭流 是个好习惯,^_^
-            IOUtils.closeQuietly(fileInputStream);
         }
     }
 
