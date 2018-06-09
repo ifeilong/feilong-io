@@ -66,6 +66,7 @@ public class FileUtilTest{
      * @throws IOException
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testFileUtilTest() throws IOException{
         URL url = URLUtil.toURL("http://localhost:8080/TestHttpURLConnectionPro/index.jsp");
         url.openConnection();
@@ -85,6 +86,7 @@ public class FileUtilTest{
      * Test get p1.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void testGetP1(){
         URL resource = ClassLoaderUtil.getResource("org/apache/commons/collections4/map");
         URI uri = URLUtil.toURI(resource);
@@ -99,6 +101,7 @@ public class FileUtilTest{
      *             Signals that an I/O exception has occurred.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void listFiles() throws IOException{
         String localPath = "E:\\DataCommon\\test";
         // 读取localPath目录下的全部properties文件
@@ -113,6 +116,7 @@ public class FileUtilTest{
      * Checks if is empty directory.
      */
     @Test
+    @SuppressWarnings("static-method")
     public void isEmptyDirectory(){
         // 不存在的文件
         try{
