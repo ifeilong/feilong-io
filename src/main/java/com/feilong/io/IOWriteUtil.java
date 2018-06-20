@@ -203,11 +203,14 @@ public final class IOWriteUtil{
         OutputStream outputStream = FileUtil.getFileOutputStream(file, false);
         write(inputStream, outputStream);
 
+        //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             String messagePattern = "fileSize:[{}],absolutePath:[{}],use time:[{}]";
             LOGGER.info(messagePattern, FileUtil.getFileFormatSize(file), file.getAbsolutePath(), formatDuration(beginDate));
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 写资源,速度最快的方法,速度比较请看 电脑资料 {@code  <<压缩解压性能探究>>}.

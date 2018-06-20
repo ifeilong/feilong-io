@@ -166,6 +166,8 @@ public final class FileUtil{
         return getFileOutputStream(filePath, append);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得 {@link java.io.FileOutputStream} 文件输出流 (或其他文件写入对象)打开文件进行写入 .
      * 
@@ -254,6 +256,8 @@ public final class FileUtil{
             throw new UncheckedIOException(e);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 判断一个目录是否是空目录 <span style="color:red">(判断的原则:里面没有文件)</span>.
@@ -361,7 +365,7 @@ public final class FileUtil{
 
         //---------------do with 存在------------------------------------------------
         if (isExists){//存在
-            LOGGER.debug("directory:[{}] exists,don't need mkdirs,nothing to do~", directoryFile);
+            LOGGER.trace("directory:[{}] exists,don't need mkdirs,nothing to do~", directoryFile);
             return;
         }
 
