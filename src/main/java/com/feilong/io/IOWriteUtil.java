@@ -146,7 +146,6 @@ public final class IOWriteUtil{
         Validate.notBlank(filePath, "filePath can't be null/empty!");
 
         //---------------------------------------------------------------
-
         Date beginDate = new Date();
 
         String useEncode = defaultIfNullOrEmpty(charsetType, UTF8);
