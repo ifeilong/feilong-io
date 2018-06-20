@@ -365,30 +365,31 @@ public final class IOWriteUtil{
     private static void writeUseNIO(InputStream inputStream,OutputStream outputStream,int bufferLength){
         Date beginDate = new Date();
 
-        ReadableByteChannel readableByteChannel = Channels.newChannel(inputStream);
-        WritableByteChannel writableByteChannel = Channels.newChannel(outputStream);
+        int loopCount = 0;
+        int sumSize = 0;
         ByteBuffer byteBuffer = ByteBuffer.allocate(bufferLength);
 
-        try{
-            int loopCount = 0;
-            int sumSize = 0;
+        try (ReadableByteChannel readableByteChannel = Channels.newChannel(inputStream);
+                        WritableByteChannel writableByteChannel = Channels.newChannel(outputStream);){
+
             while (readableByteChannel.read(byteBuffer) != EOF){
                 byteBuffer.flip();
                 sumSize += writableByteChannel.write(byteBuffer);
                 byteBuffer.clear();
                 loopCount++;
             }
+
+            //---------------------------------------------------------------
             if (LOGGER.isDebugEnabled()){
                 String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],use time:[{}]";
                 LOGGER.debug(pattern, FileUtil.formatSize(sumSize), bufferLength, loopCount, formatDuration(beginDate));
             }
+
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
             IOUtils.closeQuietly(outputStream);
-            IOUtils.closeQuietly(writableByteChannel);
             IOUtils.closeQuietly(inputStream);
-            IOUtils.closeQuietly(readableByteChannel);
         }
     }
 }
