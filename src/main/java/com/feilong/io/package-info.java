@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * 封装常用的JAVA IO操作工具方法.
- */
+
+/** 封装常用的JAVA IO操作工具方法. */
 package com.feilong.io;

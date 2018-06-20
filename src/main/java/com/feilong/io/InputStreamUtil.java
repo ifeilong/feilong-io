@@ -91,6 +91,8 @@ public final class InputStreamUtil{
         return ReaderUtil.toString(bufferedReader);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将 {@link java.io.InputStream} 转成 {@link java.io.BufferedReader} ({@link java.io.BufferedReader} 缓冲 高效读取).
      *

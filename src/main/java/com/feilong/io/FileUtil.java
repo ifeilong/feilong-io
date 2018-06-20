@@ -331,6 +331,8 @@ public final class FileUtil{
         createDirectory(directory);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 创建文件夹,支持<span style="color:green">级联创建</span>.
      * 
@@ -498,6 +500,8 @@ public final class FileUtil{
         return FileUtils.sizeOf(file);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得文件 <code>file</code> 格式化大小.
      * 
@@ -583,6 +587,8 @@ public final class FileUtil{
         throw new UnsupportedOperationException("fileSize:[" + fileSize + "] not support!");//理论上不会到这里
     }
 
+    //---------------------------------------------------------------
+
     /**
      * To ur ls.
      *
@@ -597,6 +603,8 @@ public final class FileUtil{
         String[] filePaths = ConvertUtil.toArray(filePathList, String.class);
         return toURLs(filePaths);
     }
+
+    //---------------------------------------------------------------
 
     /**
      * To ur ls.

@@ -105,6 +105,8 @@ public final class FilenameUtil{
         return formatFileName;
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 获得带后缀的文件纯名称.
      * 

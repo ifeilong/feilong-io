@@ -54,6 +54,8 @@ public final class IOReaderUtil{
     /** 默认编码. */
     private static final String DEFAULT_CHARSET_NAME = UTF8;
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private IOReaderUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -145,6 +147,8 @@ public final class IOReaderUtil{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 读取 {@link InputStream} 内容.
      *
@@ -188,6 +192,8 @@ public final class IOReaderUtil{
         }
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 使用 {@link LineNumberReaderResolver}解析文件.
      *
@@ -206,6 +212,8 @@ public final class IOReaderUtil{
             throw new UncheckedIOException(e);
         }
     }
+
+    //---------------------------------------------------------------
 
     /**
      * 使用 {@link LineNumberReaderResolver}解析 {@link Reader}.

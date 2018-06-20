@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io;
+package com.feilong.io.iowriteutil;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.DatePattern.TIMESTAMP;
@@ -45,6 +45,9 @@ import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.core.date.DateUtil;
 import com.feilong.core.lang.StringUtil;
+import com.feilong.io.FileUtil;
+import com.feilong.io.IOWriteUtil;
+import com.feilong.io.SpecialFolder;
 import com.feilong.io.entity.FileWriteMode;
 
 /**

@@ -20,6 +20,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.io.filenameutil.FeiLongFilenameUtilSuiteTests;
+import com.feilong.io.iowriteutil.WriteDirectoryAndFileTest;
 
 /**
  * 
@@ -29,7 +30,11 @@ import com.feilong.io.filenameutil.FeiLongFilenameUtilSuiteTests;
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                FeiLongFilenameUtilSuiteTests.class })
+                FeiLongFilenameUtilSuiteTests.class,
+
+                WriteDirectoryAndFileTest.class,
+
+})
 public class FeiLongIoSuiteTests{
 
 }

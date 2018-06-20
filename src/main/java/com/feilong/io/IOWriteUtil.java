@@ -68,6 +68,8 @@ public final class IOWriteUtil{
     /** 默认缓冲大小 10k <code>{@value}</code>. */
     public static final int     DEFAULT_BUFFER_LENGTH = (int) (10 * FileUtils.ONE_KB);
 
+    //---------------------------------------------------------------
+
     /** Don't let anyone instantiate this class. */
     private IOWriteUtil(){
         //AssertionError不是必须的. 但它可以避免不小心在类的内部调用构造器. 保证该类在任何情况下都不会被实例化.
@@ -107,8 +109,14 @@ public final class IOWriteUtil{
         writeStringToFile(filePath, content, charsetType, COVER);//default_fileWriteMode
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 将字符串写到文件中.
+     * 
+     * <p style="color:red">
+     * <b>(注意,本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
+     * </p>
      * 
      * <h3>相关规则:</h3>
      * 
@@ -136,6 +144,8 @@ public final class IOWriteUtil{
      */
     public static void writeStringToFile(String filePath,String content,String charsetType,FileWriteMode fileWriteMode){
         Validate.notBlank(filePath, "filePath can't be null/empty!");
+
+        //---------------------------------------------------------------
 
         Date beginDate = new Date();
 
@@ -169,42 +179,74 @@ public final class IOWriteUtil{
     //---------------------------------------------------------------
 
     /**
-     * 将inputStream 写到 某个文件夹(文件夹路径 最后不带"/"),名字为fileName.
+     * 将inputStream 写到某个文件夹 <code>directoryName</code> ,名字为 <code>fileName</code>.
      * 
-     * <h3>最终的fileAllName 格式是:</h3>
+     * <p style="color:red">
+     * <b>(注意,本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
+     * </p>
+     * 
+     * <h3>最终的文件名字格式是:</h3>
      * 
      * <blockquote>
      * <p>
      * <code>directoryName + "/" + fileName</code>
      * </p>
-     * </blockquote>
      * 
      * <p>
      * 拼接文件路径.<br>
-     * 如果拼接完的文件路径 父路径不存在,则自动创建(支持级联创建 文件夹)
+     * 如果拼接完的文件路径,父路径不存在,则自动创建<span style="color:green">(支持级联创建文件夹)</span>
      * </p>
-     *
+     * 
+     * </blockquote>
+     * 
+     * <h3>说明:</h3>
+     * <blockquote>
+     * 也支持 fileName 是路径下面的路径的写法:
+     * 
+     * <pre>
+    {@code
+    IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs/",<span style="color:green">"a/a.txt"</span>);
+    }
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <p>
+     * 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
+     * 
+     * 如果 <code>directoryPath</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>directoryPath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     * 如果 <code>fileName</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>fileName</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * </p>
+     * 
      * @param inputStream
-     *            上传得文件流
-     * @param directoryName
-     *            文件夹路径 最后不带"/"
+     *            上传的文件流
+     * @param directoryPath
+     *            文件夹路径
      * @param fileName
      *            文件名称
      * @see #write(InputStream, OutputStream)
      */
-    public static void write(InputStream inputStream,String directoryName,String fileName){
+    public static void write(InputStream inputStream,String directoryPath,String fileName){
+        Validate.notNull(inputStream, "inputStream can't be null!");
+        Validate.notBlank(directoryPath, "directoryPath can't be blank!");
+        Validate.notBlank(fileName, "fileName can't be blank!");
+
+        //---------------------------------------------------------------
         Date beginDate = new Date();
 
-        String filePath = directoryName + "/" + fileName;
-        FileUtil.createDirectory(directoryName);
+        //---------------------------------------------------------------
+        String filePath = directoryPath + File.separator + fileName;
+        FileUtil.createDirectoryByFilePath(filePath);
 
-        File file = new File(filePath);
-
-        OutputStream outputStream = FileUtil.getFileOutputStream(file, false);
+        OutputStream outputStream = FileUtil.getFileOutputStream(filePath);
         write(inputStream, outputStream);
 
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
+            File file = new File(filePath);
             String messagePattern = "fileSize:[{}],absolutePath:[{}],use time:[{}]";
             LOGGER.info(messagePattern, FileUtil.getFileFormatSize(file), file.getAbsolutePath(), formatDuration(beginDate));
         }
@@ -238,6 +280,8 @@ public final class IOWriteUtil{
         write(inputStream, outputStream, DEFAULT_BUFFER_LENGTH);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 写资源,速度最快的方法,速度比较请看电脑资料 {@code <<压缩解压性能探究>>} .
      * 
@@ -263,8 +307,14 @@ public final class IOWriteUtil{
         writeUseNIO(inputStream, outputStream, bufferLength);
     }
 
+    //---------------------------------------------------------------
+
     /**
      * 使用NIO API 来写数据 (效率高).
+     * 
+     * <p style="color:red">
+     * <b>(注意,本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
+     * </p>
      * 
      * <h3>关于NIO</h3>
      * 
@@ -315,6 +365,7 @@ public final class IOWriteUtil{
      */
     private static void writeUseNIO(InputStream inputStream,OutputStream outputStream,int bufferLength){
         Date beginDate = new Date();
+
         ReadableByteChannel readableByteChannel = Channels.newChannel(inputStream);
         WritableByteChannel writableByteChannel = Channels.newChannel(outputStream);
         ByteBuffer byteBuffer = ByteBuffer.allocate(bufferLength);
