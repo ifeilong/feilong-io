@@ -21,14 +21,12 @@ import static org.apache.commons.io.IOUtils.EOF;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.LineNumberReader;
 import java.io.Reader;
 import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 
@@ -122,20 +120,24 @@ public final class IOReaderUtil{
     public static String getContent(FileInputStream fileInputStream,String charsetName){
         Validate.notNull(fileInputStream, "inputStream can't be null!");
 
+        Charset charset = Charset.forName(defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
+
+        //---------------------------------------------------------------
+
         // 分配新的直接字节缓冲区
         final int capacity = 186140;
         ByteBuffer byteBuffer = ByteBuffer.allocateDirect(capacity);
-        StringBuilder sb = new StringBuilder(capacity);
+
+        //---------------------------------------------------------------
+        // 用于读取、写入、映射和操作文件的通道.
+        FileChannel fileChannel = fileInputStream.getChannel();
 
         try{
-            // 用于读取、写入、映射和操作文件的通道.
-            FileChannel fileChannel = fileInputStream.getChannel();
-            Charset charset = Charset.forName(defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
+            StringBuilder sb = new StringBuilder(capacity);
             while (fileChannel.read(byteBuffer) != EOF){
                 // 反转此缓冲区
                 byteBuffer.flip();
-                CharBuffer charBuffer = charset.decode(byteBuffer);
-                sb.append(charBuffer.toString());
+                sb.append(charset.decode(byteBuffer));
                 byteBuffer.clear();
             }
             return sb.toString();
@@ -175,27 +177,35 @@ public final class IOReaderUtil{
 
     /**
      * 使用 {@link LineNumberReaderResolver}解析文件.
-     *
+     * 
+     * <p>
+     * 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * 
+     * 如果 <code>lineNumberReaderResolver</code> 是null,抛出 {@link NullPointerException}<br>
+     * </p>
+     * 
      * @param filePath
      *            the file path
      * @param lineNumberReaderResolver
      *            the line number reader resolver
+     * @see #resolverFile(File, LineNumberReaderResolver)
      * @since 1.4.1
      */
     public static void resolverFile(String filePath,LineNumberReaderResolver lineNumberReaderResolver){
-        try{
-            Reader reader = new FileReader(filePath);
-            resolverFile(reader, lineNumberReaderResolver);
-        }catch (FileNotFoundException e){
-            LOGGER.error("", e);
-            throw new UncheckedIOException(e);
-        }
-    }
+        Validate.notBlank(filePath, "filePath can't be blank!");
+        Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
 
-    //---------------------------------------------------------------
+        resolverFile(new File(filePath), lineNumberReaderResolver);
+    }
 
     /**
      * 使用 {@link LineNumberReaderResolver}解析文件.
+     * 
+     * <p>
+     * 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>lineNumberReaderResolver</code> 是null,抛出 {@link NullPointerException}<br>
+     * </p>
      *
      * @param file
      *            the file
@@ -204,10 +214,14 @@ public final class IOReaderUtil{
      * @since 1.4.1
      */
     public static void resolverFile(File file,LineNumberReaderResolver lineNumberReaderResolver){
-        try{
-            Reader reader = new FileReader(file);
+        Validate.notNull(file, "file can't be null!");
+        Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
+
+        //---------------------------------------------------------------
+
+        try (Reader reader = new FileReader(file);){
             resolverFile(reader, lineNumberReaderResolver);
-        }catch (FileNotFoundException e){
+        }catch (IOException e){
             LOGGER.error("", e);
             throw new UncheckedIOException(e);
         }
@@ -264,6 +278,11 @@ public final class IOReaderUtil{
      * </pre>
      * 
      * </blockquote>
+     * 
+     * <p>
+     * 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>lineNumberReaderResolver</code> 是null,抛出 {@link NullPointerException}<br>
+     * </p>
      *
      * @param reader
      *            the reader
@@ -272,13 +291,16 @@ public final class IOReaderUtil{
      * @since 1.4.1
      */
     public static void resolverFile(Reader reader,LineNumberReaderResolver lineNumberReaderResolver){
-        LineNumberReader lineNumberReader = new LineNumberReader(reader);
-        try{
+        Validate.notNull(reader, "reader can't be null!");
+        Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
+
+        //---------------------------------------------------------------
+
+        try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
             String line = null;
             while ((line = lineNumberReader.readLine()) != null){
                 int lineNumber = lineNumberReader.getLineNumber();
                 boolean result = lineNumberReaderResolver.excute(lineNumber, line);
-
                 if (!result){
                     break;
                 }
@@ -287,7 +309,6 @@ public final class IOReaderUtil{
             LOGGER.error("", e);
             throw new UncheckedIOException(e);
         }finally{
-            IOUtils.closeQuietly(lineNumberReader);
             IOUtils.closeQuietly(reader);
         }
     }
