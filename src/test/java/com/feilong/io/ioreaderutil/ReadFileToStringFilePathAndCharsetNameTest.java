@@ -20,7 +20,10 @@ import static com.feilong.core.CharsetType.UTF8;
 import java.io.File;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.feilong.core.UncheckedIOException;
 import com.feilong.io.IOReaderUtil;
 
 /**
@@ -29,6 +32,22 @@ import com.feilong.io.IOReaderUtil;
  * @since 1.11.5
  */
 public class ReadFileToStringFilePathAndCharsetNameTest{
+
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReadFileToStringFilePathAndCharsetNameTest.class);
+
+    //---------------------------------------------------------------
+    @Test
+    public void testReadFile(){
+        String readFileToString = IOReaderUtil.readFileToString("/Users/feilong/feilong/logs/readFileToString.txt", UTF8);
+        LOGGER.debug(readFileToString);
+
+    }
+
+    @Test(expected = UncheckedIOException.class)
+    public void testReadFile1(){
+        IOReaderUtil.readFileToString("/Users/feilong/feilong/logs2222/readFileToString.txt", UTF8);
+    }
 
     @Test(expected = NullPointerException.class)
     public void testReadFileToStringFilePathAndCharsetNameTestNull(){

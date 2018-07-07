@@ -20,7 +20,10 @@ import static com.feilong.core.CharsetType.UTF8;
 import java.io.FileInputStream;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.feilong.io.FileUtil;
 import com.feilong.io.IOReaderUtil;
 
 /**
@@ -29,6 +32,19 @@ import com.feilong.io.IOReaderUtil;
  * @since 1.11.5
  */
 public class GetContentFileInputStreamTest{
+
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetContentFileInputStreamTest.class);
+
+    //---------------------------------------------------------------
+
+    @Test
+    public void testReadFile(){
+        String readFileToString = IOReaderUtil
+                        .getContent(FileUtil.getFileInputStream("/Users/feilong/feilong/logs/readFileToString.txt"), UTF8);
+        LOGGER.debug(readFileToString);
+
+    }
 
     @Test(expected = NullPointerException.class)
     public void testGetContent(){

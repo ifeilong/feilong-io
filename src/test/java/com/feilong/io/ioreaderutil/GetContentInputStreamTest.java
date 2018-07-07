@@ -20,7 +20,10 @@ import static com.feilong.core.CharsetType.UTF8;
 import java.io.InputStream;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.feilong.core.net.URLUtil;
 import com.feilong.io.IOReaderUtil;
 
 /**
@@ -30,8 +33,20 @@ import com.feilong.io.IOReaderUtil;
  */
 public class GetContentInputStreamTest{
 
-    @Test(expected = NullPointerException.class)
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(GetContentInputStreamTest.class);
+
+    //---------------------------------------------------------------
+
+    @Test
     public void testGetContent(){
+        String spec = "https://www.jd.com/robots.txt";
+        InputStream openStream = URLUtil.openStream(URLUtil.toURL(spec));
+        LOGGER.debug(IOReaderUtil.getContent(openStream, UTF8));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetContentNull(){
         IOReaderUtil.getContent((InputStream) null, UTF8);
     }
 
