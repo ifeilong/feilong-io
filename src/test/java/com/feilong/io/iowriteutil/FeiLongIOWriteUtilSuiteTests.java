@@ -13,32 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io;
+package com.feilong.io.iowriteutil;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.io.filenameutil.FeiLongFilenameUtilSuiteTests;
-import com.feilong.io.ioreaderutil.FeiLongIOReaderUtilSuiteTests;
-import com.feilong.io.iowriteutil.FeiLongIOWriteUtilSuiteTests;
-import com.feilong.io.readerutil.FeiLongReaderUtilSuiteTests;
-
 /**
- * The Class FeiLongIoSuiteTests.
- *
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-                FeiLongFilenameUtilSuiteTests.class,
-                FeiLongIOWriteUtilSuiteTests.class,
-                FeiLongIOReaderUtilSuiteTests.class,
-                FeiLongReaderUtilSuiteTests.class
+
+                WriteDirectoryAndFileTest.class,
 
 })
-
-public class FeiLongIoSuiteTests{
+public class FeiLongIOWriteUtilSuiteTests{
 
 }
