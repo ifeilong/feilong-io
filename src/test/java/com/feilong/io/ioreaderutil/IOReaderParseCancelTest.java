@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io;
+package com.feilong.io.ioreaderutil;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
@@ -34,14 +34,13 @@ import org.slf4j.LoggerFactory;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class IOReaderParseCancelTest3{
+public class IOReaderParseCancelTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(IOReaderParseCancelTest3.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IOReaderParseCancelTest.class);
 
     @Test
     public void parseAlipay() throws IOException{
-
         Date beginDate = new Date();
         String fileName = "/Users/feilong/Downloads/no-canceled-1.sql";
 
@@ -85,6 +84,5 @@ public class IOReaderParseCancelTest3{
         File file = new File(fileNameOut);
 
         FileUtils.write(file, sb, UTF8);
-
     }
 }

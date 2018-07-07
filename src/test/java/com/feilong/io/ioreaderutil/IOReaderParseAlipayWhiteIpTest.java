@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io;
+package com.feilong.io.ioreaderutil;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.util.CollectionsUtil.removeDuplicate;
@@ -28,22 +28,19 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.io.IOReaderUtil;
 import com.feilong.json.jsonlib.JsonUtil;
 
-/**
- * The Class IOReaderUtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
-public class IOReaderParseAlipayWhiteIpTest2{
+public class IOReaderParseAlipayWhiteIpTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(IOReaderParseAlipayWhiteIpTest2.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IOReaderParseAlipayWhiteIpTest.class);
 
     @Test
     public void parseAlipay() throws IOException{
         String fileName = "/Users/feilong/Downloads/alipay-ip.txt";
         String fileNameOut = "/Users/feilong/Downloads/alipay-ip-out.txt";
+
         LOGGER.debug(IOReaderUtil.readFileToString(fileName, UTF8));
         List<String> readLines = FileUtils.readLines(new File(fileName), UTF8);
         LOGGER.debug("size:{},{}", readLines.size(), JsonUtil.format(readLines));

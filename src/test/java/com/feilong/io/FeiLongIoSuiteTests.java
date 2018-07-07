@@ -20,19 +20,43 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.io.filenameutil.FeiLongFilenameUtilSuiteTests;
+import com.feilong.io.ioreaderutil.GetContentFileInputStreamTest;
+import com.feilong.io.ioreaderutil.GetContentInputStreamTest;
+import com.feilong.io.ioreaderutil.ReadFileToStringFileAndCharsetNameTest;
+import com.feilong.io.ioreaderutil.ReadFileToStringFilePathAndCharsetNameTest;
+import com.feilong.io.ioreaderutil.ResolverFileAndLineNumberReaderTest;
+import com.feilong.io.ioreaderutil.ResolverFilePathAndLineNumberReaderTest;
+import com.feilong.io.ioreaderutil.ResolverReaderAndLineNumberReaderTest;
 import com.feilong.io.iowriteutil.WriteDirectoryAndFileTest;
+import com.feilong.io.readerutil.NewStringReaderTest;
+import com.feilong.io.readerutil.ReadLineTest;
+import com.feilong.io.readerutil.ToStringTest;
 
 /**
- * 
+ * The Class FeiLongIoSuiteTests.
+ *
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.0
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
-
                 FeiLongFilenameUtilSuiteTests.class,
 
+                NewStringReaderTest.class,
                 WriteDirectoryAndFileTest.class,
+
+                GetContentFileInputStreamTest.class,
+                GetContentInputStreamTest.class,
+                ReadFileToStringFileAndCharsetNameTest.class,
+                ReadFileToStringFilePathAndCharsetNameTest.class,
+
+                ResolverFileAndLineNumberReaderTest.class,
+                ResolverFilePathAndLineNumberReaderTest.class,
+                ResolverReaderAndLineNumberReaderTest.class,
+
+                NewStringReaderTest.class,
+                ReadLineTest.class,
+                ToStringTest.class
 
 })
 public class FeiLongIoSuiteTests{

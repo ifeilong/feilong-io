@@ -18,6 +18,7 @@ package com.feilong.io;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
@@ -47,6 +48,21 @@ public final class ReaderUtil{
     }
 
     //---------------------------------------------------------------
+    /**
+     * 构造一个 {@link StringReader}.
+     *
+     * @param str
+     *            the str
+     * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.11.5
+     */
+    public static StringReader newStringReader(String str){
+        Validate.notNull(str, "str can't be null!");
+
+        return new StringReader(str);
+    }
+
+    //---------------------------------------------------------------
 
     /**
      * 将 {@link java.io.Reader} 转成 {@link java.lang.String}.
@@ -61,6 +77,7 @@ public final class ReaderUtil{
     public static String toString(Reader reader){
         Validate.notNull(reader, "reader can't be null!");
 
+        //---------------------------------------------------------------
         try{
             return IOUtils.toString(reader);
         }catch (IOException e){

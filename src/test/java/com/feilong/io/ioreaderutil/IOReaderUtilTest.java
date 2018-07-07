@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.feilong.io;
+package com.feilong.io.ioreaderutil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
@@ -23,7 +23,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.lang.StringUtil;
+import com.feilong.io.FileUtil;
+import com.feilong.io.IOReaderUtil;
 
 /**
  * The Class IOReaderUtilTest.
@@ -35,29 +36,7 @@ public class IOReaderUtilTest{
     /** The Constant LOGGER. */
     private static final Logger LOGGER         = LoggerFactory.getLogger(IOReaderUtilTest.class);
 
-    private static final String propertiesPath = "C:\\Users\\feilong\\.m2\\settings.xml";
-
-    /**
-     * Testname.
-     */
-    @Test
-    public void testname(){
-        String fileName = "F:\\Life 生活\\Job 工作\\淘宝开店\\商家编码.txt";
-        String content = IOReaderUtil.readFileToString(fileName, UTF8);
-        // 将内容以换行符转成数组
-        String[] rowsContents = StringUtil.split(content, "\r\n");
-        LOGGER.debug(content);
-        LOGGER.debug("" + rowsContents.length);
-    }
-
-    /**
-     * Parses the nginx.
-     */
-    @Test
-    public void parseNginx(){
-        String fileName = "C:\\Users\\feilong\\Documents\\AJ11\\AJ11\\1.txt";
-        LOGGER.debug(IOReaderUtil.readFileToString(fileName, UTF8));
-    }
+    private static final String propertiesPath = "/Users/feilong/work/build.xml";
 
     /**
      * Gets the file content.
