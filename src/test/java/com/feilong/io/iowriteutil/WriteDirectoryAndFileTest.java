@@ -23,6 +23,7 @@ import java.io.InputStream;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
+import com.feilong.core.UncheckedIOException;
 import com.feilong.io.IOWriteUtil;
 
 /**
@@ -93,7 +94,7 @@ public class WriteDirectoryAndFileTest{
         try{
             return IOUtils.toInputStream("feilong 我爱你", UTF8);
         }catch (IOException e){
-            throw new RuntimeException(e);
+            throw new UncheckedIOException(e);
         }
     }
 
