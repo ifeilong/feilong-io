@@ -34,9 +34,9 @@ import com.feilong.io.FileUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
-public class FormatSizeUtil{
+public class FormatSizeUtilTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FormatSizeUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FormatSizeUtilTest.class);
 
     @Test
     public void formatFileSize1(){

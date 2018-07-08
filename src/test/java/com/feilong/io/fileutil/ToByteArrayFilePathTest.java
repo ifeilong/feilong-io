@@ -24,31 +24,20 @@ import com.feilong.io.FileUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
-public class CreateDirectoryByFilePathTest{
-
-    /**
-     * Test create directory by file path.
-     */
-    @Test
-    public void testCreateDirectoryByFilePath(){
-        FileUtil.createDirectoryByFilePath("/Users/feilong/feilong/logs/createDirectoryByFilePath/createDirectoryByFilePath.txt");
-    }
-
-    //---------------------------------------------------------------
+public class ToByteArrayFilePathTest{
 
     @Test(expected = NullPointerException.class)
-    public void testCreateDirectoryByFilePathTestNull(){
-        FileUtil.createDirectoryByFilePath(null);
+    public void testToByteArrayUtilNull(){
+        FileUtil.toByteArray((String) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateDirectoryByFilePathTestEmpty(){
-        FileUtil.createDirectoryByFilePath("");
+    public void testToByteArrayUtilEmpty(){
+        FileUtil.toByteArray("");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateDirectoryByFilePathTestBlank(){
-        FileUtil.createDirectoryByFilePath(" ");
+    public void testToByteArrayUtilBlank(){
+        FileUtil.toByteArray(" ");
     }
-
 }

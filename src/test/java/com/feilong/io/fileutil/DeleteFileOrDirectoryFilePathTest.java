@@ -15,6 +15,8 @@
  */
 package com.feilong.io.fileutil;
 
+import static org.junit.Assert.assertFalse;
+
 import org.junit.Test;
 
 import com.feilong.io.FileUtil;
@@ -24,31 +26,30 @@ import com.feilong.io.FileUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
-public class CreateDirectoryByFilePathTest{
+public class DeleteFileOrDirectoryFilePathTest{
 
     /**
-     * Test create directory by file path.
+     * Test delete file or directory.
      */
     @Test
-    public void testCreateDirectoryByFilePath(){
-        FileUtil.createDirectoryByFilePath("/Users/feilong/feilong/logs/createDirectoryByFilePath/createDirectoryByFilePath.txt");
+    public void testDeleteFileOrDirectory(){
+        assertFalse(FileUtil.deleteFileOrDirectory("/Users/feilong/feilong/logs/deleteFileOrDirectory"));
     }
 
     //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
-    public void testCreateDirectoryByFilePathTestNull(){
-        FileUtil.createDirectoryByFilePath(null);
+    public void testDeleteFileOrDirectoryFilePathTestNull(){
+        FileUtil.deleteFileOrDirectory((String) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateDirectoryByFilePathTestEmpty(){
-        FileUtil.createDirectoryByFilePath("");
+    public void testDeleteFileOrDirectoryFilePathTestEmpty(){
+        FileUtil.deleteFileOrDirectory("");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateDirectoryByFilePathTestBlank(){
-        FileUtil.createDirectoryByFilePath(" ");
+    public void testDeleteFileOrDirectoryFilePathTestBlank(){
+        FileUtil.deleteFileOrDirectory(" ");
     }
-
 }

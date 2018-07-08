@@ -20,6 +20,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.feilong.io.filenameutil.FeiLongFilenameUtilSuiteTests;
+import com.feilong.io.fileutil.FeiLongFileUtilSuiteTests;
 import com.feilong.io.ioreaderutil.FeiLongIOReaderUtilSuiteTests;
 import com.feilong.io.iowriteutil.FeiLongIOWriteUtilSuiteTests;
 import com.feilong.io.readerutil.FeiLongReaderUtilSuiteTests;
@@ -33,6 +34,8 @@ import com.feilong.io.readerutil.FeiLongReaderUtilSuiteTests;
 @RunWith(Suite.class)
 @SuiteClasses({ //
                 FeiLongFilenameUtilSuiteTests.class,
+                FeiLongFileUtilSuiteTests.class,
+
                 FeiLongIOWriteUtilSuiteTests.class,
                 FeiLongIOReaderUtilSuiteTests.class,
                 FeiLongReaderUtilSuiteTests.class

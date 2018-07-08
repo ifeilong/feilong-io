@@ -20,8 +20,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FileUtil;
 
@@ -31,8 +29,6 @@ import com.feilong.io.FileUtil;
  * @since 1.11.5
  */
 public class IsEmptyDirectoryTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(IsEmptyDirectoryTest.class);
 
     /**
      * Checks if is empty directory.

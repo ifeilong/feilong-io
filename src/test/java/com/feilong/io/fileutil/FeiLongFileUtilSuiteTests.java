@@ -19,17 +19,40 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.feilong.io.filenameutil.GetExtensionLowerCaseParameterizedTest;
-
 /**
  * 
+ * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
+ * @since 1.11.5
  */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-        // GetExtensionLowerCaseParameterizedTest.class
+                ToURLsArrayTest.class,
+                ToURLsListTest.class,
+
+                GetFileSizeTest.class,
+                GetFileFormatSizeTest.class,
+
+                GetParentTest.class,
+
+                IsExistFileTest.class,
+                IsNotExistFileTest.class,
+
+                DeleteFileOrDirectoryFilePathTest.class,
+                DeleteFileOrDirectoryFileTest.class,
+
+                CreateDirectoryTest.class,
+                CreateDirectoryByFilePathTest.class,
+
+                GetFileOutputStreamFilePathTest.class,
+                GetFileOutputStreamFilePathAndFileWriteModeTest.class,
+
+                GetFileInputStreamFileTest.class,
+                GetFileInputStreamFilePathTest.class,
+
+                ToByteArrayFilePathTest.class,
+                ToByteArrayFileTest.class
 
 })
 public class FeiLongFileUtilSuiteTests{

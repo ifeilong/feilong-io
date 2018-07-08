@@ -15,6 +15,8 @@
  */
 package com.feilong.io.fileutil;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import com.feilong.io.FileUtil;
@@ -24,31 +26,13 @@ import com.feilong.io.FileUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
-public class CreateDirectoryByFilePathTest{
-
-    /**
-     * Test create directory by file path.
-     */
-    @Test
-    public void testCreateDirectoryByFilePath(){
-        FileUtil.createDirectoryByFilePath("/Users/feilong/feilong/logs/createDirectoryByFilePath/createDirectoryByFilePath.txt");
-    }
+public class GetFileSizeTest{
 
     //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
-    public void testCreateDirectoryByFilePathTestNull(){
-        FileUtil.createDirectoryByFilePath(null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateDirectoryByFilePathTestEmpty(){
-        FileUtil.createDirectoryByFilePath("");
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateDirectoryByFilePathTestBlank(){
-        FileUtil.createDirectoryByFilePath(" ");
+    public void testGetFileSizeTestNull(){
+        FileUtil.getFileSize((File) null);
     }
 
 }

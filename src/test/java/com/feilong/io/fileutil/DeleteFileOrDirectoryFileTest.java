@@ -15,10 +15,9 @@
  */
 package com.feilong.io.fileutil;
 
-import org.junit.Ignore;
+import java.io.File;
+
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.io.FileUtil;
 
@@ -27,24 +26,11 @@ import com.feilong.io.FileUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
-public class DeleteFileOrDirectoryTest{
+public class DeleteFileOrDirectoryFileTest{
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DeleteFileOrDirectoryTest.class);
-
-    /**
-     * Test delete file or directory.
-     */
-    @Test
-    @Ignore
-    public void testDeleteFileOrDirectory(){
-        FileUtil.deleteFileOrDirectory("D:\\test");
+    @Test(expected = NullPointerException.class)
+    public void testDeleteFileOrDirectoryFileTestNull(){
+        FileUtil.deleteFileOrDirectory((File) null);
     }
 
-    /**
-     * Test delete file or directory2.
-     */
-    @Test
-    public void testDeleteFileOrDirectory2(){
-        FileUtil.deleteFileOrDirectory("E:\\test");
-    }
 }
