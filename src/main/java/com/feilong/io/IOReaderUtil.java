@@ -16,6 +16,7 @@
 package com.feilong.io;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static org.apache.commons.io.IOUtils.EOF;
 
@@ -29,9 +30,12 @@ import java.io.Reader;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
@@ -43,6 +47,11 @@ import com.feilong.core.UncheckedIOException;
  * @since 1.0.6
  */
 public final class IOReaderUtil{
+
+    /** The Constant log. */
+    private static final Logger LOGGER               = LoggerFactory.getLogger(IOReaderUtil.class);
+
+    //---------------------------------------------------------------
 
     /** 默认编码. */
     private static final String DEFAULT_CHARSET_NAME = UTF8;
@@ -104,6 +113,11 @@ public final class IOReaderUtil{
     public static String readFileToString(String filePath,String charsetName){
         Validate.notBlank(filePath, "filePath can't be blank!");
 
+        //---------------------------------------------------------------
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("will read filePath:[{}] to String,use charsetName:[{}]", filePath, charsetName);
+        }
+        //---------------------------------------------------------------
         File file = new File(filePath);
         return readFileToString(file, charsetName);
     }
@@ -151,7 +165,10 @@ public final class IOReaderUtil{
     public static String readFileToString(File file,String charsetName){
         Validate.notNull(file, "file can't be null!");
         //---------------------------------------------------------------
-
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("will read file:[{}] to String,use charsetName:[{}]", file.getAbsolutePath(), charsetName);
+        }
+        //---------------------------------------------------------------
         try (FileInputStream fileInputStream = FileUtil.getFileInputStream(file)){
             return getContent(fileInputStream, charsetName);
         }catch (IOException e){
@@ -202,6 +219,13 @@ public final class IOReaderUtil{
     public static String getContent(FileInputStream fileInputStream,String charsetName){
         Validate.notNull(fileInputStream, "inputStream can't be null!");
 
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("start read fileInputStream:[{}] to String,use charsetName:[{}]", fileInputStream, charsetName);
+        }
+        //---------------------------------------------------------------
+        Date beginDate = new Date();
+
         Charset charset = Charset.forName(defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
         //---------------------------------------------------------------
 
@@ -220,7 +244,15 @@ public final class IOReaderUtil{
                 sb.append(charset.decode(byteBuffer));
                 byteBuffer.clear();
             }
-            return sb.toString();
+
+            //---------------------------------------------------------------
+            String result = sb.toString();
+
+            //---------------------------------------------------------------
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info("end read fileInputStream:[{}],use time: [{}]", fileInputStream, formatDuration(beginDate));
+            }
+            return result;
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
@@ -278,9 +310,21 @@ public final class IOReaderUtil{
     public static String getContent(InputStream inputStream,String charsetName){
         Validate.notNull(inputStream, "inputStream can't be null!");
 
+        Date beginDate = new Date();
+
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("start read inputStream:[{}] to String,use charsetName:[{}]", inputStream, charsetName);
+        }
         //---------------------------------------------------------------
         try{
-            return IOUtils.toString(inputStream, defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
+            String result = IOUtils.toString(inputStream, defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
+
+            //---------------------------------------------------------------
+            if (LOGGER.isInfoEnabled()){
+                LOGGER.info("end read inputStream:[{}],use time: [{}]", inputStream, formatDuration(beginDate));
+            }
+            return result;
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
@@ -312,6 +356,11 @@ public final class IOReaderUtil{
         Validate.notBlank(filePath, "filePath can't be blank!");
         Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
 
+        //---------------------------------------------------------------
+        if (LOGGER.isTraceEnabled()){
+            LOGGER.trace("will resolverFile filePath:[{}],use lineNumberReaderResolver:[{}]", filePath, lineNumberReaderResolver);
+        }
+        //---------------------------------------------------------------
         resolverFile(new File(filePath), lineNumberReaderResolver);
     }
 
@@ -333,6 +382,10 @@ public final class IOReaderUtil{
         Validate.notNull(file, "file can't be null!");
         Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
 
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("will resolverFile file:[{}], lineNumberReaderResolver:[{}]", file.getAbsolutePath(), lineNumberReaderResolver);
+        }
         //---------------------------------------------------------------
 
         try (Reader reader = new FileReader(file);){
@@ -410,6 +463,12 @@ public final class IOReaderUtil{
         Validate.notNull(lineNumberReaderResolver, "lineNumberReaderResolver can't be null!");
 
         //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("start resolverFile reader:[{}], lineNumberReaderResolver:[{}]", reader, lineNumberReaderResolver);
+        }
+
+        Date beginDate = new Date();
+        //---------------------------------------------------------------
         try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
             String line = null;
             while ((line = lineNumberReader.readLine()) != null){
@@ -424,5 +483,15 @@ public final class IOReaderUtil{
         }finally{
             IOUtils.closeQuietly(reader);
         }
+
+        //---------------------------------------------------------------
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(
+                            "end resolverFile reader:[{}],lineNumberReaderResolver:[{}],use time: [{}]",
+                            reader,
+                            lineNumberReaderResolver,
+                            formatDuration(beginDate));
+        }
+
     }
 }
