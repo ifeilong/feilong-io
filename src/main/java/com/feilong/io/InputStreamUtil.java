@@ -16,6 +16,7 @@
 package com.feilong.io;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -23,10 +24,13 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
+import com.feilong.core.lang.StringUtil;
 
 /**
  * {@link java.io.InputStream} 工具类.
@@ -51,8 +55,25 @@ public final class InputStreamUtil{
     //---------------------------------------------------------------
 
     /**
-     * 将 {@link java.io.InputStream} 转成string.<br>
-     * 使用默认的编码集 {@link Charset#defaultCharset()}
+     * 构造一个 {@link ByteArrayInputStream}.
+     *
+     * @param str
+     *            the str
+     * @param charsetName
+     *            受支持的 charset 名称,比如 utf-8, {@link CharsetType}
+     * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
+     * @see org.apache.commons.io.IOUtils#toInputStream(String, Charset)
+     * @since 1.12.1
+     */
+    public static ByteArrayInputStream newByteArrayInputStream(String str,String charsetName){
+        Validate.notNull(str, "str can't be null!");
+        return new ByteArrayInputStream(StringUtil.getBytes(str, charsetName));
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 使用默认的编码集 {@link Charset#defaultCharset()} 将 {@link java.io.InputStream} 转成string.
      * 
      * <p>
      * 如果需要将 {@link String} 转成 {@link InputStream} 可以调用 {@link IOUtils#toInputStream(String, Charset)}
@@ -60,10 +81,13 @@ public final class InputStreamUtil{
      * 
      * @param inputStream
      *            the input stream
-     * @return 将 {@link java.io.InputStream} 转成string
+     * @return 将 {@link java.io.InputStream} 转成string <br>
+     *         如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toString(InputStream, String)
      */
     public static String toString(InputStream inputStream){
+        Validate.notNull(inputStream, "inputStream can't be null!");
+
         Charset defaultCharset = Charset.defaultCharset();
         String charsetName = defaultCharset.name();
         LOGGER.debug("the param defaultCharset:[{}]", charsetName);
@@ -82,11 +106,14 @@ public final class InputStreamUtil{
      *            the input stream
      * @param charsetName
      *            指定受支持的 charset 的名称
-     * @return 将 {@link java.io.InputStream} 转成string
+     * @return 将 {@link java.io.InputStream} 转成string<br>
+     *         如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
      * @see #toBufferedReader(InputStream, String)
      * @see ReaderUtil#toString(Reader)
      */
     public static String toString(InputStream inputStream,String charsetName){
+        Validate.notNull(inputStream, "inputStream can't be null!");
+
         BufferedReader bufferedReader = toBufferedReader(inputStream, charsetName);
         return ReaderUtil.toString(bufferedReader);
     }
@@ -100,12 +127,14 @@ public final class InputStreamUtil{
      *            the input stream
      * @param charsetName
      *            the charset name
-     * @return the buffered reader
+     * @return 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
      * @see java.io.BufferedReader
      * @see java.io.InputStreamReader#InputStreamReader(InputStream, String)
      * @see org.apache.commons.io.IOUtils#toBufferedReader(Reader)
      */
     public static BufferedReader toBufferedReader(InputStream inputStream,String charsetName){
+        Validate.notNull(inputStream, "inputStream can't be null!");
+
         try{
             Reader reader = new InputStreamReader(inputStream, charsetName);
 
