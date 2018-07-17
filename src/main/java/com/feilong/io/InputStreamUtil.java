@@ -59,15 +59,15 @@ public final class InputStreamUtil{
      *
      * @param str
      *            the str
-     * @param charsetName
+     * @param charsetType
      *            受支持的 charset 名称,比如 utf-8, {@link CharsetType}
      * @return 如果 <code>str</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.io.IOUtils#toInputStream(String, Charset)
      * @since 1.12.1
      */
-    public static ByteArrayInputStream newByteArrayInputStream(String str,String charsetName){
+    public static ByteArrayInputStream newByteArrayInputStream(String str,String charsetType){
         Validate.notNull(str, "str can't be null!");
-        return new ByteArrayInputStream(StringUtil.getBytes(str, charsetName));
+        return new ByteArrayInputStream(StringUtil.getBytes(str, charsetType));
     }
 
     //---------------------------------------------------------------
