@@ -153,6 +153,8 @@ public final class IOReaderUtil{
     feilong
      * </pre>
      * 
+     * </blockquote>
+     * 
      * @param file
      *            文件
      * @param charsetName
@@ -207,6 +209,8 @@ public final class IOReaderUtil{
     feilong 我爱你
     feilong
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param fileInputStream
      *            the file input stream
@@ -297,6 +301,8 @@ public final class IOReaderUtil{
     User-agent: WochachaSpider 
     Disallow: /
      * </pre>
+     * 
+     * </blockquote>
      * 
      * @param inputStream
      *            the input stream
