@@ -16,6 +16,8 @@
 package com.feilong.io.iowriteutil;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.io.IOReaderUtil.readFileToString;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,21 +28,42 @@ import org.junit.Test;
 import com.feilong.core.UncheckedIOException;
 import com.feilong.io.IOWriteUtil;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.4
- */
 public class WriteDirectoryAndFileTest{
+
+    private static final String INPUT_MESSAGE = "feilong 我爱你";
+
+    //---------------------------------------------------------------
 
     @Test
     public void test(){
+        //带斜杆的
         IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs/", "a.txt");
+        check("/Users/feilong/feilong/logs/a.txt", INPUT_MESSAGE);
+    }
+
+    @Test
+    public void test12(){
+        //不带斜杆的
+        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs", "a.txt");
+        check("/Users/feilong/feilong/logs/a.txt", INPUT_MESSAGE);
     }
 
     @Test
     public void test1(){
         IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs/", "a/a.txt");
+        check("/Users/feilong/feilong/logs/a/a.txt", INPUT_MESSAGE);
+    }
+
+    @Test
+    public void test123(){
+        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs", "normalize/normalize.txt");
+        check("/Users/feilong/feilong/logs/normalize/normalize.txt", INPUT_MESSAGE);
+    }
+
+    @Test
+    public void testNormalize(){
+        IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs", "../normalize/normalize2.txt");
+        check("/Users/feilong/feilong/normalize/normalize2.txt", INPUT_MESSAGE);
     }
 
     //---------------------------------------------------------------
@@ -53,7 +76,7 @@ public class WriteDirectoryAndFileTest{
     //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
-    public void testWriteDirectoryAndFileTestNull1() throws IOException{
+    public void testWriteDirectoryAndFileTestNull1(){
         IOWriteUtil.write(getInputStream(), null, "a.txt");
     }
 
@@ -84,15 +107,14 @@ public class WriteDirectoryAndFileTest{
     }
 
     //---------------------------------------------------------------
+    private void check(String filePath,String expectedValue){
+        String content = readFileToString(filePath, UTF8);
+        assertEquals(expectedValue, content);
+    }
 
-    /**
-     * @return
-     * @throws IOException
-     * @since 1.11.4
-     */
     private static InputStream getInputStream(){
         try{
-            return IOUtils.toInputStream("feilong 我爱你", UTF8);
+            return IOUtils.toInputStream(INPUT_MESSAGE, UTF8);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }

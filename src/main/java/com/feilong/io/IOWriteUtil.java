@@ -30,6 +30,8 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
@@ -178,35 +180,46 @@ public final class IOWriteUtil{
     //---------------------------------------------------------------
 
     /**
-     * 将inputStream 写到某个文件夹 <code>directoryName</code> ,名字为 <code>fileName</code>.
+     * 将inputStream 写到某个文件夹 <code>directoryPath</code> ,名字为 <code>fileName</code>.
      * 
      * <p style="color:red">
      * <b>(注意,本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
      * </p>
      * 
-     * <h3>最终的文件名字格式是:</h3>
-     * 
-     * <blockquote>
      * <p>
-     * <code>directoryName + "/" + fileName</code>
-     * </p>
-     * 
-     * <p>
-     * 拼接文件路径.<br>
      * 如果拼接完的文件路径,父路径不存在,则自动创建<span style="color:green">(支持级联创建文件夹)</span>
      * </p>
      * 
      * </blockquote>
      * 
      * <h3>说明:</h3>
+     * 
      * <blockquote>
-     * 也支持 fileName 是路径下面的路径的写法:
+     * <p>
+     * 支持 fileName 是路径的写法:
+     * </p>
      * 
      * <pre>
-    {@code
-    IOWriteUtil.write(getInputStream(), "/Users/feilong/feilong/logs/",<span style="color:green">"a/a.txt"</span>);
-    }
+     * IOWriteUtil.write(getInputStream(), "/Users/feilong/logs/",<span style="color:green">"a/a.txt"</span>);
      * </pre>
+     * 
+     * <p>
+     * 此时会将内容写到 /Users/feilong/logs/a/a.txt 文件
+     * </p>
+     * 
+     * <hr>
+     * 
+     * <p>
+     * 也支持 fileName 带相对路径的写法:
+     * </p>
+     * 
+     * <pre>
+     * IOWriteUtil.write(getInputStream(), "/Users/feilong/logs/",<span style="color:green">"../a/a.txt"</span>);
+     * </pre>
+     * 
+     * <p>
+     * 此时会将内容写到 /Users/feilong/a/a.txt 文件
+     * </p>
      * 
      * </blockquote>
      * 
@@ -223,7 +236,7 @@ public final class IOWriteUtil{
      * @param inputStream
      *            上传的文件流
      * @param directoryPath
-     *            文件夹路径
+     *            文件夹路径, 支持格式类似于是 <code>/Users/feilong/logs/</code> 或者 <code>/Users/feilong/logs</code>
      * @param fileName
      *            文件名称
      * @see #write(InputStream, OutputStream)
@@ -237,7 +250,16 @@ public final class IOWriteUtil{
         Date beginDate = new Date();
 
         //---------------------------------------------------------------
-        String filePath = directoryPath + File.separator + fileName;
+        //since 1.12.9
+        Path path = Paths.get(directoryPath, fileName).normalize();
+        String filePath = path.toString();
+        //---------------------------------------------------------------
+
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("directoryPath:[{}],fileName:[{}] ==> file final Path:[{}]", directoryPath, fileName, filePath);
+        }
+        //---------------------------------------------------------------
+
         FileUtil.createDirectoryByFilePath(filePath);
 
         OutputStream outputStream = FileUtil.getFileOutputStream(filePath);
@@ -288,12 +310,12 @@ public final class IOWriteUtil{
      * <b>(注意,本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
      * </p>
      *
-     * @param bufferLength
-     *            每次循环buffer大小
      * @param inputStream
      *            inputStream
      * @param outputStream
      *            outputStream
+     * @param bufferLength
+     *            每次循环buffer大小
      * @see #writeUseNIO(InputStream, OutputStream,int)
      * @see java.io.OutputStream#write(byte[], int, int)
      * @see org.apache.commons.io.IOUtils#copyLarge(InputStream, OutputStream)
@@ -353,12 +375,12 @@ public final class IOWriteUtil{
      * As creme de la creme with regard to performance,you could use NIO {@link java.nio.channels.Channels} and {@link java.nio.ByteBuffer}.
      * </p>
      *
-     * @param bufferLength
-     *            the buffer length
      * @param inputStream
      *            the input stream
      * @param outputStream
      *            the output stream
+     * @param bufferLength
+     *            the buffer length
      * @since 1.0.8
      * @since jdk1.4
      */
