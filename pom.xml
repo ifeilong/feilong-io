@@ -29,18 +29,22 @@
 			<artifactId>feilong-core</artifactId>
 		</dependency>
 
-		<!-- commons-io -->
 		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<!-- <optional>true</optional> -->
+			<groupId>com.feilong.platform</groupId>
+			<artifactId>feilong-validator</artifactId>
 		</dependency>
 
 		<!-- feilong-json-jsonlib -->
 		<dependency>
 			<groupId>com.feilong.json</groupId>
 			<artifactId>feilong-json-jsonlib</artifactId>
-			<scope>test</scope>
+		</dependency>
+
+		<!-- commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<!-- <optional>true</optional> -->
 		</dependency>
 
 		<!-- **********************log日志************************************ -->
@@ -77,7 +81,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
 
 	<!-- 用于管理此项目的发布跟踪（bug跟踪） -->
 	<issueManagement>

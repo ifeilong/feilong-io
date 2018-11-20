@@ -16,8 +16,11 @@
 package com.feilong.io;
 
 import static com.feilong.core.CharsetType.UTF8;
+import static com.feilong.core.Validator.isNotNullOrEmpty;
+import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
+import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
 import static org.apache.commons.io.IOUtils.EOF;
 
 import java.io.File;
@@ -31,14 +34,18 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.Set;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.feilong.core.CharsetType;
 import com.feilong.core.UncheckedIOException;
+import com.feilong.json.jsonlib.JsonUtil;
+import com.feilong.validator.ValidatorUtil;
 
 /**
  * focus 在文件读取以及解析.
@@ -498,6 +505,113 @@ public final class IOReaderUtil{
                             lineNumberReaderResolver,
                             formatDuration(beginDate));
         }
+    }
 
+    //---------------------------------------------------------------
+
+    /**
+     * 使用 {@link ReaderConfig}解析 {@link Reader}.
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * 
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * try{
+     *     Set{@code <String>} set = new HashSet{@code <>}();
+     *     BufferedReader bufferedReader = new BufferedReader(read);
+     *     String txt = null;
+     *     while ((txt = bufferedReader.readLine()) != null){ <span style="color:green">// 读取文件,将文件内容放入到set中</span>
+     *         txt = txt.trim();<span style="color:green">// 忽略前面前后空格</span>
+     *         txt = txt.replace(" ", "");<span style="color:green">// 文中过滤空格</span>
+     *         set.add(txt);
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     read.close(); <span style="color:green">// 关闭文件流</span>
+     * }
+     * return set;
+     * 
+     * </pre>
+     * 
+     * 现在可以重构为:
+     * 
+     * <pre class="code">
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * 
+     * final Set{@code <String>} set = new HashSet{@code <>}();
+     * 
+     * Set{@code <String>} set=IOReaderUtil.resolverFile(read, new ReaderConfig());
+     * return set;
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * <p>
+     * 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * </p>
+     *
+     * @param reader
+     *            the reader
+     * @param readerConfig
+     *            the reader config
+     * @return the 设置
+     * @since 1.12.10
+     */
+    public static Set<String> resolverFile(Reader reader,ReaderConfig readerConfig){
+        Validate.notNull(reader, "reader can't be null!");
+        Validate.notNull(readerConfig, "readerConfig can't be null!");
+
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("start resolverFile reader:[{}], readerConfig:[{}]", reader, JsonUtil.format(readerConfig));
+        }
+
+        //---------------------------------------------------------------
+        boolean ignoreBlankLine = readerConfig.getIgnoreBlankLine();
+        boolean isTrim = readerConfig.getIsTrim();
+        String regexPattern = readerConfig.getRegexPattern();
+
+        Date beginDate = new Date();
+
+        Set<String> set = newLinkedHashSet();
+        //---------------------------------------------------------------
+        try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
+            String line = null;
+            while ((line = lineNumberReader.readLine()) != null){
+                if (isTrim){
+                    line = StringUtils.trim(line);
+                }
+
+                if (isNotNullOrEmpty(regexPattern) && !ValidatorUtil.isMatches(regexPattern, line)){
+                    continue;
+                }
+
+                if (isNullOrEmpty(line) && ignoreBlankLine){
+                    continue;
+                }
+
+                set.add(line);
+            }
+        }catch (IOException e){
+            throw new UncheckedIOException(e);
+        }finally{
+            IOUtils.closeQuietly(reader);
+        }
+
+        //---------------------------------------------------------------
+        if (LOGGER.isInfoEnabled()){
+            LOGGER.info(
+                            "end resolverFile reader:[{}],readerConfig:[{}],use time: [{}]",
+                            reader,
+                            JsonUtil.format(readerConfig),
+                            formatDuration(beginDate));
+        }
+
+        return set;
     }
 }

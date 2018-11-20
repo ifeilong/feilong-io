@@ -45,6 +45,6 @@ public class ResolverReaderAndLineNumberReaderTest{
 
     @Test(expected = NullPointerException.class)
     public void testReadFileToStringFilePathAndCharsetNameTestBlank(){
-        IOReaderUtil.resolverFile(ReaderUtil.newStringReader("test"), null);
+        IOReaderUtil.resolverFile(ReaderUtil.newStringReader("test"), (LineNumberReaderResolver) null);
     }
 }
