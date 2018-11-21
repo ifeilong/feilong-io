@@ -35,7 +35,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 ResolverFileAndLineNumberReaderTest.class,
                 ResolverFilePathAndLineNumberReaderTest.class,
                 ResolverReaderAndLineNumberReaderTest.class,
-                ResolverReaderAndReaderConfigTest.class,
+
+                ReadReaderAndReaderConfigTest.class,
+                ReadFilePathAndReaderConfigTest.class,
+                ReadFileAndReaderConfigTest.class,
 
 })
 public class FeiLongIOReaderUtilSuiteTests{

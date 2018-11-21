@@ -20,94 +20,102 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.junit.Test;
 
 import com.feilong.io.IOReaderUtil;
 import com.feilong.io.ReaderConfig;
-import com.feilong.io.ReaderUtil;
 
-public class ResolverReaderAndReaderConfigTest{
+/**
+ * The Class ReadFilePathAndReaderConfigTest.
+ */
+public class ReadFilePathAndReaderConfigTest{
 
-    private final StringReader STRING_READER = ReaderUtil.newStringReader(" \n\n123456 \nA\n23456");
+    /** The file path. */
+    private final String filePath = "/Users/feilong/workspace/feilong/feilong-io/src/test/resources/readtest.txt";
 
     //---------------------------------------------------------------
 
+    /**
+     * Test read file path and reader config test null.
+     */
     @Test(expected = NullPointerException.class)
-    public void testResolverFile(){
-        IOReaderUtil.resolverFile((Reader) null, new ReaderConfig());
+    public void testReadFilePathAndReaderConfigTestNull(){
+        IOReaderUtil.read((String) null, new ReaderConfig());
     }
 
+    /**
+     * Test read file path and reader config test empty.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testReadFilePathAndReaderConfigTestEmpty(){
+        IOReaderUtil.read("", new ReaderConfig());
+    }
+
+    /**
+     * Test read file path and reader config test blank.
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testReadFilePathAndReaderConfigTestBlank(){
+        IOReaderUtil.read(" ", new ReaderConfig());
+    }
+
+    /**
+     * Test resolver file and reader config is null.
+     */
     @Test(expected = NullPointerException.class)
     public void testResolverFileAndReaderConfigIsNull(){
-        IOReaderUtil.resolverFile(ReaderUtil.newStringReader("test"), (ReaderConfig) null);
+        IOReaderUtil.read("/usr", (ReaderConfig) null);
     }
 
     //---------------------------------------------------------------
 
     /**
-     * TestResolverReaderAndReaderConfigTest.
-     * 
-     * @throws IOException
+     * Test resolver reader and reader config test 1.
      */
     @Test
-    public void testResolverReaderAndReaderConfigTest() throws IOException{
-        Set<String> codes = new LinkedHashSet<>();
-
-        BufferedReader bufferedReader = new BufferedReader(STRING_READER);
-        String lineTxt = null;
-        while ((lineTxt = bufferedReader.readLine()) != null && lineTxt.trim() != ""){
-            codes.add(lineTxt.trim());
-        }
-
-        //校验是否和自动生成的code(且未使用)重复、是否含中文，特殊符号，20字符内
-        Iterator<String> iterator = codes.iterator();
-        while (iterator.hasNext()){
-            String code = iterator.next();
-            if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
-                iterator.remove();
-            }
-        }
-        assertThat(codes, allOf(hasItem("123456"), not(hasItem("23456"))));
-    }
-
-    @Test
     public void testResolverReaderAndReaderConfigTest1(){
-        Set<String> codes = IOReaderUtil.resolverFile(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+        Set<String> codes = IOReaderUtil.read(filePath, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
         assertThat(codes, allOf(hasItem("123456"), not(hasItem("23456"))));
     }
 
+    /**
+     * Test resolver reader and reader config test 2.
+     */
     @Test
     public void testResolverReaderAndReaderConfigTest2(){
-        Set<String> codes = IOReaderUtil.resolverFile(STRING_READER, new ReaderConfig());
+        Set<String> codes = IOReaderUtil.read(filePath, new ReaderConfig());
         assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
     }
 
     // \n\n123456 \nA\n23456
 
+    /**
+     * Test resolver reader and reader config test 3.
+     */
     @Test
     public void testResolverReaderAndReaderConfigTest3(){
-        Set<String> codes = IOReaderUtil.resolverFile(STRING_READER, new ReaderConfig(true, false));
+        Set<String> codes = IOReaderUtil.read(filePath, new ReaderConfig(true, false));
         assertThat(codes, allOf(hasItem("123456 "), hasItem("A"), hasItem("23456"), not(hasItem(" "))));
     }
 
+    /**
+     * Test resolver reader and reader config test 4.
+     */
     @Test
     public void testResolverReaderAndReaderConfigTest4(){
-        Set<String> codes = IOReaderUtil.resolverFile(STRING_READER, new ReaderConfig(false, false));
+        Set<String> codes = IOReaderUtil.read(filePath, new ReaderConfig(false, false));
         assertThat(codes, allOf(hasItem(" "), hasItem(""), hasItem("123456 "), hasItem("A"), hasItem("23456")));
     }
 
+    /**
+     * Test resolver reader and reader config test 5.
+     */
     // \n\n123456 \nA\n23456
     @Test
     public void testResolverReaderAndReaderConfigTest5(){
-        Set<String> codes = IOReaderUtil.resolverFile(STRING_READER, new ReaderConfig(false, true));
+        Set<String> codes = IOReaderUtil.read(filePath, new ReaderConfig(false, true));
         assertThat(codes, allOf(hasItem(""), hasItem(""), hasItem("123456"), hasItem("A"), hasItem("23456")));
     }
 }

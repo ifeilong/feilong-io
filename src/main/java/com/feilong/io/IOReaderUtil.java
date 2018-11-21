@@ -512,63 +512,202 @@ public final class IOReaderUtil{
     /**
      * 使用 {@link ReaderConfig}解析 {@link Reader}.
      * 
+     * <p>
+     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
+     * </p>
+     * 
      * <h3>如果你以前这么写代码:</h3>
      * 
      * <blockquote>
      * 
      * <pre class="code">
-     * 
      * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
      * try{
-     *     Set{@code <String>} set = new HashSet{@code <>}();
-     *     BufferedReader bufferedReader = new BufferedReader(read);
-     *     String txt = null;
-     *     while ((txt = bufferedReader.readLine()) != null){ <span style="color:green">// 读取文件,将文件内容放入到set中</span>
-     *         txt = txt.trim();<span style="color:green">// 忽略前面前后空格</span>
-     *         txt = txt.replace(" ", "");<span style="color:green">// 文中过滤空格</span>
-     *         set.add(txt);
+     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
+     *     String lineTxt = null;
+     *     while ((lineTxt = bufferedReader.readLine()) != null && lineTxt.trim() != ""){
+     *         codes.add(lineTxt.trim());
+     *     }
+     *     
+     *     Iterator{@code <String>} iterator = codes.iterator();
+     *     while (iterator.hasNext()){
+     *         String code = iterator.next();
+     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
+     *             iterator.remove();
+     *         }
      *     }
      * }catch (Exception e){
      *     log.error(e.getMessage());
      * }finally{
-     *     read.close(); <span style="color:green">// 关闭文件流</span>
+     *     read.close();
      * }
      * return set;
-     * 
      * </pre>
      * 
      * 现在可以重构为:
      * 
      * <pre class="code">
+     * Set{@code <String>} set = IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * 
+     * return set;
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param filePath
+     *            the file path
+     * @param readerConfig
+     *            the reader config
+     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.12.10
+     */
+    public static Set<String> read(String filePath,ReaderConfig readerConfig){
+        Validate.notBlank(filePath, "filePath can't be blank!");
+        Validate.notNull(readerConfig, "readerConfig can't be null!");
+
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("start read filePath:[{}], readerConfig:[{}]", filePath, JsonUtil.format(readerConfig));
+        }
+        //---------------------------------------------------------------
+        return read(new File(filePath), readerConfig);
+    }
+
+    /**
+     * 使用 {@link ReaderConfig}解析 {@link Reader}.
+     * 
+     * <p>
+     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
+     * </p>
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
      * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
+     * try{
+     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
+     *     String lineTxt = null;
+     *     while ((lineTxt = bufferedReader.readLine()) != null && lineTxt.trim() != ""){
+     *         codes.add(lineTxt.trim());
+     *     }
+     *     
+     *     Iterator{@code <String>} iterator = codes.iterator();
+     *     while (iterator.hasNext()){
+     *         String code = iterator.next();
+     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
+     *             iterator.remove();
+     *         }
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     read.close();
+     * }
+     * return set;
+     * </pre>
      * 
-     * final Set{@code <String>} set = new HashSet{@code <>}();
+     * 现在可以重构为:
      * 
-     * Set{@code <String>} set=IOReaderUtil.resolverFile(read, new ReaderConfig());
+     * <pre class="code">
+     * Set{@code <String>} set = IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * 
      * return set;
      * </pre>
      * 
      * </blockquote>
      * 
+     * @param file
+     *            the file
+     * @param readerConfig
+     *            the reader config
+     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.12.10
+     */
+    public static Set<String> read(File file,ReaderConfig readerConfig){
+        Validate.notNull(file, "file can't be null!");
+        Validate.notNull(readerConfig, "readerConfig can't be null!");
+
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("start read reader:[{}], readerConfig:[{}]", file, JsonUtil.format(readerConfig));
+        }
+        //---------------------------------------------------------------
+
+        try (Reader reader = new FileReader(file);){
+            return read(reader, readerConfig);
+        }catch (IOException e){
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * 使用 {@link ReaderConfig}解析 {@link Reader}.
+     * 
      * <p>
-     * 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
-     * 如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
      * </p>
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
+     * try{
+     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
+     *     String lineTxt = null;
+     *     while ((lineTxt = bufferedReader.readLine()) != null && lineTxt.trim() != ""){
+     *         codes.add(lineTxt.trim());
+     *     }
+     *     
+     *     Iterator{@code <String>} iterator = codes.iterator();
+     *     while (iterator.hasNext()){
+     *         String code = iterator.next();
+     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
+     *             iterator.remove();
+     *         }
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     read.close();
+     * }
+     * return set;
+     * </pre>
+     * 
+     * 现在可以重构为:
+     * 
+     * <pre class="code">
+     * Set{@code <String>} set = IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * 
+     * return set;
+     * </pre>
+     * 
+     * </blockquote>
      *
      * @param reader
      *            the reader
      * @param readerConfig
      *            the reader config
-     * @return the 设置
+     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.12.10
      */
-    public static Set<String> resolverFile(Reader reader,ReaderConfig readerConfig){
+    public static Set<String> read(Reader reader,ReaderConfig readerConfig){
         Validate.notNull(reader, "reader can't be null!");
         Validate.notNull(readerConfig, "readerConfig can't be null!");
 
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("start resolverFile reader:[{}], readerConfig:[{}]", reader, JsonUtil.format(readerConfig));
+            LOGGER.debug("start read reader:[{}], readerConfig:[{}]", reader, JsonUtil.format(readerConfig));
         }
 
         //---------------------------------------------------------------
@@ -606,7 +745,7 @@ public final class IOReaderUtil{
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
             LOGGER.info(
-                            "end resolverFile reader:[{}],readerConfig:[{}],use time: [{}]",
+                            "end read reader:[{}],readerConfig:[{}],use time: [{}]",
                             reader,
                             JsonUtil.format(readerConfig),
                             formatDuration(beginDate));
