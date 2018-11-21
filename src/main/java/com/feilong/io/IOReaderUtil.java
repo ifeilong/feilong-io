@@ -548,9 +548,7 @@ public final class IOReaderUtil{
      * 现在可以重构为:
      * 
      * <pre class="code">
-     * Set{@code <String>} set = IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
-     * 
-     * return set;
+     * return IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
      * </pre>
      * 
      * </blockquote>
@@ -615,9 +613,7 @@ public final class IOReaderUtil{
      * 现在可以重构为:
      * 
      * <pre class="code">
-     * Set{@code <String>} set = IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
-     * 
-     * return set;
+     * return IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
      * </pre>
      * 
      * </blockquote>
@@ -686,9 +682,7 @@ public final class IOReaderUtil{
      * 现在可以重构为:
      * 
      * <pre class="code">
-     * Set{@code <String>} set = IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
-     * 
-     * return set;
+     * return IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
      * </pre>
      * 
      * </blockquote>
