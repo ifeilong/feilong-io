@@ -526,7 +526,7 @@ public final class IOReaderUtil{
      * try{
      *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
      *     String lineTxt = null;
-     *     while ((lineTxt = bufferedReader.readLine()) != null && lineTxt.trim() != ""){
+     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
      *         codes.add(lineTxt.trim());
      *     }
      *     
@@ -591,7 +591,7 @@ public final class IOReaderUtil{
      * try{
      *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
      *     String lineTxt = null;
-     *     while ((lineTxt = bufferedReader.readLine()) != null && lineTxt.trim() != ""){
+     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
      *         codes.add(lineTxt.trim());
      *     }
      *     
@@ -660,7 +660,7 @@ public final class IOReaderUtil{
      * try{
      *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
      *     String lineTxt = null;
-     *     while ((lineTxt = bufferedReader.readLine()) != null && lineTxt.trim() != ""){
+     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
      *         codes.add(lineTxt.trim());
      *     }
      *     
