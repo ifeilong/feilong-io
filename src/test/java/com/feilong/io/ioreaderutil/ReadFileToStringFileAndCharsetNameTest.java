@@ -31,7 +31,7 @@ import com.feilong.io.IOReaderUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
-public class ReadFileToStringFileAndCharsetNameTest{
+public class ReadFileToStringFileAndCharsetNameTest extends AbstractReadFileToStringTest{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(ReadFileToStringFileAndCharsetNameTest.class);
@@ -40,7 +40,7 @@ public class ReadFileToStringFileAndCharsetNameTest{
 
     @Test
     public void testReadFile(){
-        String readFileToString = IOReaderUtil.readFileToString(new File("/Users/feilong/feilong/logs/readFileToString.txt"), UTF8);
+        String readFileToString = IOReaderUtil.readFileToString(new File(filePath), UTF8);
         LOGGER.debug(readFileToString);
 
     }

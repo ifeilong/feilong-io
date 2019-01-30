@@ -31,7 +31,7 @@ import com.feilong.io.IOReaderUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
-public class GetContentFileInputStreamTest{
+public class GetContentFileInputStreamTest extends AbstractReadFileToStringTest{
 
     /** The Constant log. */
     private static final Logger LOGGER = LoggerFactory.getLogger(GetContentFileInputStreamTest.class);
@@ -40,8 +40,7 @@ public class GetContentFileInputStreamTest{
 
     @Test
     public void testReadFile(){
-        String readFileToString = IOReaderUtil
-                        .getContent(FileUtil.getFileInputStream("/Users/feilong/feilong/logs/readFileToString.txt"), UTF8);
+        String readFileToString = IOReaderUtil.getContent(FileUtil.getFileInputStream(filePath), UTF8);
         LOGGER.debug(readFileToString);
 
     }
