@@ -90,13 +90,16 @@ public final class InputStreamUtil{
 
         Charset defaultCharset = Charset.defaultCharset();
         String charsetName = defaultCharset.name();
-        LOGGER.debug("the param defaultCharset:[{}]", charsetName);
+        LOGGER.debug("will use defaultCharset:[{}]", charsetName);
         return toString(inputStream, charsetName);
     }
 
     /**
-     * 将 {@link java.io.InputStream} 转成string.<br>
+     * 将 {@link java.io.InputStream} 转成string.
+     * 
+     * <p>
      * 读取cmd命令结果时候, 有时候读取的是乱码,需要传递 <code>charsetName</code>字符集.
+     * </p>
      * 
      * <p>
      * 如果需要将 {@link String} 转成 {@link InputStream} 可以调用 {@link IOUtils#toInputStream(String, Charset)}
