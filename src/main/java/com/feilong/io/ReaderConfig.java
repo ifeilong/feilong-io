@@ -26,18 +26,28 @@ import java.io.Serializable;
 public class ReaderConfig implements Serializable{
 
     /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -6044017657112874891L;
+    private static final long        serialVersionUID = -6044017657112874891L;
+
+    /**
+     * Static instance.
+     * 
+     * @since 1.13.3
+     */
+    // the static instance works for all types
+    public static final ReaderConfig DEFAULT          = new ReaderConfig();
 
     //---------------------------------------------------------------
 
     /** 是否忽略空白行. */
-    private boolean           ignoreBlankLine  = true;
+    private boolean                  ignoreBlankLine  = true;
 
     /** 是否去空格. */
-    private boolean           isTrim           = true;
+    private boolean                  isTrim           = true;
+
+    //---------------------------------------------------------------
 
     /** 符合正则的内容才抓取,不符合的跳过. */
-    private String            regexPattern;
+    private String                   regexPattern;
 
     //---------------------------------------------------------------
     /**
