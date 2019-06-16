@@ -16,8 +16,6 @@
 package com.feilong.io.readerutil;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.feilong.io.ReaderUtil;
 
@@ -27,8 +25,6 @@ import com.feilong.io.ReaderUtil;
  * @since 1.11.5
  */
 public class ToStringTest{
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ToStringTest.class);
 
     @Test(expected = NullPointerException.class)
     public void testToStringTestNull(){
