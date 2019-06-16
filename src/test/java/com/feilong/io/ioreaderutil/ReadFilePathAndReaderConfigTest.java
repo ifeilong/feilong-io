@@ -61,14 +61,6 @@ public class ReadFilePathAndReaderConfigTest{
         IOReaderUtil.read(" ", new ReaderConfig());
     }
 
-    /**
-     * Test resolver file and reader config is null.
-     */
-    @Test(expected = NullPointerException.class)
-    public void testResolverFileAndReaderConfigIsNull(){
-        IOReaderUtil.read("/usr", (ReaderConfig) null);
-    }
-
     //---------------------------------------------------------------
 
     /**
@@ -86,6 +78,12 @@ public class ReadFilePathAndReaderConfigTest{
     @Test
     public void testResolverReaderAndReaderConfigTest2(){
         Set<String> codes = IOReaderUtil.read(filePath, new ReaderConfig());
+        assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
+    }
+
+    @Test
+    public void testResolverReaderAndReaderConfigTest23(){
+        Set<String> codes = IOReaderUtil.read(filePath, null);
         assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
     }
 

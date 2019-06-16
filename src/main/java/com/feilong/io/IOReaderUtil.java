@@ -22,6 +22,7 @@ import static com.feilong.core.date.DateExtensionUtil.formatDuration;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
 import static org.apache.commons.io.IOUtils.EOF;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -51,6 +52,7 @@ import com.feilong.validator.ValidatorUtil;
  * focus 在文件读取以及解析.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @see org.apache.commons.io.IOUtils
  * @since 1.0.6
  */
 public final class IOReaderUtil{
@@ -258,8 +260,6 @@ public final class IOReaderUtil{
 
             //---------------------------------------------------------------
             String result = sb.toString();
-
-            //---------------------------------------------------------------
             if (LOGGER.isInfoEnabled()){
                 LOGGER.info("end read fileInputStream:[{}],use time: [{}]", fileInputStream, formatDuration(beginDate));
             }
@@ -324,7 +324,6 @@ public final class IOReaderUtil{
         Validate.notNull(inputStream, "inputStream can't be null!");
 
         Date beginDate = new Date();
-
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("start read inputStream:[{}] to String,use charsetName:[{}]", inputStream, charsetName);
@@ -332,8 +331,6 @@ public final class IOReaderUtil{
         //---------------------------------------------------------------
         try{
             String result = IOUtils.toString(inputStream, defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
-
-            //---------------------------------------------------------------
             if (LOGGER.isInfoEnabled()){
                 LOGGER.info("end read inputStream:[{}],use time: [{}]", inputStream, formatDuration(beginDate));
             }
@@ -400,7 +397,6 @@ public final class IOReaderUtil{
             LOGGER.debug("will resolverFile file:[{}], lineNumberReaderResolver:[{}]", file.getAbsolutePath(), lineNumberReaderResolver);
         }
         //---------------------------------------------------------------
-
         try (Reader reader = new FileReader(file);){
             resolverFile(reader, lineNumberReaderResolver);
         }catch (IOException e){
@@ -496,18 +492,31 @@ public final class IOReaderUtil{
         }finally{
             IOUtils.closeQuietly(reader);
         }
-
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
-                            "end resolverFile reader:[{}],lineNumberReaderResolver:[{}],use time: [{}]",
-                            reader,
-                            lineNumberReaderResolver,
-                            formatDuration(beginDate));
+            String format = "end resolverFile reader:[{}],lineNumberReaderResolver:[{}],use time: [{}]";
+            LOGGER.info(format, reader, lineNumberReaderResolver, formatDuration(beginDate));
         }
     }
 
     //---------------------------------------------------------------
+
+    /**
+     * 直接解析 {@code filePath} 成 {@link Set}.
+     * 
+     * <p>
+     * 使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
+     * </p>
+     *
+     * @param filePath
+     *            the file path
+     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.13.3
+     */
+    public static Set<String> read(String filePath){
+        return read(filePath, null);
+    }
 
     /**
      * 使用 {@link ReaderConfig}解析 {@link Reader}.
@@ -556,21 +565,14 @@ public final class IOReaderUtil{
      * @param filePath
      *            the file path
      * @param readerConfig
-     *            the reader config
+     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.12.10
+     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
      */
     public static Set<String> read(String filePath,ReaderConfig readerConfig){
         Validate.notBlank(filePath, "filePath can't be blank!");
-        Validate.notNull(readerConfig, "readerConfig can't be null!");
-
-        //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("start read filePath:[{}], readerConfig:[{}]", filePath, JsonUtil.format(readerConfig));
-        }
-        //---------------------------------------------------------------
         return read(new File(filePath), readerConfig);
     }
 
@@ -621,20 +623,14 @@ public final class IOReaderUtil{
      * @param file
      *            the file
      * @param readerConfig
-     *            the reader config
+     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.12.10
+     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
      */
     public static Set<String> read(File file,ReaderConfig readerConfig){
         Validate.notNull(file, "file can't be null!");
-        Validate.notNull(readerConfig, "readerConfig can't be null!");
-
-        //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("start read reader:[{}], readerConfig:[{}]", file, JsonUtil.format(readerConfig));
-        }
-        //---------------------------------------------------------------
 
         try (Reader reader = new FileReader(file);){
             return read(reader, readerConfig);
@@ -690,24 +686,23 @@ public final class IOReaderUtil{
      * @param reader
      *            the reader
      * @param readerConfig
-     *            the reader config
+     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
      * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.12.10
+     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
      */
     public static Set<String> read(Reader reader,ReaderConfig readerConfig){
         Validate.notNull(reader, "reader can't be null!");
-        Validate.notNull(readerConfig, "readerConfig can't be null!");
 
+        ReaderConfig useReaderConfig = defaultIfNull(readerConfig, ReaderConfig.DEFAULT);
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("start read reader:[{}], readerConfig:[{}]", reader, JsonUtil.format(readerConfig));
+            LOGGER.debug("start read reader:[{}], readerConfig:[{}]", reader, JsonUtil.format(useReaderConfig));
         }
 
         //---------------------------------------------------------------
-        boolean ignoreBlankLine = readerConfig.getIgnoreBlankLine();
-        boolean isTrim = readerConfig.getIsTrim();
-        String regexPattern = readerConfig.getRegexPattern();
+        String regexPattern = useReaderConfig.getRegexPattern();
 
         Date beginDate = new Date();
 
@@ -716,18 +711,15 @@ public final class IOReaderUtil{
         try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
             String line = null;
             while ((line = lineNumberReader.readLine()) != null){
-                if (isTrim){
+                if (useReaderConfig.getIsTrim()){
                     line = StringUtils.trim(line);
                 }
-
                 if (isNotNullOrEmpty(regexPattern) && !ValidatorUtil.isMatches(regexPattern, line)){
                     continue;
                 }
-
-                if (isNullOrEmpty(line) && ignoreBlankLine){
+                if (isNullOrEmpty(line) && useReaderConfig.getIgnoreBlankLine()){
                     continue;
                 }
-
                 set.add(line);
             }
         }catch (IOException e){
@@ -735,16 +727,11 @@ public final class IOReaderUtil{
         }finally{
             IOUtils.closeQuietly(reader);
         }
-
         //---------------------------------------------------------------
         if (LOGGER.isInfoEnabled()){
-            LOGGER.info(
-                            "end read reader:[{}],readerConfig:[{}],use time: [{}]",
-                            reader,
-                            JsonUtil.format(readerConfig),
-                            formatDuration(beginDate));
+            String format = "end read reader:[{}],readerConfig:[{}],use time: [{}]";
+            LOGGER.info(format, reader, JsonUtil.format(useReaderConfig), formatDuration(beginDate));
         }
-
         return set;
     }
 }

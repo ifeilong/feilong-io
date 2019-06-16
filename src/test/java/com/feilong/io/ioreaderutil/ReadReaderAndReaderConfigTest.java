@@ -45,11 +45,6 @@ public class ReadReaderAndReaderConfigTest{
         IOReaderUtil.read((Reader) null, new ReaderConfig());
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testResolverFileAndReaderConfigIsNull(){
-        IOReaderUtil.read(ReaderUtil.newStringReader("test"), (ReaderConfig) null);
-    }
-
     //---------------------------------------------------------------
 
     /**
@@ -87,6 +82,12 @@ public class ReadReaderAndReaderConfigTest{
     @Test
     public void testResolverReaderAndReaderConfigTest2(){
         Set<String> codes = IOReaderUtil.read(STRING_READER, new ReaderConfig());
+        assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
+    }
+
+    @Test
+    public void testResolverReaderAndReaderConfigTest2333(){
+        Set<String> codes = IOReaderUtil.read(STRING_READER, null);
         assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
     }
 

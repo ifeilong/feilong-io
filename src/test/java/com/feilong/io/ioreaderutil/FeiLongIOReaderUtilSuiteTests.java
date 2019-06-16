@@ -29,6 +29,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
                 GetContentFileInputStreamTest.class,
                 GetContentInputStreamTest.class,
+
                 ReadFileToStringFileAndCharsetNameTest.class,
                 ReadFileToStringFilePathAndCharsetNameTest.class,
 
@@ -37,7 +38,10 @@ import org.junit.runners.Suite.SuiteClasses;
                 ResolverReaderAndLineNumberReaderTest.class,
 
                 ReadReaderAndReaderConfigTest.class,
+
+                ReadFilePathTest.class,
                 ReadFilePathAndReaderConfigTest.class,
+
                 ReadFileAndReaderConfigTest.class,
 
 })

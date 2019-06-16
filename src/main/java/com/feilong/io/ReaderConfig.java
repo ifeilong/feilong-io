@@ -29,7 +29,7 @@ public class ReaderConfig implements Serializable{
     private static final long        serialVersionUID = -6044017657112874891L;
 
     /**
-     * Static instance.
+     * 默认的读取配置,忽略空白行,且去空格.
      * 
      * @since 1.13.3
      */
