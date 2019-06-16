@@ -17,13 +17,13 @@ package com.feilong.io.ioreaderutil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
-import java.io.FileInputStream;
+import java.io.InputStream;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.io.FileUtil;
+import com.feilong.core.net.URLUtil;
 import com.feilong.io.IOReaderUtil;
 
 /**
@@ -31,23 +31,23 @@ import com.feilong.io.IOReaderUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
-public class GetContentFileInputStreamTest extends AbstractReadFileToStringTest{
+public class ReadToStringInputStreamTest{
 
     /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(GetContentFileInputStreamTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReadToStringInputStreamTest.class);
 
     //---------------------------------------------------------------
 
     @Test
-    public void testReadFile(){
-        String readFileToString = IOReaderUtil.getContent(FileUtil.getFileInputStream(filePath), UTF8);
-        LOGGER.debug(readFileToString);
-
+    public void testGetContent(){
+        String spec = "https://www.jd.com/robots.txt";
+        InputStream openStream = URLUtil.openStream(URLUtil.toURL(spec));
+        LOGGER.debug(IOReaderUtil.readToString(openStream, UTF8));
     }
 
     @Test(expected = NullPointerException.class)
-    public void testGetContent(){
-        IOReaderUtil.getContent((FileInputStream) null, UTF8);
+    public void testGetContentNull(){
+        IOReaderUtil.readToString((InputStream) null, UTF8);
     }
 
 }

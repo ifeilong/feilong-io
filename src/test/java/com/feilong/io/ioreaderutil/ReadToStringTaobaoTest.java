@@ -29,10 +29,10 @@ import com.feilong.io.IOReaderUtil;
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  */
-public class ReadFileToStringTaobaoTest{
+public class ReadToStringTaobaoTest{
 
     /** The Constant LOGGER. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ReadFileToStringTaobaoTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReadToStringTaobaoTest.class);
 
     /**
      * Testname.
@@ -40,7 +40,7 @@ public class ReadFileToStringTaobaoTest{
     @Test
     public void testname(){
         String fileName = "F:\\Life 生活\\Job 工作\\淘宝开店\\商家编码.txt";
-        String content = IOReaderUtil.readFileToString(fileName, UTF8);
+        String content = IOReaderUtil.readToString(fileName, UTF8);
         // 将内容以换行符转成数组
         String[] rowsContents = StringUtil.split(content, "\r\n");
         LOGGER.debug(content);

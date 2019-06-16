@@ -25,7 +25,7 @@ import org.junit.Test;
 
 import com.feilong.io.IOReaderUtil;
 
-public class ReadFilePathTest{
+public class ReadToSetTest{
 
     /** The file path. */
     private final String filePath = "/Users/feilong/workspace/feilong/feilong-io/src/test/resources/readtest.txt";
@@ -37,7 +37,7 @@ public class ReadFilePathTest{
      */
     @Test(expected = NullPointerException.class)
     public void testReadFilePathAndReaderConfigTestNull(){
-        IOReaderUtil.read((String) null);
+        IOReaderUtil.readToSet((String) null);
     }
 
     /**
@@ -45,7 +45,7 @@ public class ReadFilePathTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testReadFilePathAndReaderConfigTestEmpty(){
-        IOReaderUtil.read("");
+        IOReaderUtil.readToSet("");
     }
 
     /**
@@ -53,7 +53,7 @@ public class ReadFilePathTest{
      */
     @Test(expected = IllegalArgumentException.class)
     public void testReadFilePathAndReaderConfigTestBlank(){
-        IOReaderUtil.read(" ");
+        IOReaderUtil.readToSet(" ");
     }
 
     //---------------------------------------------------------------
@@ -63,7 +63,7 @@ public class ReadFilePathTest{
      */
     @Test
     public void testResolverReaderAndReaderConfigTest2(){
-        Set<String> codes = IOReaderUtil.read(filePath);
+        Set<String> codes = IOReaderUtil.readToSet(filePath);
         assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
     }
 

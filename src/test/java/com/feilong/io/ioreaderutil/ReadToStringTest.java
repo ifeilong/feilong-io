@@ -23,31 +23,32 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.feilong.core.net.URLUtil;
+import com.feilong.io.FileUtil;
 import com.feilong.io.IOReaderUtil;
 
 /**
+ * The Class IOReaderUtilTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.5
  */
-public class GetContentInputStreamTest{
+public class ReadToStringTest{
 
-    /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(GetContentInputStreamTest.class);
+    /** The Constant LOGGER. */
+    private static final Logger LOGGER         = LoggerFactory.getLogger(ReadToStringTest.class);
 
-    //---------------------------------------------------------------
+    private static final String propertiesPath = "/Users/feilong/work/build.xml";
+
+    /**
+     * Gets the file content.
+     */
+    @Test
+    public void testGetFileContent(){
+        LOGGER.debug(IOReaderUtil.readToString(propertiesPath, UTF8));
+    }
 
     @Test
-    public void testGetContent(){
-        String spec = "https://www.jd.com/robots.txt";
-        InputStream openStream = URLUtil.openStream(URLUtil.toURL(spec));
-        LOGGER.debug(IOReaderUtil.getContent(openStream, UTF8));
+    public void testGetFileContent2(){
+        InputStream inputStream = FileUtil.getFileInputStream(propertiesPath);
+        LOGGER.debug(IOReaderUtil.readToString(inputStream, UTF8));
     }
-
-    @Test(expected = NullPointerException.class)
-    public void testGetContentNull(){
-        IOReaderUtil.getContent((InputStream) null, UTF8);
-    }
-
 }

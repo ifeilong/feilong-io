@@ -16,7 +16,7 @@
 package com.feilong.io.iowriteutil;
 
 import static com.feilong.core.CharsetType.UTF8;
-import static com.feilong.io.IOReaderUtil.readFileToString;
+import static com.feilong.io.IOReaderUtil.readToString;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
@@ -108,7 +108,7 @@ public class WriteDirectoryAndFileTest{
 
     //---------------------------------------------------------------
     private void check(String filePath,String expectedValue){
-        String content = readFileToString(filePath, UTF8);
+        String content = readToString(filePath, UTF8);
         assertEquals(expectedValue, content);
     }
 

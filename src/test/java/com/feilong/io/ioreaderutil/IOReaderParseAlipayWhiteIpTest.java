@@ -41,7 +41,7 @@ public class IOReaderParseAlipayWhiteIpTest{
         String fileName = "/Users/feilong/Downloads/alipay-ip.txt";
         String fileNameOut = "/Users/feilong/Downloads/alipay-ip-out.txt";
 
-        LOGGER.debug(IOReaderUtil.readFileToString(fileName, UTF8));
+        LOGGER.debug(IOReaderUtil.readToString(fileName, UTF8));
         List<String> readLines = FileUtils.readLines(new File(fileName), UTF8);
         LOGGER.debug("size:{},{}", readLines.size(), JsonUtil.format(readLines));
 

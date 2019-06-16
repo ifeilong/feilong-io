@@ -96,7 +96,7 @@ public final class IOReaderUtil{
      * 此时你可以直接使用
      * 
      * <pre class="code">
-     * IOReaderUtil.readFileToString("/Users/feilong/feilong/logs/readFileToString.txt", UTF8);
+     * IOReaderUtil.readToString("/Users/feilong/feilong/logs/readFileToString.txt", UTF8);
      * </pre>
      * 
      * <b>返回:</b>
@@ -116,10 +116,11 @@ public final class IOReaderUtil{
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
-     * @see #readFileToString(File, String)
+     * @see #readToString(File, String)
      * @since 1.0.8
+     * @since 1.13.3 rename from readFileToString
      */
-    public static String readFileToString(String filePath,String charsetName){
+    public static String readToString(String filePath,String charsetName){
         Validate.notBlank(filePath, "filePath can't be blank!");
 
         //---------------------------------------------------------------
@@ -128,7 +129,7 @@ public final class IOReaderUtil{
         }
         //---------------------------------------------------------------
         File file = new File(filePath);
-        return readFileToString(file, charsetName);
+        return readToString(file, charsetName);
     }
 
     //---------------------------------------------------------------
@@ -152,7 +153,7 @@ public final class IOReaderUtil{
      * 此时你可以直接使用
      * 
      * <pre class="code">
-     * IOReaderUtil.readFileToString(new File("/Users/feilong/feilong/logs/readFileToString.txt"), UTF8);
+     * IOReaderUtil.readToString(new File("/Users/feilong/feilong/logs/readFileToString.txt"), UTF8);
      * </pre>
      * 
      * <b>返回:</b>
@@ -172,8 +173,9 @@ public final class IOReaderUtil{
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
      * @since 1.5.3
+     * @since 1.13.3 rename from readFileToString
      */
-    public static String readFileToString(File file,String charsetName){
+    public static String readToString(File file,String charsetName){
         Validate.notNull(file, "file can't be null!");
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
@@ -181,7 +183,7 @@ public final class IOReaderUtil{
         }
         //---------------------------------------------------------------
         try (FileInputStream fileInputStream = FileUtil.getFileInputStream(file)){
-            return getContent(fileInputStream, charsetName);
+            return readToString(fileInputStream, charsetName);
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }
@@ -209,7 +211,7 @@ public final class IOReaderUtil{
      * 此时你可以直接使用
      * 
      * <pre class="code">
-     * IOReaderUtil.getContent(FileUtil.getFileInputStream("/Users/feilong/feilong/logs/readFileToString.txt"), UTF8);
+     * IOReaderUtil.readToString(FileUtil.getFileInputStream("/Users/feilong/feilong/logs/readFileToString.txt"), UTF8);
      * </pre>
      * 
      * <b>返回:</b>
@@ -225,11 +227,12 @@ public final class IOReaderUtil{
      *            the file input stream
      * @param charsetName
      *            字符编码,如果是isNullOrEmpty,那么默认使用 {@link CharsetType#UTF8}
-     * @return the file content
+     * @return 如果 <code>fileInputStream</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
      * @since 1.5.3
+     * @since 1.13.3 rename from getContent
      */
-    public static String getContent(FileInputStream fileInputStream,String charsetName){
+    public static String readToString(FileInputStream fileInputStream,String charsetName){
         Validate.notNull(fileInputStream, "inputStream can't be null!");
 
         //---------------------------------------------------------------
@@ -289,7 +292,7 @@ public final class IOReaderUtil{
      * <pre class="code">
      * String spec = "https://www.jd.com/robots.txt";
      * InputStream openStream = URLUtil.openStream(URLUtil.toURL(spec));
-     * LOGGER.debug(IOReaderUtil.getContent(openStream, UTF8));
+     * LOGGER.debug(IOReaderUtil.readToString(openStream, UTF8));
      * </pre>
      * 
      * <b>返回:</b>
@@ -319,8 +322,9 @@ public final class IOReaderUtil{
      * @see org.apache.commons.io.IOUtils#toString(InputStream, String)
      * @see InputStreamUtil#toString(InputStream, String)
      * @since 1.5.3
+     * @since 1.13.3 rename from getContent
      */
-    public static String getContent(InputStream inputStream,String charsetName){
+    public static String readToString(InputStream inputStream,String charsetName){
         Validate.notNull(inputStream, "inputStream can't be null!");
 
         Date beginDate = new Date();
@@ -341,6 +345,245 @@ public final class IOReaderUtil{
             // 用完关闭流 是个好习惯,^_^
             IOUtils.closeQuietly(inputStream);
         }
+    }
+
+    //---------------------------------------------------------------
+
+    /**
+     * 直接解析 {@code filePath} 成 {@link Set}.
+     * 
+     * <p>
+     * 使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
+     * </p>
+     *
+     * @param filePath
+     *            the file path
+     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.13.3
+     */
+    public static Set<String> readToSet(String filePath){
+        return readToSet(filePath, null);
+    }
+
+    /**
+     * 使用 {@link ReaderConfig}解析 {@link Reader}.
+     * 
+     * <p>
+     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
+     * </p>
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
+     * try{
+     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
+     *     String lineTxt = null;
+     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
+     *         codes.add(lineTxt.trim());
+     *     }
+     *     
+     *     Iterator{@code <String>} iterator = codes.iterator();
+     *     while (iterator.hasNext()){
+     *         String code = iterator.next();
+     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
+     *             iterator.remove();
+     *         }
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     read.close();
+     * }
+     * return set;
+     * </pre>
+     * 
+     * 现在可以重构为:
+     * 
+     * <pre class="code">
+     * return IOReaderUtil.readToSet(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param filePath
+     *            the file path
+     * @param readerConfig
+     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
+     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     * @since 1.12.10
+     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
+     * @since 1.13.3 rename from read
+     */
+    public static Set<String> readToSet(String filePath,ReaderConfig readerConfig){
+        Validate.notBlank(filePath, "filePath can't be blank!");
+        return readToSet(new File(filePath), readerConfig);
+    }
+
+    /**
+     * 使用 {@link ReaderConfig}解析 {@link Reader}.
+     * 
+     * <p>
+     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
+     * </p>
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
+     * try{
+     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
+     *     String lineTxt = null;
+     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
+     *         codes.add(lineTxt.trim());
+     *     }
+     *     
+     *     Iterator{@code <String>} iterator = codes.iterator();
+     *     while (iterator.hasNext()){
+     *         String code = iterator.next();
+     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
+     *             iterator.remove();
+     *         }
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     read.close();
+     * }
+     * return set;
+     * </pre>
+     * 
+     * 现在可以重构为:
+     * 
+     * <pre class="code">
+     * return IOReaderUtil.readToSet(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * </pre>
+     * 
+     * </blockquote>
+     * 
+     * @param file
+     *            the file
+     * @param readerConfig
+     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
+     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.12.10
+     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
+     * @since 1.13.3 rename from read
+     */
+    public static Set<String> readToSet(File file,ReaderConfig readerConfig){
+        Validate.notNull(file, "file can't be null!");
+
+        try (Reader reader = new FileReader(file);){
+            return readToSet(reader, readerConfig);
+        }catch (IOException e){
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    /**
+     * 使用 {@link ReaderConfig}解析 {@link Reader}.
+     * 
+     * <p>
+     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
+     * </p>
+     * 
+     * <h3>如果你以前这么写代码:</h3>
+     * 
+     * <blockquote>
+     * 
+     * <pre class="code">
+     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
+     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
+     * try{
+     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
+     *     String lineTxt = null;
+     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
+     *         codes.add(lineTxt.trim());
+     *     }
+     *     
+     *     Iterator{@code <String>} iterator = codes.iterator();
+     *     while (iterator.hasNext()){
+     *         String code = iterator.next();
+     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
+     *             iterator.remove();
+     *         }
+     *     }
+     * }catch (Exception e){
+     *     log.error(e.getMessage());
+     * }finally{
+     *     read.close();
+     * }
+     * return set;
+     * </pre>
+     * 
+     * 现在可以重构为:
+     * 
+     * <pre class="code">
+     * return IOReaderUtil.readToSet(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param reader
+     *            the reader
+     * @param readerConfig
+     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
+     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
+     * @since 1.12.10
+     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
+     * @since 1.13.3 rename from read
+     */
+    public static Set<String> readToSet(Reader reader,ReaderConfig readerConfig){
+        Validate.notNull(reader, "reader can't be null!");
+
+        ReaderConfig useReaderConfig = defaultIfNull(readerConfig, ReaderConfig.DEFAULT);
+        //---------------------------------------------------------------
+        if (LOGGER.isDebugEnabled()){
+            LOGGER.debug("start read reader:[{}], readerConfig:[{}]", reader, JsonUtil.format(useReaderConfig));
+        }
+
+        //---------------------------------------------------------------
+        String regexPattern = useReaderConfig.getRegexPattern();
+
+        Date beginDate = new Date();
+
+        Set<String> set = newLinkedHashSet();
+        //---------------------------------------------------------------
+        try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
+            String line = null;
+            while ((line = lineNumberReader.readLine()) != null){
+                if (useReaderConfig.getIsTrim()){
+                    line = StringUtils.trim(line);
+                }
+                if (isNotNullOrEmpty(regexPattern) && !ValidatorUtil.isMatches(regexPattern, line)){
+                    continue;
+                }
+                if (isNullOrEmpty(line) && useReaderConfig.getIgnoreBlankLine()){
+                    continue;
+                }
+                set.add(line);
+            }
+        }catch (IOException e){
+            throw new UncheckedIOException(e);
+        }finally{
+            IOUtils.closeQuietly(reader);
+        }
+        //---------------------------------------------------------------
+        if (LOGGER.isInfoEnabled()){
+            String format = "end read reader:[{}],readerConfig:[{}],use time: [{}]";
+            LOGGER.info(format, reader, JsonUtil.format(useReaderConfig), formatDuration(beginDate));
+        }
+        return set;
     }
 
     //---------------------------------------------------------------
@@ -497,241 +740,5 @@ public final class IOReaderUtil{
             String format = "end resolverFile reader:[{}],lineNumberReaderResolver:[{}],use time: [{}]";
             LOGGER.info(format, reader, lineNumberReaderResolver, formatDuration(beginDate));
         }
-    }
-
-    //---------------------------------------------------------------
-
-    /**
-     * 直接解析 {@code filePath} 成 {@link Set}.
-     * 
-     * <p>
-     * 使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * </p>
-     *
-     * @param filePath
-     *            the file path
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @since 1.13.3
-     */
-    public static Set<String> read(String filePath){
-        return read(filePath, null);
-    }
-
-    /**
-     * 使用 {@link ReaderConfig}解析 {@link Reader}.
-     * 
-     * <p>
-     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
-     * </p>
-     * 
-     * <h3>如果你以前这么写代码:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
-     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
-     * try{
-     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
-     *     String lineTxt = null;
-     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
-     *         codes.add(lineTxt.trim());
-     *     }
-     *     
-     *     Iterator{@code <String>} iterator = codes.iterator();
-     *     while (iterator.hasNext()){
-     *         String code = iterator.next();
-     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
-     *             iterator.remove();
-     *         }
-     *     }
-     * }catch (Exception e){
-     *     log.error(e.getMessage());
-     * }finally{
-     *     read.close();
-     * }
-     * return set;
-     * </pre>
-     * 
-     * 现在可以重构为:
-     * 
-     * <pre class="code">
-     * return IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param filePath
-     *            the file path
-     * @param readerConfig
-     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @since 1.12.10
-     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
-     */
-    public static Set<String> read(String filePath,ReaderConfig readerConfig){
-        Validate.notBlank(filePath, "filePath can't be blank!");
-        return read(new File(filePath), readerConfig);
-    }
-
-    /**
-     * 使用 {@link ReaderConfig}解析 {@link Reader}.
-     * 
-     * <p>
-     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
-     * </p>
-     * 
-     * <h3>如果你以前这么写代码:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
-     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
-     * try{
-     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
-     *     String lineTxt = null;
-     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
-     *         codes.add(lineTxt.trim());
-     *     }
-     *     
-     *     Iterator{@code <String>} iterator = codes.iterator();
-     *     while (iterator.hasNext()){
-     *         String code = iterator.next();
-     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
-     *             iterator.remove();
-     *         }
-     *     }
-     * }catch (Exception e){
-     *     log.error(e.getMessage());
-     * }finally{
-     *     read.close();
-     * }
-     * return set;
-     * </pre>
-     * 
-     * 现在可以重构为:
-     * 
-     * <pre class="code">
-     * return IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
-     * </pre>
-     * 
-     * </blockquote>
-     * 
-     * @param file
-     *            the file
-     * @param readerConfig
-     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
-     * @since 1.12.10
-     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
-     */
-    public static Set<String> read(File file,ReaderConfig readerConfig){
-        Validate.notNull(file, "file can't be null!");
-
-        try (Reader reader = new FileReader(file);){
-            return read(reader, readerConfig);
-        }catch (IOException e){
-            throw new UncheckedIOException(e);
-        }
-    }
-
-    /**
-     * 使用 {@link ReaderConfig}解析 {@link Reader}.
-     * 
-     * <p>
-     * 适合于对一个文件或者流,去除空白行, trim 并且读取指定的正则表达式内容形式
-     * </p>
-     * 
-     * <h3>如果你以前这么写代码:</h3>
-     * 
-     * <blockquote>
-     * 
-     * <pre class="code">
-     * InputStreamReader read = new InputStreamReader(resourceAsStream, ENCODING);
-     * Set{@code <String>} codes = new LinkedHashSet{@code <>}();
-     * try{
-     *     BufferedReader bufferedReader = new BufferedReader(STRING_READER);
-     *     String lineTxt = null;
-     *     while ((lineTxt = bufferedReader.readLine()) != null {@code &&} lineTxt.trim() != ""){
-     *         codes.add(lineTxt.trim());
-     *     }
-     *     
-     *     Iterator{@code <String>} iterator = codes.iterator();
-     *     while (iterator.hasNext()){
-     *         String code = iterator.next();
-     *         if (!code.matches("[0-9a-zA-Z\\-]{6,20}")){
-     *             iterator.remove();
-     *         }
-     *     }
-     * }catch (Exception e){
-     *     log.error(e.getMessage());
-     * }finally{
-     *     read.close();
-     * }
-     * return set;
-     * </pre>
-     * 
-     * 现在可以重构为:
-     * 
-     * <pre class="code">
-     * return IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
-     * </pre>
-     * 
-     * </blockquote>
-     *
-     * @param reader
-     *            the reader
-     * @param readerConfig
-     *            读取配置, 如果传入的是 null,那么会使用默认的 {@link ReaderConfig#DEFAULT},忽略空白行,且去空格.
-     * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
-     *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
-     * @since 1.12.10
-     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
-     */
-    public static Set<String> read(Reader reader,ReaderConfig readerConfig){
-        Validate.notNull(reader, "reader can't be null!");
-
-        ReaderConfig useReaderConfig = defaultIfNull(readerConfig, ReaderConfig.DEFAULT);
-        //---------------------------------------------------------------
-        if (LOGGER.isDebugEnabled()){
-            LOGGER.debug("start read reader:[{}], readerConfig:[{}]", reader, JsonUtil.format(useReaderConfig));
-        }
-
-        //---------------------------------------------------------------
-        String regexPattern = useReaderConfig.getRegexPattern();
-
-        Date beginDate = new Date();
-
-        Set<String> set = newLinkedHashSet();
-        //---------------------------------------------------------------
-        try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
-            String line = null;
-            while ((line = lineNumberReader.readLine()) != null){
-                if (useReaderConfig.getIsTrim()){
-                    line = StringUtils.trim(line);
-                }
-                if (isNotNullOrEmpty(regexPattern) && !ValidatorUtil.isMatches(regexPattern, line)){
-                    continue;
-                }
-                if (isNullOrEmpty(line) && useReaderConfig.getIgnoreBlankLine()){
-                    continue;
-                }
-                set.add(line);
-            }
-        }catch (IOException e){
-            throw new UncheckedIOException(e);
-        }finally{
-            IOUtils.closeQuietly(reader);
-        }
-        //---------------------------------------------------------------
-        if (LOGGER.isInfoEnabled()){
-            String format = "end read reader:[{}],readerConfig:[{}],use time: [{}]";
-            LOGGER.info(format, reader, JsonUtil.format(useReaderConfig), formatDuration(beginDate));
-        }
-        return set;
     }
 }

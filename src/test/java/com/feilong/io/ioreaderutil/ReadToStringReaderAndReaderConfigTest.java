@@ -34,7 +34,7 @@ import com.feilong.io.IOReaderUtil;
 import com.feilong.io.ReaderConfig;
 import com.feilong.io.ReaderUtil;
 
-public class ReadReaderAndReaderConfigTest{
+public class ReadToStringReaderAndReaderConfigTest{
 
     private final StringReader STRING_READER = ReaderUtil.newStringReader(" \n\n123456 \nA\n23456");
 
@@ -42,7 +42,7 @@ public class ReadReaderAndReaderConfigTest{
 
     @Test(expected = NullPointerException.class)
     public void testResolverFile(){
-        IOReaderUtil.read((Reader) null, new ReaderConfig());
+        IOReaderUtil.readToSet((Reader) null, new ReaderConfig());
     }
 
     //---------------------------------------------------------------
@@ -75,19 +75,19 @@ public class ReadReaderAndReaderConfigTest{
 
     @Test
     public void testResolverReaderAndReaderConfigTest1(){
-        Set<String> codes = IOReaderUtil.read(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
+        Set<String> codes = IOReaderUtil.readToSet(STRING_READER, new ReaderConfig("[0-9a-zA-Z\\-]{6,20}"));
         assertThat(codes, allOf(hasItem("123456"), not(hasItem("23456"))));
     }
 
     @Test
     public void testResolverReaderAndReaderConfigTest2(){
-        Set<String> codes = IOReaderUtil.read(STRING_READER, new ReaderConfig());
+        Set<String> codes = IOReaderUtil.readToSet(STRING_READER, new ReaderConfig());
         assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
     }
 
     @Test
     public void testResolverReaderAndReaderConfigTest2333(){
-        Set<String> codes = IOReaderUtil.read(STRING_READER, null);
+        Set<String> codes = IOReaderUtil.readToSet(STRING_READER, null);
         assertThat(codes, allOf(hasItem("123456"), hasItem("23456")));
     }
 
@@ -95,20 +95,20 @@ public class ReadReaderAndReaderConfigTest{
 
     @Test
     public void testResolverReaderAndReaderConfigTest3(){
-        Set<String> codes = IOReaderUtil.read(STRING_READER, new ReaderConfig(true, false));
+        Set<String> codes = IOReaderUtil.readToSet(STRING_READER, new ReaderConfig(true, false));
         assertThat(codes, allOf(hasItem("123456 "), hasItem("A"), hasItem("23456"), not(hasItem(" "))));
     }
 
     @Test
     public void testResolverReaderAndReaderConfigTest4(){
-        Set<String> codes = IOReaderUtil.read(STRING_READER, new ReaderConfig(false, false));
+        Set<String> codes = IOReaderUtil.readToSet(STRING_READER, new ReaderConfig(false, false));
         assertThat(codes, allOf(hasItem(" "), hasItem(""), hasItem("123456 "), hasItem("A"), hasItem("23456")));
     }
 
     // \n\n123456 \nA\n23456
     @Test
     public void testResolverReaderAndReaderConfigTest5(){
-        Set<String> codes = IOReaderUtil.read(STRING_READER, new ReaderConfig(false, true));
+        Set<String> codes = IOReaderUtil.readToSet(STRING_READER, new ReaderConfig(false, true));
         assertThat(codes, allOf(hasItem(""), hasItem(""), hasItem("123456"), hasItem("A"), hasItem("23456")));
     }
 }

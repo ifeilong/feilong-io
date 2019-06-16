@@ -31,39 +31,27 @@ import com.feilong.io.IOReaderUtil;
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
  * @since 1.11.5
  */
-public class ReadFileToStringFileAndCharsetNameTest extends AbstractReadFileToStringTest{
+public class ReadToStringStringFilePathAndCharsetNameTest extends AbstractReadFileToStringTest{
 
     /** The Constant log. */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ReadFileToStringFileAndCharsetNameTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReadToStringStringFilePathAndCharsetNameTest.class);
 
     //---------------------------------------------------------------
-
     @Test
     public void testReadFile(){
-        String readFileToString = IOReaderUtil.readFileToString(new File(filePath), UTF8);
+        String readFileToString = IOReaderUtil.readToString(filePath, UTF8);
         LOGGER.debug(readFileToString);
 
     }
 
     @Test(expected = UncheckedIOException.class)
     public void testReadFile1(){
-        IOReaderUtil.readFileToString(new File("/Users/feilong/feilong/logs2222/readFileToString.txt"), UTF8);
+        IOReaderUtil.readToString("/Users/feilong/feilong/logs2222/readFileToString.txt", UTF8);
     }
-
-    //---------------------------------------------------------------
 
     @Test(expected = NullPointerException.class)
     public void testReadFileToStringFilePathAndCharsetNameTestNull(){
-        IOReaderUtil.readFileToString((String) null, UTF8);
+        IOReaderUtil.readToString((File) null, UTF8);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testReadFileToStringFilePathAndCharsetNameTestEmpty(){
-        IOReaderUtil.readFileToString("", UTF8);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testReadFileToStringFilePathAndCharsetNameTestBlank(){
-        IOReaderUtil.readFileToString(" ", UTF8);
-    }
 }

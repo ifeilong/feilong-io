@@ -17,7 +17,7 @@ package com.feilong.io.ioreaderutil;
 
 import static com.feilong.core.CharsetType.UTF8;
 
-import java.io.InputStream;
+import java.io.FileInputStream;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -27,28 +27,27 @@ import com.feilong.io.FileUtil;
 import com.feilong.io.IOReaderUtil;
 
 /**
- * The Class IOReaderUtilTest.
  * 
  * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
+ * @since 1.11.5
  */
-public class IOReaderUtilTest{
+public class ReadToStringFileInputStreamTest extends AbstractReadFileToStringTest{
 
-    /** The Constant LOGGER. */
-    private static final Logger LOGGER         = LoggerFactory.getLogger(IOReaderUtilTest.class);
+    /** The Constant log. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReadToStringFileInputStreamTest.class);
 
-    private static final String propertiesPath = "/Users/feilong/work/build.xml";
-
-    /**
-     * Gets the file content.
-     */
-    @Test
-    public void testGetFileContent(){
-        LOGGER.debug(IOReaderUtil.readFileToString(propertiesPath, UTF8));
-    }
+    //---------------------------------------------------------------
 
     @Test
-    public void testGetFileContent2(){
-        InputStream inputStream = FileUtil.getFileInputStream(propertiesPath);
-        LOGGER.debug(IOReaderUtil.getContent(inputStream, UTF8));
+    public void testReadFile(){
+        String readFileToString = IOReaderUtil.readToString(FileUtil.getFileInputStream(filePath), UTF8);
+        LOGGER.debug(readFileToString);
+
     }
+
+    @Test(expected = NullPointerException.class)
+    public void testGetContent(){
+        IOReaderUtil.readToString((FileInputStream) null, UTF8);
+    }
+
 }

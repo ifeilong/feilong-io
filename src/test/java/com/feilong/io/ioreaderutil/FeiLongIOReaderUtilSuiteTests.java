@@ -19,30 +19,25 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
- */
 @RunWith(Suite.class)
 @SuiteClasses({ //
 
-                GetContentFileInputStreamTest.class,
-                GetContentInputStreamTest.class,
+                ReadToStringFileInputStreamTest.class,
+                ReadToStringInputStreamTest.class,
 
-                ReadFileToStringFileAndCharsetNameTest.class,
-                ReadFileToStringFilePathAndCharsetNameTest.class,
+                ReadToStringFileAndCharsetNameTest.class,
+                ReadToStringStringFilePathAndCharsetNameTest.class,
 
                 ResolverFileAndLineNumberReaderTest.class,
                 ResolverFilePathAndLineNumberReaderTest.class,
                 ResolverReaderAndLineNumberReaderTest.class,
 
-                ReadReaderAndReaderConfigTest.class,
+                ReadToStringReaderAndReaderConfigTest.class,
 
-                ReadFilePathTest.class,
-                ReadFilePathAndReaderConfigTest.class,
+                ReadToSetTest.class,
+                ReadToSetFilePathAndReaderConfigTest.class,
 
-                ReadFileAndReaderConfigTest.class,
+                ReadToSetFileAndReaderConfigTest.class,
 
 })
 public class FeiLongIOReaderUtilSuiteTests{
