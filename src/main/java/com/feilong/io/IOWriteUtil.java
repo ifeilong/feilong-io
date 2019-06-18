@@ -17,6 +17,7 @@ package com.feilong.io;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.io.entity.FileWriteMode.COVER;
 import static org.apache.commons.io.IOUtils.EOF;
@@ -148,7 +149,7 @@ public final class IOWriteUtil{
         Validate.notBlank(filePath, "filePath can't be null/empty!");
 
         //---------------------------------------------------------------
-        Date beginDate = new Date();
+        Date beginDate = now();
 
         String useEncode = defaultIfNullOrEmpty(charsetType, UTF8);
         FileWriteMode useFileWriteMode = defaultIfNullOrEmpty(fileWriteMode, COVER);
@@ -245,7 +246,7 @@ public final class IOWriteUtil{
         Validate.notBlank(fileName, "fileName can't be blank!");
 
         //---------------------------------------------------------------
-        Date beginDate = new Date();
+        Date beginDate = now();
 
         //---------------------------------------------------------------
         //since 1.12.9
@@ -383,7 +384,7 @@ public final class IOWriteUtil{
      * @since jdk1.4
      */
     private static void writeUseNIO(InputStream inputStream,OutputStream outputStream,int bufferLength){
-        Date beginDate = new Date();
+        Date beginDate = now();
 
         int loopCount = 0;
         int sumSize = 0;

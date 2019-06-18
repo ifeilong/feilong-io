@@ -17,6 +17,7 @@ package com.feilong.io.iowriteutil;
 
 import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.now;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -59,7 +60,7 @@ public class IOWriteUtilTest{
      */
     @Test
     public void write1(){
-        Date beginDate = new Date();
+        Date beginDate = now();
 
         InputStream inputStream = FileUtil.getFileInputStream("C:\\Users\\feilong\\feilong\\1993 超级战警 马可·布拉姆贝拉 史泰龙.rmvb");
         OutputStream outputStream = FileUtil.getFileOutputStream("C:\\Users\\feilong\\feilong\\1993 超级战警 马可·布拉姆贝拉 史泰龙1.rmvb");

@@ -19,6 +19,7 @@ import static com.feilong.core.CharsetType.UTF8;
 import static com.feilong.core.Validator.isNotNullOrEmpty;
 import static com.feilong.core.Validator.isNullOrEmpty;
 import static com.feilong.core.date.DateExtensionUtil.formatDuration;
+import static com.feilong.core.date.DateUtil.now;
 import static com.feilong.core.lang.ObjectUtil.defaultIfNullOrEmpty;
 import static com.feilong.core.util.CollectionsUtil.newLinkedHashSet;
 import static org.apache.commons.io.IOUtils.EOF;
@@ -240,7 +241,7 @@ public final class IOReaderUtil{
             LOGGER.debug("start read fileInputStream:[{}] to String,use charsetName:[{}]", fileInputStream, charsetName);
         }
         //---------------------------------------------------------------
-        Date beginDate = new Date();
+        Date beginDate = now();
 
         Charset charset = Charset.forName(defaultIfNullOrEmpty(charsetName, DEFAULT_CHARSET_NAME));
         //---------------------------------------------------------------
@@ -327,7 +328,7 @@ public final class IOReaderUtil{
     public static String readToString(InputStream inputStream,String charsetName){
         Validate.notNull(inputStream, "inputStream can't be null!");
 
-        Date beginDate = new Date();
+        Date beginDate = now();
         //---------------------------------------------------------------
         if (LOGGER.isDebugEnabled()){
             LOGGER.debug("start read inputStream:[{}] to String,use charsetName:[{}]", inputStream, charsetName);
@@ -555,7 +556,7 @@ public final class IOReaderUtil{
         //---------------------------------------------------------------
         String regexPattern = useReaderConfig.getRegexPattern();
 
-        Date beginDate = new Date();
+        Date beginDate = now();
 
         Set<String> set = newLinkedHashSet();
         //---------------------------------------------------------------
@@ -719,7 +720,7 @@ public final class IOReaderUtil{
             LOGGER.debug("start resolverFile reader:[{}], lineNumberReaderResolver:[{}]", reader, lineNumberReaderResolver);
         }
 
-        Date beginDate = new Date();
+        Date beginDate = now();
         //---------------------------------------------------------------
         try (LineNumberReader lineNumberReader = new LineNumberReader(reader);){
             String line = null;
