@@ -31,7 +31,7 @@ public class ReaderConfig implements Serializable{
     /**
      * 默认的读取配置,忽略空白行,且去空格.
      * 
-     * @since 1.13.3
+     * @since 1.14.0
      */
     // the static instance works for all types
     public static final ReaderConfig DEFAULT          = new ReaderConfig();

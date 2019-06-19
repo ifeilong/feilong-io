@@ -119,7 +119,7 @@ public final class IOReaderUtil{
      * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
      * @see #readToString(File, String)
      * @since 1.0.8
-     * @since 1.13.3 rename from readFileToString
+     * @since 1.14.0 rename from readFileToString
      */
     public static String readToString(String filePath,String charsetName){
         Validate.notBlank(filePath, "filePath can't be blank!");
@@ -174,7 +174,7 @@ public final class IOReaderUtil{
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
      * @since 1.5.3
-     * @since 1.13.3 rename from readFileToString
+     * @since 1.14.0 rename from readFileToString
      */
     public static String readToString(File file,String charsetName){
         Validate.notNull(file, "file can't be null!");
@@ -231,7 +231,7 @@ public final class IOReaderUtil{
      * @return 如果 <code>fileInputStream</code> 是null,抛出 {@link NullPointerException}<br>
      * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
      * @since 1.5.3
-     * @since 1.13.3 rename from getContent
+     * @since 1.14.0 rename from getContent
      */
     public static String readToString(FileInputStream fileInputStream,String charsetName){
         Validate.notNull(fileInputStream, "inputStream can't be null!");
@@ -323,7 +323,7 @@ public final class IOReaderUtil{
      * @see org.apache.commons.io.IOUtils#toString(InputStream, String)
      * @see InputStreamUtil#toString(InputStream, String)
      * @since 1.5.3
-     * @since 1.13.3 rename from getContent
+     * @since 1.14.0 rename from getContent
      */
     public static String readToString(InputStream inputStream,String charsetName){
         Validate.notNull(inputStream, "inputStream can't be null!");
@@ -361,7 +361,7 @@ public final class IOReaderUtil{
      *            the file path
      * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
-     * @since 1.13.3
+     * @since 1.14.0
      */
     public static Set<String> readToSet(String filePath){
         return readToSet(filePath, null);
@@ -418,8 +418,8 @@ public final class IOReaderUtil{
      * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
      * @since 1.12.10
-     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
-     * @since 1.13.3 rename from read
+     * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
+     * @since 1.14.0 rename from read
      */
     public static Set<String> readToSet(String filePath,ReaderConfig readerConfig){
         Validate.notBlank(filePath, "filePath can't be blank!");
@@ -477,8 +477,8 @@ public final class IOReaderUtil{
      * @return 如果 <code>file</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.12.10
-     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
-     * @since 1.13.3 rename from read
+     * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
+     * @since 1.14.0 rename from read
      */
     public static Set<String> readToSet(File file,ReaderConfig readerConfig){
         Validate.notNull(file, "file can't be null!");
@@ -541,8 +541,8 @@ public final class IOReaderUtil{
      * @return 如果 <code>reader</code> 是null,抛出 {@link NullPointerException}<br>
      *         如果 <code>readerConfig</code> 是null,抛出 {@link NullPointerException}<br>
      * @since 1.12.10
-     * @since 1.13.3 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
-     * @since 1.13.3 rename from read
+     * @since 1.14.0 remove readerConfig NPE validate, will use {@link ReaderConfig#DEFAULT}
+     * @since 1.14.0 rename from read
      */
     public static Set<String> readToSet(Reader reader,ReaderConfig readerConfig){
         Validate.notNull(reader, "reader can't be null!");
