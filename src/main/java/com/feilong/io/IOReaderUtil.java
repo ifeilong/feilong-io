@@ -688,7 +688,7 @@ public final class IOReaderUtil{
      * IOReaderUtil.resolverFile(read, new LineNumberReaderResolver(){
      * 
      *     {@code @Override}
-     *     public boolean excute(int lineNumber,String line){
+     *     public boolean resolve(int lineNumber,String line){
      *         line = line.trim();<span style="color:green">// 忽略前面前后空格</span>
      *         line = line.replace(" ", "");<span style="color:green">// 文中过滤空格</span>
      *         set.add(line);<span style="color:green">// 读取文件,将文件内容放入到set中</span>
@@ -726,7 +726,7 @@ public final class IOReaderUtil{
             String line = null;
             while ((line = lineNumberReader.readLine()) != null){
                 int lineNumber = lineNumberReader.getLineNumber();
-                boolean result = lineNumberReaderResolver.excute(lineNumber, line);
+                boolean result = lineNumberReaderResolver.resolve(lineNumber, line);
                 if (!result){
                     break;
                 }

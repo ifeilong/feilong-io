@@ -30,7 +30,7 @@ public class ResolverFilePathAndLineNumberReaderTest{
     private final LineNumberReaderResolver lineNumberReaderResolver = new LineNumberReaderResolver(){
 
         @Override
-        public boolean excute(int lineNumber,String line){
+        public boolean resolve(int lineNumber,String line){
             return false;
         }
     };

@@ -61,7 +61,7 @@ public interface LineNumberReaderResolver{
      * IOReaderUtil.resolverFile(read, new <b>LineNumberReaderResolver</b>(){
      * 
      *     {@code @Override}
-     *     public boolean excute(int lineNumber,String line){
+     *     public boolean resolve(int lineNumber,String line){
      *         line = line.trim();<span style="color:green">// 忽略前面前后空格</span>
      *         line = line.replace(" ", "");<span style="color:green">// 文中过滤空格</span>
      *         set.add(line);<span style="color:green">// 读取文件,将文件内容放入到set中</span>
@@ -84,6 +84,7 @@ public interface LineNumberReaderResolver{
      * @see java.io.LineNumberReader#getLineNumber()
      * @see java.io.LineNumberReader#readLine()
      * @see java.io.LineNumberReader#read()
+     * @since 2.0.0 change method name from "excute" to "resolve"
      */
-    boolean excute(int lineNumber,String line);
+    boolean resolve(int lineNumber,String line);
 }
