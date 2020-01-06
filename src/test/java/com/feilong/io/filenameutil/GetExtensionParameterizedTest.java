@@ -23,9 +23,9 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.feilong.io.FilenameUtil;
-import com.feilong.test.AbstractOneParamAndOneResultParameterizedTest;
+import com.feilong.test.Abstract1ParamAndResultParameterizedTest;
 
-public class GetExtensionParameterizedTest extends AbstractOneParamAndOneResultParameterizedTest<String, String>{
+public class GetExtensionParameterizedTest extends Abstract1ParamAndResultParameterizedTest<String, String>{
 
     /**
      * Data.
