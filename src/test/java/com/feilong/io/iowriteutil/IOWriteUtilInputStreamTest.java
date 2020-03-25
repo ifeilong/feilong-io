@@ -15,23 +15,22 @@
  */
 package com.feilong.io.iowriteutil;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.apache.commons.lang3.SystemUtils;
+import org.junit.Test;
 
-/**
- * IOWriteUtil相关测试套餐.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.0
- */
-@RunWith(Suite.class)
-@SuiteClasses({ //
+import com.feilong.io.FileUtil;
+import com.feilong.io.IOWriteUtil;
 
-                IOWriteUtilInputStreamTest.class,
-                WriteDirectoryAndFileTest.class,
+public class IOWriteUtilInputStreamTest{
 
-})
-public class FeiLongIOWriteUtilSuiteTests{
+    @Test(expected = NullPointerException.class)
+    public void testIOWriteUtilInputStreamTestNull(){
+        IOWriteUtil.write(null, FileUtil.getFileOutputStream(SystemUtils.getUserDir().getAbsolutePath() + "/1.txt"));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testIOWriteUtilInputStreamTestEmpty(){
+        IOWriteUtil.write(FileUtil.getFileInputStream(SystemUtils.getUserDir().getAbsolutePath() + "/1.txt"), null);
+    }
 
 }

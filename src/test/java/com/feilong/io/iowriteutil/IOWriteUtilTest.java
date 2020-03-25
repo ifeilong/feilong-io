@@ -32,22 +32,11 @@ import com.feilong.io.FileUtil;
 import com.feilong.io.IOWriteUtil;
 import com.feilong.io.SpecialFolder;
 
-/**
- * The Class IOWriteUtilTest.
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- */
 public class IOWriteUtilTest{
 
     /** The Constant LOGGER. */
     private static final Logger LOGGER = LoggerFactory.getLogger(IOWriteUtilTest.class);
 
-    /**
-     * Unescape html2.
-     *
-     * @throws Exception
-     *             the exception
-     */
     @Test
     public void unescapeHtml2() throws Exception{
         String a = "第572章 三十年后(大结局) *局";
@@ -55,9 +44,6 @@ public class IOWriteUtilTest{
         LOGGER.debug(result);
     }
 
-    /**
-     * Write1.
-     */
     @Test
     public void write1(){
         Date beginDate = now();
@@ -69,9 +55,6 @@ public class IOWriteUtilTest{
         LOGGER.debug("time:{}", formatDuration(beginDate));
     }
 
-    /**
-     * Write.
-     */
     @Test
     public void write(){
         String url = "F:\\test.txt";

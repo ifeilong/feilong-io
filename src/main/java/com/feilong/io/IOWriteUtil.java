@@ -384,6 +384,9 @@ public final class IOWriteUtil{
      * @since jdk1.4
      */
     private static void writeUseNIO(InputStream inputStream,OutputStream outputStream,int bufferLength){
+        Validate.notNull(inputStream, "inputStream can't be null!");
+        Validate.notNull(outputStream, "outputStream can't be null!");
+        //---------------------------------------------------------------
         Date beginDate = now();
 
         int loopCount = 0;
@@ -405,7 +408,6 @@ public final class IOWriteUtil{
                 String pattern = "Write data over,sumSize:[{}],bufferLength:[{}],loopCount:[{}],use time:[{}]";
                 LOGGER.debug(pattern, FileUtil.formatSize(sumSize), bufferLength, loopCount, formatDuration(beginDate));
             }
-
         }catch (IOException e){
             throw new UncheckedIOException(e);
         }finally{
