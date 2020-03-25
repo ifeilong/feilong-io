@@ -15,22 +15,36 @@
  */
 package com.feilong.io.iowriteutil;
 
-import org.apache.commons.lang3.SystemUtils;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import org.junit.Test;
 
-import com.feilong.io.FileUtil;
 import com.feilong.io.IOWriteUtil;
 
 public class IOWriteUtilInputStreamTest{
 
     @Test(expected = NullPointerException.class)
     public void testIOWriteUtilInputStreamTestNull(){
-        IOWriteUtil.write(null, FileUtil.getFileOutputStream(SystemUtils.getUserDir().getAbsolutePath() + "/1.txt"));
+        IOWriteUtil.write(null, new OutputStream(){
+
+            @Override
+            public void write(int b) throws IOException{
+
+            }
+        });
     }
 
     @Test(expected = NullPointerException.class)
     public void testIOWriteUtilInputStreamTestEmpty(){
-        IOWriteUtil.write(FileUtil.getFileInputStream(SystemUtils.getUserDir().getAbsolutePath() + "/1.txt"), null);
+        IOWriteUtil.write(new InputStream(){
+
+            @Override
+            public int read() throws IOException{
+                return 0;
+            }
+        }, null);
     }
 
 }
