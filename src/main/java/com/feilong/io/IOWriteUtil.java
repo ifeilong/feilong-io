@@ -46,7 +46,7 @@ import com.feilong.core.UncheckedIOException;
 import com.feilong.io.entity.FileWriteMode;
 
 /**
- * 提供写文件操作.
+ * 专注于写文件的操作的工具类.
  * 
  * <ul>
  * <li>{@link #write(InputStream, OutputStream)} 写资源,速度最快的方法,速度比较请看 电脑资料 {@code <<压缩解压性能探究>>}</li>
@@ -89,7 +89,8 @@ public final class IOWriteUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>如果 <code>isNullOrEmpty(filePath)</code>,那么抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}</li>
      * <li>如果文件不存在,自动创建,包括其父文件夹 (支持级联创建 文件夹)</li>
      * <li>如果文件存在则覆盖旧文件,可以设置{@link FileWriteMode#APPEND}表示追加内容而非覆盖</li>
      * <li>如果不设置 <code>charsetType</code>,则默认使用{@link CharsetType#UTF8}编码</li>
@@ -125,7 +126,9 @@ public final class IOWriteUtil{
      * 
      * <blockquote>
      * <ul>
-     * <li>如果 <code>isNullOrEmpty(filePath)</code>,那么抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}</li>
+     * <li>如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}</li>
+     * 
      * <li>如果文件不存在,自动创建,包括其父文件夹 (支持级联创建 文件夹)</li>
      * <li>如果文件存在则覆盖旧文件,可以设置{@link FileWriteMode#APPEND}表示追加内容而非覆盖</li>
      * <li>如果不设置 <code>charsetType</code>,则默认使用{@link CharsetType#UTF8}编码</li>
@@ -164,9 +167,7 @@ public final class IOWriteUtil{
         OutputStream outputStream = FileUtil.getFileOutputStream(filePath, useFileWriteMode);
 
         //---------------------------------------------------------------
-
         write(inputStream, outputStream);
-
         //---------------------------------------------------------------
 
         if (LOGGER.isInfoEnabled()){
@@ -308,13 +309,18 @@ public final class IOWriteUtil{
      * <p style="color:red">
      * <b>(注意,本方法最终会关闭 <code>inputStream</code>以及 <code>outputStream</code>).</b>
      * </p>
+     * 
+     * <p>
+     * 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>outputStream</code> 是null,抛出 {@link NullPointerException}<br>
+     * </p>
      *
      * @param inputStream
      *            inputStream
      * @param outputStream
      *            outputStream
      * @param bufferLength
-     *            每次循环buffer大小
+     *            每次循环buffer大小 ,必须 {@code >}0
      * @see #writeUseNIO(InputStream, OutputStream,int)
      * @see java.io.OutputStream#write(byte[], int, int)
      * @see org.apache.commons.io.IOUtils#copyLarge(InputStream, OutputStream)
@@ -372,6 +378,11 @@ public final class IOWriteUtil{
      * 
      * <p>
      * As creme de la creme with regard to performance,you could use NIO {@link java.nio.channels.Channels} and {@link java.nio.ByteBuffer}.
+     * </p>
+     * 
+     * <p>
+     * 如果 <code>inputStream</code> 是null,抛出 {@link NullPointerException}<br>
+     * 如果 <code>outputStream</code> 是null,抛出 {@link NullPointerException}<br>
      * </p>
      *
      * @param inputStream
