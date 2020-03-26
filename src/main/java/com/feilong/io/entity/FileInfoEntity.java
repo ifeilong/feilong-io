@@ -45,17 +45,51 @@ public class FileInfoEntity implements Serializable{
     /** 文件大小, 单位 字节,如果是文件夹 不显示size. */
     private Long              size;
 
-    /** 格式化显示的size. */
-    private String            formatSize;
-
     /**
      * 返回此抽象路径名表示的文件最后一次被修改的时间. <br>
      * 表示文件最后一次被修改的时间的 long 值,用与时间点(1970 年 1 月 1 日,00:00:00 GMT)之间的毫秒数表示;如果该文件不存在,或者发生 I/O 错误,则返回 0L.
      */
     private Long              lastModified;
 
+    //---------------------------------------------------------------
+
     /** 格式化显示的时间默认 yy-mm hh:ss. */
     private String            formatLastModified;
+
+    /** 格式化显示的size. */
+    private String            formatSize;
+
+    //---------------------------------------------------------------
+
+    /**
+     * Instantiates a new file info entity.
+     *
+     * @since 2.0.3
+     */
+    public FileInfoEntity(){
+        super();
+    }
+
+    /**
+     * Instantiates a new file info entity.
+     *
+     * @param name
+     *            the name
+     * @param fileType
+     *            the file type
+     * @param size
+     *            the size
+     * @param lastModified
+     *            the last modified
+     * @since 2.0.3
+     */
+    public FileInfoEntity(String name, FileType fileType, Long size, Long lastModified){
+        super();
+        this.name = name;
+        this.fileType = fileType;
+        this.size = size;
+        this.lastModified = lastModified;
+    }
 
     //---------------------------------------------------------------
 
