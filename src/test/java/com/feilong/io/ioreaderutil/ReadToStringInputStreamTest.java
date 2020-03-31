@@ -26,11 +26,6 @@ import org.slf4j.LoggerFactory;
 import com.feilong.core.net.URLUtil;
 import com.feilong.io.IOReaderUtil;
 
-/**
- * 
- * @author <a href="http://feitianbenyue.iteye.com/">feilong</a>
- * @since 1.11.5
- */
 public class ReadToStringInputStreamTest{
 
     /** The Constant log. */
