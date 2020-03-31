@@ -90,6 +90,51 @@ public final class IOReaderUtil{
      * 比如在 /Users/feilong/feilong/logs/readFileToString.txt 文件中有 内容如下:
      * 
      * <pre class="code">
+     *     feilong 我爱你
+     *     feilong
+     * </pre>
+     * 
+     * 此时你可以直接使用
+     * 
+     * <pre class="code">
+     * IOReaderUtil.readToString("/Users/feilong/feilong/logs/readFileToString.txt");
+     * </pre>
+     * 
+     * <b>返回:</b>
+     * 
+     * <pre class="code">
+     *     feilong 我爱你
+     *     feilong
+     * </pre>
+     * 
+     * </blockquote>
+     *
+     * @param filePath
+     *            the path
+     * @return 如果 <code>filePath</code> 是null,抛出 {@link NullPointerException}<br>
+     *         如果 <code>filePath</code> 是blank,抛出 {@link IllegalArgumentException}<br>
+     *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
+     * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
+     * @see #readToString(File, String)
+     * @since 2.0.3
+     */
+    public static String readToString(String filePath){
+        return readToString(filePath, DEFAULT_CHARSET_NAME);
+    }
+
+    /**
+     * 获得文件内容直接转成字符串.
+     * 
+     * <p>
+     * <span style="color:red">方法内部已经关闭了相关流</span>
+     * </p>
+     * 
+     * <h3>示例:</h3>
+     * 
+     * <blockquote>
+     * 比如在 /Users/feilong/feilong/logs/readFileToString.txt 文件中有 内容如下:
+     * 
+     * <pre class="code">
     feilong 我爱你
     feilong
      * </pre>
