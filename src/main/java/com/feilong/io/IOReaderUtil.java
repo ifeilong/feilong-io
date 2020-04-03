@@ -116,7 +116,7 @@ public final class IOReaderUtil{
      *         如果 <code>file</code> 不存在,抛出 {@link UncheckedIOException}<br>
      * @see org.apache.commons.io.FileUtils#readFileToString(File, Charset)
      * @see #readToString(File, String)
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public static String readToString(String filePath){
         return readToString(filePath, DEFAULT_CHARSET_NAME);

@@ -64,7 +64,7 @@ public class FileInfoEntity implements Serializable{
     /**
      * Instantiates a new file info entity.
      *
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public FileInfoEntity(){
         super();
@@ -81,7 +81,7 @@ public class FileInfoEntity implements Serializable{
      *            the size
      * @param lastModified
      *            the last modified
-     * @since 2.0.3
+     * @since 2.1.0
      */
     public FileInfoEntity(String name, FileType fileType, Long size, Long lastModified){
         super();
